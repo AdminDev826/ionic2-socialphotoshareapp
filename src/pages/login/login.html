@@ -1,0 +1,101 @@
+<ion-content class="login_content">
+  <div (swipe)="swipeEvent($event)">
+    <div class="custom_header">
+      <button class="closeBtn" (click)="closeLogin()"><ion-icon ios="ios-close" md="md-close-outline" style="font-size: 30px;"></ion-icon></button>
+      <img class="logo" src="../assets/img/Logo.png" />
+    </div>
+    <div class="button_rows">
+      <ion-row>
+        <ion-col width-50 [ngClass]="isTab=='signup'?'active':''">
+          <button ion-button button-clear button-light (click)="changeTab('signup')">SIGN UP</button>
+        </ion-col>
+        <ion-col width-50 [ngClass]="isTab=='signin'?'active':''">
+          <button ion-button button-clear button-light  (click)="changeTab('signin')">SIGN IN</button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row arrow_row">
+        <ion-col width-50>
+          <div class="arrow" *ngIf="isTab=='signup'"></div>
+        </ion-col>
+        <ion-col width-50>
+          <div class="arrow" *ngIf="isTab!=='signup'"></div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="list signup_list" *ngIf="isTab=='signup'">
+        <ion-row>
+          <ion-col width-50>
+            <label class="item item-input">
+              <input type="text" placeholder="First" [(ngModel)]="newuser.firstName">
+            </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Last" [(ngModel)]="newuser.lastName">
+            </label>
+          </ion-col>
+          <ion-col width-50>
+            <div>
+              <img class="img_btn" src="../assets/img/Profile.png" *ngIf="newuser.profileImage==''" (click)="showCameraSheet()"/>
+              <img class="img_btn" src="{{newuser.profileImage}}" *ngIf="newuser.profileImage!=''" (click)="showCameraSheet()"/>
+            </div>
+          </ion-col>
+        </ion-row>
+        <label class="item item-input">
+          <input type="email" placeholder="E-mail"  [(ngModel)]="newuser.email">
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Password"  [(ngModel)]="newuser.password">
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Confirm Password"  [(ngModel)]="newuser.confirm">
+        </label>
+
+        <ion-row>
+          <ion-col width-50>
+            <label class="item item-input" style="padding-left:30px; height:48px;">
+              <input type="date" placeholder="Birthday" [(ngModel)]="newuser.dob" style=" line-height:50px; padding-top:0px;">
+            </label>
+          </ion-col>
+          <ion-col width-50>
+            <label class="item item-input item-select">
+              <select ng-model="newuser.gender" style="width: 100%; height: 100%;">
+                <option selected>Male</option>
+                <option>Female</option>
+              </select>
+            </label>
+          </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+          <ion-col width-50>
+            <button ion-button color="light" class="signup_btn" outline (click)="signup()">Create Account</button>
+          </ion-col>
+          <ion-col width-50>
+            <button ion-button icon-right class="fb_btn" (click)="fbLogin()">
+              Sign Up With
+              <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+    </div>
+
+    <div class="list signin_list" *ngIf="isTab!=='signup'">
+      <label class="item item-input">
+        <input type="email" placeholder="E-mail or Username" [(ngModel)]="user.username">
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="Password" [(ngModel)]="user.password">
+      </label>
+      <button ion-button button-outline button-light class="sign_btn" (click)="login()" style="margin-top:50px;">Sign In</button>
+      <button ion-button button-positive class="fb_btn" (click)="fbLogin()">Sign In With Facebook</button>
+      <ion-row>
+        <ion-col width-50>
+          <button ion-button button-light clear (click)="goGuest()">Continue As Guest</button>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button button-light clear (click)="onForgotPassword()">Forgot Password?</button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

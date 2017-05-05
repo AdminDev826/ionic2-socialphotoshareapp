@@ -1,0 +1,16 @@
+<ion-menu id="leftMenu" type="overlay" [content]="content">
+	<ion-content class="menu_content" [menuClose]="wide">
+        <div class="item user_profile" menu-close ng-click="goProfile()">
+            <img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>
+            <div class="name"  *ngIf="!loginAsGuest">{{currentUser.name}}</div>
+        </div>
+		<ion-list no-lines>
+			<ion-item no-lines *ngFor="let p of nativePages" (click)="openPage(p)">
+				<ion-icon [name]="p.icon_name" item-left></ion-icon>
+				{{p.title}}
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-menu>
+
+<ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>

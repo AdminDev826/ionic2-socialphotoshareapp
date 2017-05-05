@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>
+      <img src="../../assets/img/Logo1.png" class="logo1"/>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="event_detail_content" lazy-scroll>
+  <!--<img class="full-image" image-lazy-src="{{event.imageThumbURL}}" image-lazy-loader="lines" />-->
+  <img src="{{event.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+  <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+
+  <ion-row>
+    <ion-col width-50 class="e_logo text-center" (click)="goVenueDetail()">
+        <!--<img class="full-image" image-lazy-src="{{event.venue.imageThumbURL}}" image-lazy-loader="lines" />-->
+        <div class="img_div" [ngStyle]="{ 'background-image': 'url(' + event.venue.imageThumbURL + ')'}"></div>
+    </ion-col>
+    <ion-col width-50 class="text-center address">
+      <h3>{{event.name}}</h3>
+      <div style="font-size:12px; padding-bottom:10px;">{{event.formatted_date}}</div>
+      <div (click)="navigatorApp()">{{event.venue.address[0]}}</div>
+      <div (click)="navigatorApp()">{{event.venue.address[1]}}</div>
+      <div class="item location">
+        <i class="icon ion-ios-location" style="color:#60a398"></i>&nbsp;
+        {{event.venue.dist}} miles
+      </div>
+    </ion-col>
+  </ion-row>
+  <br>
+  <ion-row class="button_row">
+    <ion-col width-33>
+      <a class="col-33" href="tel:{{event.venue.phoneNumber}}">
+          <i class="icon ion-ios-telephone-outline"></i>
+          <div>Call</div>
+      </a>
+    </ion-col>
+    <ion-col width-34>
+      <div class="col-34" (click)="openWebsite(event.venue.siteURL)">
+        <i class="icon ion-ios-world-outline"></i>
+        <div>Website</div>
+      </div>
+    </ion-col>
+    <ion-col width-33>
+      <div class="col-33" (click)="navigatorApp()">
+        <i class="icon ion-android-map"></i>
+        <div>Map</div>
+    </div>
+    </ion-col>
+  </ion-row>
+  <ion-list padding>
+    <div class="item divider">DESCRIPTION</div>
+    <div class="value item item-icon-left" style="padding-left:40px;"><i class="icon ion-record" style="font-size:0.6em; color:#60a398; line-height:40px; height:25px;"></i> {{event.description}}</div>
+    <div class="item divider">THEME</div>
+    <div class="value item item-icon-left" style="padding-left:40px;"><i class="icon ion-record" style="font-size:0.6em; color:#60a398; line-height:40px;"></i> {{event.theme}}</div>
+    <div class="item divider">DRESS CODE</div>
+    <div class="value item item-icon-left" ng-repeat="d in event.dressCode" style="padding-left:40px;"><i class="icon ion-record" style="font-size:0.6em; color:#60a398; line-height:40px;"></i> {{d}}</div>
+    <div class="item divider">AGE LIMIT</div>
+    <div class="value item item-icon-left" style="padding-left:40px;"><i class="icon ion-record" style="font-size:0.6em; color:#60a398; line-height:40px;"></i> {{event.age}}</div>
+<!--
+    <div class="item divider item-icon-right" ng-if="event.venue.photos">
+      PHOTO GALLERY
+      <span class="item-note">
+        {{event.venue.photos.length}}
+      </span>
+      <i class="icon ion-ios-arrow-right"></i>
+    </div>
+    <div class="img_block" ng-repeat="item1 in event.venue.photos" style="margin-top:3px;">
+      <img image-lazy-src="{{item1.url}}" image-lazy-loader="lines">
+    </div>
+-->
+  </ion-list>
+
+</ion-content>

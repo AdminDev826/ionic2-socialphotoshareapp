@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>
+      <img src="../../assets/img/Logo1.png" class="logo1"/>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content lazy-scroll style="padding-left:5px; padding-right:5px; padding-top:5px;">
+    <ion-list padding>
+      <div *ngIf="eventSliderList.length">
+        <ion-slides class="home_slider" style="margin-bottom:4px;" autoplay="3000" loop="true" speed="1000">
+            <ion-slide *ngFor="let slider of eventSliderList">
+                <div (click)="goSliderDetail(slider)"><img class="box" src="{{slider.imageThumbURL}}" style="width:300px;height:300px;margin:auto;display:block" ></div>
+            </ion-slide>
+        </ion-slides>
+      </div>
+      <div *ngIf="eventTileList.length">
+        <div class="img_block" *ngFor="let item of eventTileList" (click)="goDetail(item)">
+          <img src="{{item.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+          <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        </div>
+      </div>
+      
+    </ion-list>
+  </ion-content>

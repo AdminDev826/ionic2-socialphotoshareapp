@@ -1,0 +1,173 @@
+/* Empty. Add your own CSS if you like */
+@font-face {
+  font-family: "Lato_Light";
+  src: url("../assets/font/Lato-Light.ttf");
+}
+
+@font-face {
+  font-family: "Lato_Regular";
+  src: url("../assets/font/Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Lato_Bold";
+  src: url("../assets/font/Lato-Bold.ttf");
+}
+
+body, input, textarea {
+	font-family: 'Lato_Regular', sans-serif;
+}
+
+body, .ionic-body{
+	font-family: 'exo_light', sans-serif !important;
+}
+
+.tabs-item , h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Lato_Bold', sans-serif !important;
+}
+
+.button{
+	font-family: 'Lato_Regular', sans-serif;
+}
+
+a { text-decoration: none; color: #333;}
+
+img { max-width: 100%; height:auto; }
+input {height: 40px; border: none; }
+select { border: none; }
+
+.no-padding { padding:0px; }
+
+.col-14 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 14.28%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 14.28%;
+  -ms-flex: 0 0 14.28%;
+  flex: 0 0 14.28%;
+  max-width: 14.28%; }
+
+.logo1 { height:35px; margin-top:5px;}
+.row { width: 100% }
+.nav-icon {
+  background: transparent;
+  ion-icon {
+    font-size: 30px;
+    color: white;
+  }
+}
+.img-loaded + ion-spinner {
+  display:none;
+}
+// .center in my case to make the spinner at the center
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
+.home_content{
+	background:url("../assets/img/bg.png");
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	text-align:center;
+    color:white;
+}
+
+.home_content .logo{ width:85%; margin-top:30%;}
+.home_content .login_btn { 
+    width:80%; margin-top:10px; border-radius:20px; font-weight:bold; color:white !important; background: transparent; border-style: solid; border-color: #ddd; border-width: 1px;
+}
+.home_content .fb_btn{ background:#3e549c; border-width: 0px;}
+
+.login_content {text-align: center;}
+.login_content .closeBtn { color:white; position:absolute;left:10px; top:10px; background: transparent;}
+.login_content .custom_header{ position:relative; width:100%; height:250px; background:url("../assets/img/image.png"); background-size:100% 100%; background-repeat:no-repeat; background-position: center center;}
+.login_content .custom_header .logo{ width:60%; margin-top:60px;}
+.login_content .button_rows { position:relative; width:100%; height:55px; background:#171717 !important;}
+.login_content .button_rows .row{ position:absolute; bottom:0px; border-top:1px solid #444;}
+.login_content .button_rows .row .button{color:#aaa; background: transparent;}
+.login_content .button_rows .row .active .button{ color:white;}
+.login_content .button_rows .arrow_row { z-index:999; text-align:center; border:0px !important; margin-left:10px;}
+.login_content .button_rows .arrow_row .arrow{-ms-transform: rotate(45deg); -webkit-transform: rotate(45deg);  transform: rotate(45deg); width:20px; height:20px; background:white; margin-bottom:-20px; margin-left:40%;}
+.login_content .signin_list { margin-top:50px;}
+.login_content .signin_list label{ width:80%; margin-left:10%; border:0px; margin-top:5px; border-bottom:1px solid #ddd; }
+.login_content .signin_list label input{ text-align:center;}
+.login_content .signin_list .sign_btn{ color:black; width:80%; margin-top:20px; margin-bottom:10px; border-radius:20px;}
+.login_content .signin_list .fb_btn{ color:white; width:80%;  margin-bottom:0px; border-radius:20px; background:#3e549c;}
+.login_content .signin_list .row .button{color:#333;}
+
+.login_content .signup_list { margin-top:30px; text-align:center; width:80%; margin-left:10%}
+.login_content .signup_list .img_btn{  width: 90px;  height: 90px; border-radius:50%;}
+.login_content .signup_list .item{ border:0px; border-bottom:1px solid #ddd; margin-top:2px;}
+.login_content .signup_list label input{ text-align:center; border: none; outline:none;}
+.login_content .signup_list .signup_btn { border-radius:20px; color:#333; border-color:#333; font-size:1em;}
+.login_content .signup_list .fb_btn { border-radius:20px; font-size:1em; background:#3e549c;}
+.login_content .item-select{   height:48px;  width:95%;  }
+.login_content .item-select select{  max-width:100%;  text-align:center; right:auto; width:50%; padding:0px; color:#bbb;}
+
+
+.menu_content , .menu_content .item, .menu_content .item-content{ font-family: 'Lato_Regular', sans-serif !important;  background:#348c7f; color:white;}
+.menu_content .item{ border:0px; text-align:left; font-weight: bold; margin-top:5px; }
+.menu_content .item .icon{ font-size:1.4em; color:white;}
+.menu_content .user_profile{ text-align:center; color:white; font-weight: bold;}
+.menu_content .user_profile img{ width:100px; height:100px;; border-radius:50%; margin-top:30px;}
+.menu_content .item-complex.item-icon-left .item-content { padding-left:60px;}
+
+.home_slider .box{ border-radius:8px; margin-left:2px; width:98.5%; height:180px; background-size:100% auto; background-position: center; background-repeat:no-repeat;text-align:center;}
+.home_slider img{ height:200px; }
+.home_slider .slider-pager .slider-pager-page {color:white !important; }
+
+.img_block { width:50%; padding-top:50% !important; float:left; padding:0px; position:relative; text-align:center;}
+.img_block .img_rect{ position:absolute; top:1%; left:0px; width:98%; height:98%;  background-size:100% 100%; background-repeat:no-repeat; background-position: center center;}
+.img_block img{ border-radius:8px; position:absolute; top:0px; left:0px;  padding:2px; padding-left:2px; padding-right:4px;}
+.img_block .image-loader-container{ position:absolute;top:40%; left:40%;}
+
+.has-custom-header {margin-top:60px;}
+.subheader_area {margin-top:70px;}
+.subheader_area .calender_row {text-align:center;}
+.subheader_area .calender_date_row {text-align:center; margin-top:0px;}
+.subheader_area .calender_date_row .col-14 span{ border-radius: 50%; padding:8px; padding-left:8px; padding-right:8px; }
+.subheader_area .calender_date_row .col-14 .active{ background:#348c7f; color:white;}
+.subheader_area .tab_row {text-align:center;}
+.subheader_area .tab_row .button { border-radius: 20px; min-height:35px; height:35px; line-height:30px; width:100px;}
+
+.photo-detail-header { background:#0c0b0e !important;}
+.photo-detail-header .button { color:#398c7f !important;}
+.photo_detail_content{ background:#0c0b0e !important; }
+.photo_detail_content .full-image{margin-top:30px;}
+.photo_detail_content h2{ color:#398c7f; text-align: center; }
+.photo_detail_content h4{ color:white; text-align: center; }
+.photo_detail_content .logo{ width:30%; position:absolute; right:0px;bottom:-10px;}
+.photo_detail_content .slider-pager .slider-pager-page{ color:white;}
+
+.browse_content .list .full-image { position:relative; margin-bottom:-2px;}
+.browse_content .list .full-image h2{ position:absolute; bottom:10px; color:white; right:20px;}
+
+.previous-title img{ display:none;}
+
+.setting_content .profile_img_area { width:100%; text-align:center; position:relative; }
+.setting_content .profile_img_area .profile_img { width:120px; height:120px; border-radius:50%; margin-top:20px; margin-bottom:20px;}
+.setting_content .profile_img_area .icon{font-size:4em; position:absolute; left:45%; top:50px; color:#f8df64; }
+.setting_content .list .item-divider { font-size: 0.9em; font-family: 'Lato_Bold', sans-serif !important; height:45px; line-height:30px; color:#777; font-weight:bold; background:white;}
+.setting_content .list .item-input {border:0px; margin-top:2px; font-family: 'Lato_Light', sans-serif !important;}
+.setting_content .list .item-input .input-label {font-size:0.8em; margin-top:5px; color:#aaa;}
+.setting_content .list .item-input input { margin-top:0px; text-align:right; font-size:1em; }
+.setting_content .list .item-toggle { font-size: 0.9em;  font-family: 'Lato_Bold', sans-serif !important; color:#777; font-weight:bold; background:white; }
+.setting_content .list .ion-ios-arrow-right { font-size:1.6em;}
+
+.event_detail_content h3{ margin-top:35px; font-family: 'Lato_Regular' !important;}
+.event_detail_content .location{ border:0px; height:30px; margin-top:5px; line-height:0px;}
+.event_detail_content .button_row{ color:#333; width:80%; margin-left:10%; text-align: center; margin-top:10px;}
+.event_detail_content .button_row .icon { font-size:3em;}
+.event_detail_content .address{ font-family: 'Lato_Light', sans-serif; font-size: 1.2em;}
+.event_detail_content .divider{ font-family: 'Lato_Regular' !important;font-size:1.2em; border:0px; border-bottom:1px solid #ddd; font-weight:bold; }
+.event_detail_content .value { font-family: 'Lato_Light', sans-serif; font-size: 1.2em; margin-top:0px; border:0px; white-space:normal; margin-top:2px; padding-top:3px; padding-bottom:3px; margin-left:-7px;}
+.event_detail_content .e_logo .img_div{ margin-top:35px; border:1px solid #999; border-radius: 50%; width:150px; height:150px; background-position: center center; background-size: 125% 125%; margin-left:30px;}
+
+.lightfont { font-family: 'Lato_Light', sans-serif;  }
+.photos_content { padding-left:4px; padding-right:4px;}
+.notification_content .list .item{white-space:normal; font-family: 'Lato_Light', sans-serif; }
+.notification_content .list .item-note{ position:absolute; top:10px; right:10px;}
+.notification_content .list img{ width:80px; height:80px; padding-left:5px;}

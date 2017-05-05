@@ -1,0 +1,17 @@
+<ion-content class="home_content " scroll="false">
+    <br><br><br>
+    <img class="logo" src="assets/img/Logo.png" />
+    <br><br><br><br><br><br><br>
+    <button ion-button color='light' button-outline class="login_btn" (click)="showSignup()">Sign Up</button>
+    <button ion-button color='light' button-outline class="login_btn" (click)="showSignin()">Sign In</button>
+    <button ion-button color='light' button-outline class="login_btn fb_btn" (click)="fbLogin()">Sign In With Facebook</button>
+
+    <ion-row center>
+      <ion-col width-50>
+        <button ion-button color='light' clear class="" (click)="goGuest()">Continue As Guest</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button color='light' clear class="" (click)="onTerms()">Terms of Use</button>
+      </ion-col>
+    </ion-row>
+</ion-content>
