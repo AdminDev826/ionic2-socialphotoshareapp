@@ -3,6 +3,8 @@ import { NavController, ModalController, Events, LoadingController } from 'ionic
 import { Parse } from 'parse';
 import { EventDetail } from "../event-detail/event-detail";
 import { Services } from "../../providers/services";
+import * as moment from "moment";
+
 
 @Component({
   selector: 'page-home',
@@ -47,6 +49,8 @@ export class HomePage {
 
     this.services.getEventAll().subscribe(data=> {
       this.loading.dismiss();
+      var now = new Date();
+      var today = moment(now).valueOf();
       for(var index in data){
         var event = {
           id:data[index].id,
@@ -69,11 +73,28 @@ export class HomePage {
           deleted:data[index].get('deleted'),
           age:data[index].get('age'),
           description:data[index].get('description'),
-          timestamp:data[index].get('startDate')
+          timestamp:moment(data[index].get('startDate')).valueOf(),
+          formatted_date:""
         };
-        this.eventSliderList.push(event);
-        this.eventTileList.push(event);
+        event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
+
+        if((event.timestamp >= today) && (event.timestamp <= (today) + 7* 24 * 60 * 60 * 1000))
+        {
+          if(event.feature == 1){
+            this.eventTileList.push(event);
+          }
+          if(event.feature == 2){
+            this.eventSliderList.push(event);
+          }
+        }
       }
+
+      // var sortedArray = $filter('orderBy')(this.eventTileList, 'timestamp', false);
+      var sortedArray = this.eventTileList.sort ( (a, b) => {
+          return a.timestamp - b.timestamp;
+      });
+      console.log(sortedArray);
+      this.eventTileList = sortedArray;
       
     });
 

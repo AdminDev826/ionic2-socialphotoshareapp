@@ -83,7 +83,7 @@ export class EventDetail {
     //   .catch(function(event) {
     //     // error
     //   });
-  };
+  }
 
   navigatorApp(){
     var destination = [this.event.venue.geolocation.latitude, this.event.venue.geolocation.longitude];
@@ -94,12 +94,12 @@ export class EventDetail {
     // }, function (err) {
     //   console.error(err);
     // });
-  };
+  }
 
   goMapBrowser(){
     var url = "https://www.google.com/maps/search/" + this.event.venue.address[0]+","+this.event.venue.address[1];
     console.log(url);
     this.iab.create(url, '_system', this.options).show();
-  };
+  }
 
 }
