@@ -29,6 +29,9 @@ import { Terms1 } from "../pages/terms1/terms1";
 import { Termsofuse } from "../pages/termsofuse/termsofuse";
 import { Upcomming } from "../pages/upcomming/upcomming";
 import { VenueDetail } from "../pages/venue-detail/venue-detail";
+import { Geolocation } from '@ionic-native/geolocation';
+import { InAppBrowser } from '@ionic-native/in-app-browser';    
+
 
 
 @NgModule({
@@ -93,6 +96,8 @@ import { VenueDetail } from "../pages/venue-detail/venue-detail";
     Camera,
     Services,
     Http,
+    Geolocation,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

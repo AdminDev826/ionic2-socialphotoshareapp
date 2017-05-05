@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { VenueDetail } from "../venue-detail/venue-detail";
+import { Geolocation } from '@ionic-native/geolocation';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
+
 
 /**
  * Generated class for the EventDetail page.
@@ -16,13 +19,9 @@ import { VenueDetail } from "../venue-detail/venue-detail";
 export class EventDetail {
   event: any;
   myLocation = {lat:1, long:1};
-  options = {
-      location: 'yes',
-      clearcache: 'yes',
-      toolbar: 'yes'
-  };
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  options = "location: 'yes', clearcache: 'yes', toolbar: 'yes'";
+  
+  constructor(public navCtrl: NavController, private iab: InAppBrowser, public geolocation: Geolocation, public navParams: NavParams) {
 
     this.event = JSON.parse(navParams.get("selectedEvent"));
     console.log(this.event);
@@ -59,7 +58,7 @@ export class EventDetail {
   
   getDistance(){
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
-    $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+    this.geolocation.getCurrentPosition(posOptions).then(function (position) {
         this.myLocation.lat  = position.coords.latitude;
         this.myLocation.long = position.coords.longitude;
 
@@ -77,34 +76,30 @@ export class EventDetail {
 
   
   openWebsite(url){
-    $cordovaInAppBrowser.open(url, '_blank', this.options).then(function(event) {
-        // success
-      })
-      .catch(function(event) {
-        // error
-      });
+    this.iab.create(url, '_blank', this.options).show();
+    // .then(function(event) {
+    //     // success
+    //   })
+    //   .catch(function(event) {
+    //     // error
+    //   });
   };
 
   navigatorApp(){
     var destination = [this.event.venue.geolocation.latitude, this.event.venue.geolocation.longitude];
   	var start = [this.myLocation.lat, this.myLocation.long];
-      var options = {app:launchnavigator.APP.UBER};
-      $cordovaLaunchNavigator.navigate(destination, start,  options).then(function() {
-        console.log("Navigator launched");
-      }, function (err) {
-        console.error(err);
-      });
+    // var options = {app:launchnavigator.APP.UBER};
+    // $cordovaLaunchNavigator.navigate(destination, start,  options).then(function() {
+    //   console.log("Navigator launched");
+    // }, function (err) {
+    //   console.error(err);
+    // });
   };
 
   goMapBrowser(){
     var url = "https://www.google.com/maps/search/" + this.event.venue.address[0]+","+this.event.venue.address[1];
     console.log(url);
-    $cordovaInAppBrowser.open(url, '_system', this.options).then(function(event) {
-        // success
-      })
-      .catch(function(event) {
-        // error
-      });
+    this.iab.create(url, '_system', this.options).show();
   };
 
 }

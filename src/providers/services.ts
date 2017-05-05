@@ -16,10 +16,14 @@ export var global = {
 
 @Injectable()
 export class Services {
+	status = true;
 
   constructor() {
     console.log('Hello Services Provider');
   }
+	getStatus(){
+		return this.status;
+	}
 
 	getEventAll() {
 		var ParseEventObject = Parse.Object.extend("Event");
@@ -34,10 +38,34 @@ export class Services {
   			query.skip(1000 * offset);
   			query.find({
   			  success: function(results) {
+						this.status = true;
   					observer.next(results);
   			  },
   			  error: function(error) {
-  					observer.next(false, error);
+  					this.status = true;
+  					observer.next(error);
+  			  }
+  			});
+		});
+	}
+
+	getGalleryAll(){
+		var ParseGalleryObject = Parse.Object.extend("Gallery");
+   	var ParsePhotosObject = Parse.Object.extend("Photos");
+		var offset = 0;
+		return Observable.create(observer => {
+			var query = new Parse.Query(ParseGalleryObject);
+        query.include("venueid");
+        query.limit(1000);
+  			query.skip(1000 * offset);
+  			query.find({
+  			  success: function(results) {
+						this.status = true;
+  					observer.next(results);
+  			  },
+  			  error: function(error) {
+  					this.status = true;
+  					observer.next(error);
   			  }
   			});
 		});
@@ -157,8 +185,8 @@ export class Services {
     }
   }
   ParseGalleryService(q) {
-    var ParseGalleryObject = Parse.Object.extend("Gallery");
-   var ParsePhotosObject = Parse.Object.extend("Photos");
+		var ParseGalleryObject = Parse.Object.extend("Gallery");
+   	var ParsePhotosObject = Parse.Object.extend("Photos");
 
 	  return {
   		all: function(_param, offset){
