@@ -116,7 +116,7 @@ select { border: none; }
 .menu_content .user_profile img{ width:100px; height:100px;; border-radius:50%; margin-top:30px;}
 .menu_content .item-complex.item-icon-left .item-content { padding-left:60px;}
 
-.home_slider .box{ border-radius:8px; margin-left:2px; width:98.5%; height:180px; background-size:100% auto; background-position: center; background-repeat:no-repeat;text-align:center;}
+.home_slider .box{ border-radius:8px; margin-left:2px; width:98.5%; height:180px !important; background-size:100% auto; background-position: center; background-repeat:no-repeat;text-align:center;}
 .home_slider img{ height:200px; }
 .home_slider .slider-pager .slider-pager-page {color:white !important; }
 
@@ -125,10 +125,9 @@ select { border: none; }
 .img_block img{ border-radius:8px; position:absolute; top:0px; left:0px;  padding:2px; padding-left:2px; padding-right:4px;}
 .img_block .image-loader-container{ position:absolute;top:40%; left:40%;}
 
-.has-custom-header {margin-top:60px;}
-.subheader_area {margin-top:70px;}
+.has-custom-header {margin-top:30px;}
 .subheader_area .calender_row {text-align:center;}
-.subheader_area .calender_date_row {text-align:center; margin-top:0px;}
+.subheader_area .calender_date_row {text-align:center; margin-top:0px; margin-bottom: 20px;}
 .subheader_area .calender_date_row .col-14 span{ border-radius: 50%; padding:8px; padding-left:8px; padding-right:8px; }
 .subheader_area .calender_date_row .col-14 .active{ background:#348c7f; color:white;}
 .subheader_area .tab_row {text-align:center;}

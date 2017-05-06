@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, Events, LoadingController } from 'ionic-angular';
+import { NavController, ModalController, Events, LoadingController, ToastController } from 'ionic-angular';
 import { Parse } from 'parse';
 import { EventDetail } from "../event-detail/event-detail";
 import { Services } from "../../providers/services";
@@ -30,16 +30,26 @@ export class HomePage {
   
 
 
-  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, public events: Events, private services: Services) {
-
-    events.publish('user:created', "test user", "../assets/img/image.png");
-
+  constructor(
+    public navCtrl: NavController, 
+    private loadingCtrl: LoadingController, 
+    public events: Events, 
+    private services: Services,
+    private toastCtrl: ToastController
+    ) {
+    this.events.publish('user:created', "test user", "../assets/img/image.png");
     this.loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: ''
     });
-
+    this.services.temp = 10;
     this.loadEventsData();
+  }
+  showToast(title) {
+    let toast = this.toastCtrl.create({
+      message: title,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   loadEventsData(){
@@ -49,52 +59,57 @@ export class HomePage {
 
     this.services.getEventAll().subscribe(data=> {
       this.loading.dismiss();
-      var now = new Date();
-      var today = moment(now).valueOf();
-      for(var index in data){
-        var event = {
-          id:data[index].id,
-          videoStillURL:data[index].get('videoStillURL'),
-          dressCode:data[index].get('dressCode'),
-          active:data[index].get('active'),
-          dayOfWeek:data[index].get('dayOfWeek'),
-          theme:data[index].get('theme'),
-          endDate:data[index].get('endDate'),
-          name:data[index].get('name'),
-          venue:data[index].get('venue'),
-          startDate:data[index].get('startDate'),
-          desc:data[index].get('desc'),
-          ordering:data[index].get('ordering'),
-          imageURL:data[index].get('imageURL'),
-          imageThumbURL:data[index].get('imageThumbURL'),
-          imageFeatureURL:data[index].get('imageFeatureURL'),
-          videoURL:data[index].get('videoURL'),
-          feature:data[index].get('feature'),
-          deleted:data[index].get('deleted'),
-          age:data[index].get('age'),
-          description:data[index].get('description'),
-          timestamp:moment(data[index].get('startDate')).valueOf(),
-          formatted_date:""
-        };
-        event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
+      if(this.services.getStatus){
+        var now = new Date();
+        var today = moment(now).valueOf();
+        for(var index in data){
+          var event = {
+            id:data[index].id,
+            videoStillURL:data[index].get('videoStillURL'),
+            dressCode:data[index].get('dressCode'),
+            active:data[index].get('active'),
+            dayOfWeek:data[index].get('dayOfWeek'),
+            theme:data[index].get('theme'),
+            endDate:data[index].get('endDate'),
+            name:data[index].get('name'),
+            venue:data[index].get('venue'),
+            startDate:data[index].get('startDate'),
+            desc:data[index].get('desc'),
+            ordering:data[index].get('ordering'),
+            imageURL:data[index].get('imageURL'),
+            imageThumbURL:data[index].get('imageThumbURL'),
+            imageFeatureURL:data[index].get('imageFeatureURL'),
+            videoURL:data[index].get('videoURL'),
+            feature:data[index].get('feature'),
+            deleted:data[index].get('deleted'),
+            age:data[index].get('age'),
+            description:data[index].get('description'),
+            timestamp:moment(data[index].get('startDate')).valueOf(),
+            formatted_date:""
+          };
+          event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
 
-        if((event.timestamp >= today) && (event.timestamp <= (today) + 7* 24 * 60 * 60 * 1000))
-        {
-          if(event.feature == 1){
-            this.eventTileList.push(event);
-          }
-          if(event.feature == 2){
-            this.eventSliderList.push(event);
+          if((event.timestamp >= today) && (event.timestamp <= (today) + 7* 24 * 60 * 60 * 1000))
+          {
+            if(event.feature == 1){
+              this.eventTileList.push(event);
+            }
+            if(event.feature == 1){
+              this.eventSliderList.push(event);
+            }
           }
         }
-      }
 
-      // var sortedArray = $filter('orderBy')(this.eventTileList, 'timestamp', false);
-      var sortedArray = this.eventTileList.sort ( (a, b) => {
-          return a.timestamp - b.timestamp;
-      });
-      console.log(sortedArray);
-      this.eventTileList = sortedArray;
+        // var sortedArray = $filter('orderBy')(this.eventTileList, 'timestamp', false);
+        var sortedArray = this.eventTileList.sort ( (a, b) => {
+            return a.timestamp - b.timestamp;
+        });
+        console.log(sortedArray);
+        this.eventTileList = sortedArray;
+      }else{
+        this.showToast(data.message);
+      }
+      
       
     });
 

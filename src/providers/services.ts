@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Parse} from 'parse';
 import {Observable} from 'rxjs/Observable';
+import * as moment from "moment";
+
 
 
 export var global = {
@@ -17,10 +19,12 @@ export var global = {
 @Injectable()
 export class Services {
 	status = true;
+	temp = 5;
 
   constructor() {
     console.log('Hello Services Provider');
   }
+	
 	getStatus(){
 		return this.status;
 	}

@@ -15,8 +15,10 @@
         <ion-slides class="home_slider" style="margin-bottom:4px;" autoplay="3000" loop="true" speed="1000">
             <ion-slide *ngFor="let slider of eventSliderList">
                 <div (click)="goSliderDetail(slider)">
-                  <img class="box" src="{{slider.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" style="width:300px;height:300px;margin:auto;display:block" >
+                  <!--<img class="box" src="{{slider.imageFeatureURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" style="width:300px;height:300px;margin:auto;display:block" >-->
+                  <div class="box " [ngStyle]="{'background-image':'url(' + slider.imageFeatureURL + ')'}" (Click)="goSliderDetail(slider)"></div>
                   <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+                  <!--<img-loader spinner="true" class="box" src="{{slider.imageThumbURL}}"></img-loader>-->
                 </div>
             </ion-slide>
         </ion-slides>
@@ -24,7 +26,7 @@
       <div *ngIf="eventTileList.length">
         <div class="img_block" *ngFor="let item of eventTileList" (click)="goDetail(item)">
           <img src="{{item.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
-          <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+          <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
         </div>
       </div>
       

@@ -56,30 +56,45 @@ export class VenueDetail {
   }
 
   loadVenuePhotoData(){
-    this.event.venue.photos = new Array();
-    this.loading.present();
-    this.services.getGalleryAll().subscribe(data=>{
-      this.loading.dismiss();
-      if(this.services.getStatus){
-        for(var index in data){
+    if(this.event.venue){
+      this.event.venue.photos = new Array();
+      this.loading.present();
+      this.services.getGalleryAll().subscribe(data=>{
+        this.loading.dismiss();
+        if(this.services.getStatus){
+          for(var index in data){
 
-          var event = {
-            id:data[index].id,
-            venueGallery:data[index].get('venueGallery'),
-            active:data[index].get('active'),
-            eventDate:moment(data[index].get('eventDate')).format("MMMM Do YYYY"),
-            venueid:data[index].get('venueid'),
-            ordering:data[index].get('ordering'),
-            cover:data[index].get('cover'),
-            title:data[index].get('title')
-          };
-          if(event.venueid.id == this.event.venue.objectId)
-            this.event.venue.photos.push(event);
+            var event = {
+              id:data[index].id,
+              venueGallery:data[index].get('venueGallery'),
+              active:data[index].get('active'),
+              eventDate:moment(data[index].get('eventDate')).format("MMMM Do YYYY"),
+              venueid:data[index].get('venueid'),
+              ordering:data[index].get('ordering'),
+              cover:data[index].get('cover'),
+              title:data[index].get('title')
+            };
+            if(event.venueid.id == this.event.venue.objectId)
+              this.event.venue.photos.push(event);
+          }
+        }else{
+          this.showToast(data.message);
         }
-      }else{
-        this.showToast(data);
-      }
-    });
+      });
+    }else{
+      this.event.venue = {
+        type: "",
+        neighborhood: "",
+        photos: [],
+        address:["",""],
+        dist:"",
+        phoneNumber:"",
+        siteURL:"",
+        parking:[]
+      };
+      this.showToast("Cannot find Venue !");
+      this.navCtrl.popTo( this.navCtrl.getByIndex(1));
+    }
   }
   
   goPhotoGallery(gallery){

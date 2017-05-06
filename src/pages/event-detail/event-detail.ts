@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { VenueDetail } from "../venue-detail/venue-detail";
 import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
@@ -21,7 +21,13 @@ export class EventDetail {
   myLocation = {lat:1, long:1};
   options = "location: 'yes', clearcache: 'yes', toolbar: 'yes'";
   
-  constructor(public navCtrl: NavController, private iab: InAppBrowser, public geolocation: Geolocation, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    private iab: InAppBrowser, 
+    public geolocation: Geolocation, 
+    public navParams: NavParams,
+    private toastCtrl: ToastController    
+    ) {
 
     this.event = JSON.parse(navParams.get("selectedEvent"));
     console.log(this.event);
@@ -38,7 +44,14 @@ export class EventDetail {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventDetail');
   }
-
+  showToast(title) {
+    let toast = this.toastCtrl.create({
+      message: title,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
   
   distance(lat1, lon1, lat2, lon2, unit) {
   	var radlat1 = Math.PI * lat1/180;
@@ -71,7 +84,11 @@ export class EventDetail {
   
 
   goVenueDetail(){
-    this.navCtrl.push(VenueDetail, {selectedEvent:this.event});
+    if(this.event.venue){
+      this.navCtrl.push(VenueDetail, {selectedEvent:this.event});
+    }else{
+      this.showToast("Cannot find Venue !");
+    }
   }
 
   

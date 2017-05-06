@@ -31,7 +31,7 @@ import { Upcomming } from "../pages/upcomming/upcomming";
 import { VenueDetail } from "../pages/venue-detail/venue-detail";
 import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';    
-
+import { IonicImageLoader } from 'ionic-image-loader';
 
 
 @NgModule({
@@ -62,7 +62,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicImageLoader.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
