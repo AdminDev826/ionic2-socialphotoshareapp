@@ -9,7 +9,48 @@
   </ion-navbar>
 </ion-header>
 
+<ion-tabs>
+  <ion-tab tabIcon="heart" [root]="tab1"></ion-tab>
+  <ion-tab tabIcon="star" [root]="tab2"></ion-tab>
+</ion-tabs>
 
-<ion-content padding>
-
+<ion-content class="browse_content has-custom-header" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
+  <div class="subheader_area">
+    <div class="row tab_row">
+      <div class="col-33">
+        <button class="button button-balanced" [ngClass]="currentTab=='event'?'':'button-clear'" (click)="changeTab('event')">EVENT</button>
+      </div>
+      <div class="col-34">
+        <button class="button button-balanced" [ngClass]="currentTab=='venue'?'':'button-clear'" (click)="changeTab('venue')">VENUE</button>
+      </div>
+      <div class="col-33">
+        <button class="button button-balanced" [ngClass]="currentTab=='type'?'':'button-clear'" (click)="changeTab('type')">TYPE</button>
+      </div>
+    </div>
+  </div>
+  <div class="list" *ngIf="currentTab=='event'">
+    <div class="full-image" *ngFor="let item of browseEventList" (click)="goEventCategory(item)">
+      <img [src]="item.BrowseEventImg" class="full-image">
+      <h2>{{item.EventName}}</h2>
+    </div>
+  </div>
+  <div class="list" *ngIf="currentTab=='venue'">
+    <div class="full-image" *ngFor="let item of browseEventList" (click)="goVenueCategory(item)">
+      <img [src]="item.BrowseEventImg" class="full-image">
+      <h2>{{item.EventName}}</h2>
+    </div>
+    <!--<div class="full-image" *ngFor="let item of browseVenueList" (click)="goVenueCategory(item)">
+      <img [src]="item.VenueThumImag" class="full-image" style="height:250px;">
+      <h2>{{item.VenueName}}</h2>
+    </div>
+    <div class="img_block" *ngFor="let item of browseVenueList" (click)="goVenueCategory(item)">
+      <img image-lazy-src="item.VenueThumImag" image-lazy-loader="lines">
+    </div>-->
+  </div>
+  <div class="list" *ngIf="currentTab=='type'">
+    <div class="full-image" *ngFor="let item of browseVenueTypeList" (click)="goVenueTypeCategory(item)">
+      <img [src]="item.VenueTypeThumImg" class="full-image">
+      <h2>{{item.VenueTypeName}}</h2>
+    </div>
+  </div>
 </ion-content>

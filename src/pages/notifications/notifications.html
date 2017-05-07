@@ -10,6 +10,67 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="notification_content">
+  <ion-list>
+    <ion-item detail-push *ngFor="let item of notificationList">
+      <li class="item item-icon-right" *ngIf="item.isWhat=='gallery'" (click)="goGallery(item)">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy $index"/>
+        <span class="item-note">
+          {{item.date}}
+        </span>
+        <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+      </li>
+      <li class="item item-icon-right" *ngIf="item.isWhat=='event'" (click)="goEvent(item)">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy  $index"/>
+        <span class="item-note">
+          {{item.date}}
+        </span>
+        <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+      </li>
+      <li class="item item-icon-right" *ngIf="item.isWhat=='nothing'">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy  $index"/>
+        <span class="item-note">
+          {{item.date}}
+        </span>
+        <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+      </li>
+    </ion-item>
+  </ion-list>
+  <ul class="list">
+    <span *ngFor="let item of notificationList">
+      <li class="item item-icon-right" *ngIf="item.isWhat=='gallery'" (click)="goGallery(item)">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy $index"/>
+        <span class="item-note">
+          {{item.date}}
+        </span>
+        <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+      </li>
+      <li class="item item-icon-right" *ngIf="item.isWhat=='event'" (click)="goEvent(item)">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy  $index"/>
+        <span class="item-note">
+          {{item.date}}
+        </span>
+        <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+      </li>
+      <li class="item item-icon-right" *ngIf="item.isWhat=='nothing'">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy  $index"/>
+        <span class="item-note">
+          {{item.date}}
+        </span>
+        <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+      </li>
+    </span>
+  </ul>
 </ion-content>

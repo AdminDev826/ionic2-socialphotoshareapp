@@ -110,7 +110,7 @@ select { border: none; }
 
 
 .menu_content , .menu_content .item, .menu_content .item-content{ font-family: 'Lato_Regular', sans-serif !important;  background:#348c7f; color:white;}
-.menu_content .item{ border:0px; text-align:left; font-weight: bold; margin-top:5px; }
+.menu_content .item{ border:0px; text-align:left; font-weight: bold; margin-top:0px; padding-bottom: 0px;}
 .menu_content .item .icon{ font-size:1.4em; color:white;}
 .menu_content .user_profile{ text-align:center; color:white; font-weight: bold;}
 .menu_content .user_profile img{ width:100px; height:100px;; border-radius:50%; margin-top:30px;}
@@ -171,5 +171,5 @@ select { border: none; }
 .lightfont { font-family: 'Lato_Light', sans-serif;  }
 .photos_content { padding-left:4px; padding-right:4px;}
 .notification_content .item{white-space:normal; font-family: 'Lato_Light', sans-serif; }
-.notification_content .item-note{ position:absolute; top:10px; right:10px;}
+.notification_content .item-note{ position:absolute; top:10px; right:10px; color: #aaa; font-size: 14px;}
 .notification_content img{ width:80px; height:80px; padding-left:5px;}

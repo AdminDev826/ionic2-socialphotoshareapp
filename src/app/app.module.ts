@@ -32,6 +32,7 @@ import { VenueDetail } from "../pages/venue-detail/venue-detail";
 import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';    
 import { IonicImageLoader } from 'ionic-image-loader';
+import { PhotoDetail } from "../pages/photo-detail/photo-detail";
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { IonicImageLoader } from 'ionic-image-loader';
     Terms1,
     Termsofuse,
     Upcomming,
-    VenueDetail
+    VenueDetail,
+    PhotoDetail
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ import { IonicImageLoader } from 'ionic-image-loader';
     Terms1,
     Termsofuse,
     Upcomming,
-    VenueDetail
+    VenueDetail,
+    PhotoDetail
   ],
   providers: [
     StatusBar,

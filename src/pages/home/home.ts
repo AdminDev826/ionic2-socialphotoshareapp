@@ -94,7 +94,7 @@ export class HomePage {
             if(event.feature == 1){
               this.eventTileList.push(event);
             }
-            if(event.feature == 1){
+            if(event.feature == 2){
               this.eventSliderList.push(event);
             }
           }

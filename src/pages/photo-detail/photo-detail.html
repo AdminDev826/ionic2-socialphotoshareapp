@@ -1,0 +1,17 @@
+<ion-content class="photo_detail_content has-header" scroll="false">
+  <div class="bar bar-header bar-dark photo-detail-header">
+    <button class="button button-clear button-icon ion-android-close" ng-click="closePhotoDetail()"></button>
+    <h1 class="title">{{selectedPhoto.title}}</h1>
+    <button class="button button-clear button-icon ion-share" ng-click="shareImg()"></button>
+  </div>
+  <ion-slides (ionSlideDidChange) = "slideHasChanged($index)" class="home_slider" style="margin-bottom:4px;" autoplay="3000" loop="true" speed="1000">
+      <ion-slide *ngFor="let item of photoTileList">
+          <div (click)="goSliderDetail(slider)">
+            <div class="box blue"><img src="{{item.filename}}" class="full-image"/></div>
+          </div>
+      </ion-slide>
+  </ion-slides>
+  <h2>{{selectedPhoto.title}}</h2>
+  <h4>{{selectedPhoto.eventDate}}</h4>
+  <img class="logo" src="img/Logo.png" />
+</ion-content>

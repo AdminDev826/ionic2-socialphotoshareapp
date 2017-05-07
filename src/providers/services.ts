@@ -20,6 +20,7 @@ export var global = {
 export class Services {
 	status = true;
 	temp = 5;
+	photoTileList: any;
 
   constructor() {
     console.log('Hello Services Provider');
@@ -27,6 +28,12 @@ export class Services {
 	
 	getStatus(){
 		return this.status;
+	}
+	setPhotoTileList(data) {
+		this.photoTileList = data;
+	}
+	getPhotoTileList() {
+		return this.photoTileList;
 	}
 
 	getEventAll() {
@@ -55,7 +62,6 @@ export class Services {
 
 	getGalleryAll(){
 		var ParseGalleryObject = Parse.Object.extend("Gallery");
-   	var ParsePhotosObject = Parse.Object.extend("Photos");
 		var offset = 0;
 		return Observable.create(observer => {
 			var query = new Parse.Query(ParseGalleryObject);
@@ -65,6 +71,49 @@ export class Services {
   			query.find({
   			  success: function(results) {
 						this.status = true;
+  					observer.next(results);
+  			  },
+  			  error: function(error) {
+  					this.status = true;
+  					observer.next(error);
+  			  }
+  			});
+		});
+	}
+
+	getGalleryAllPhotos(){
+		var ParsePhotosObject = Parse.Object.extend("Photos");
+		var offset = 0;
+		return Observable.create(observer => {
+			var query = new Parse.Query(ParsePhotosObject);
+        query.limit(1000);
+  			query.skip(1000 * offset);
+        query.include("gallery");
+  			query.find({
+  			  success: function(results) {
+  					this.status = true;
+  					observer.next(results);
+  			  },
+  			  error: function(error) {
+  					this.status = true;
+  					observer.next(error);
+  			  }
+  			});
+		});
+	}
+	getNotificationAll(){
+		var ParseNotificationsObject = Parse.Object.extend("Notifications");
+		var offset = 0;
+		return Observable.create(observer => {
+			var query = new Parse.Query(ParseNotificationsObject);
+        query.include("gallery");
+				query.include("event");
+				query.limit(1000);
+				query.skip(1000 * offset);
+				query.descending("createdAt");
+  			query.find({
+  			  success: function(results) {
+  					this.status = true;
   					observer.next(results);
   			  },
   			  error: function(error) {
@@ -237,23 +286,23 @@ export class Services {
    return {
      all: function(_param, offset){
         if(!offset) offset = 0;
-       var deferred = q.defer();
+      	var deferred = q.defer();
        //Query Parse
-       var query = new Parse.Query(ParseNotificationsObject);
-        query.include("gallery");
-        query.include("event");
-        query.limit(1000);
-       query.skip(1000 * offset);
-       query.descending("createdAt");
-       query.find({
-         success: function(results) {
-           deferred.resolve(results);
-         },
-         error: function(error) {
-           deferred.reject(error);
-         }
-       });
-       return deferred.promise;
+       	var query = new Parse.Query(ParseNotificationsObject);
+				query.include("gallery");
+				query.include("event");
+				query.limit(1000);
+				query.skip(1000 * offset);
+				query.descending("createdAt");
+				query.find({
+					success: function(results) {
+						deferred.resolve(results);
+					},
+					error: function(error) {
+						deferred.reject(error);
+					}
+				});
+				return deferred.promise;
      }
    }
   }
