@@ -66,6 +66,11 @@ select { border: none; }
   display: block;
 }
 .item {padding: 16px;}
+.no-scroll {
+  .scroll-content {
+    overflow: hidden !important;
+  }
+}
 
 
 .home_content{
@@ -133,10 +138,12 @@ select { border: none; }
 .subheader_area .tab_row {text-align:center;}
 .subheader_area .tab_row .button { border-radius: 20px; min-height:35px; height:35px; line-height:30px; width:100px;}
 
-.photo-detail-header { background:#0c0b0e !important;}
+.photo-detail-header { background:#0c0b0e !important; text-align: center; }
+.photo-detail-header ion-icon { font-size: 2em; color: #398c7f; }
+.photo-detail-header h1 { color: white; margin-top: 1rem; font-size: 2rem; }
 .photo-detail-header .button { color:#398c7f !important;}
 .photo_detail_content{ background:#0c0b0e !important; }
-.photo_detail_content .full-image{margin-top:30px;}
+.photo_detail_content .full-image{margin-top:30px; width: 100%; height: auto !important; }
 .photo_detail_content h2{ color:#398c7f; text-align: center; }
 .photo_detail_content h4{ color:white; text-align: center; }
 .photo_detail_content .logo{ width:30%; position:absolute; right:0px;bottom:-10px;}
@@ -147,13 +154,14 @@ select { border: none; }
 
 .previous-title img{ display:none;}
 
+.setting_content a { color: #777; }
 .setting_content .profile_img_area { width:100%; text-align:center; position:relative; }
 .setting_content .profile_img_area .profile_img { width:120px; height:120px; border-radius:50%; margin-top:20px; margin-bottom:20px;}
 .setting_content .profile_img_area .icon{font-size:4em; position:absolute; left:45%; top:50px; color:#f8df64; }
-.setting_content .list .item-divider { font-size: 0.9em; font-family: 'Lato_Bold', sans-serif !important; height:45px; line-height:30px; color:#777; font-weight:bold; background:white;}
-.setting_content .list .item-input {border:0px; margin-top:2px; font-family: 'Lato_Light', sans-serif !important;}
-.setting_content .list .item-input .input-label {font-size:0.8em; margin-top:5px; color:#aaa;}
-.setting_content .list .item-input input { margin-top:0px; text-align:right; font-size:1em; }
+.setting_content .list .item-divider { padding-left: 16px; padding-right: 16px; padding-top: 0px; font-size: 0.9em; font-family: 'Lato_Bold', sans-serif !important; height:45px; line-height:30px; color:#777; font-weight:bold; background:white;}
+.setting_content .list .item-input {border:0px; margin-top:2px; font-family: 'Lato_Light', sans-serif !important; padding-bottom: 0px;}
+.setting_content .list .item-input .input-label {font-size:0.8em; margin-top:5px; color:#aaa; display: block; width: 30%; float: left; }
+.setting_content .list .item-input input { margin-top:0px; text-align:right; font-size:1em; display: block; width: 70%; }
 .setting_content .list .item-toggle { font-size: 0.9em;  font-family: 'Lato_Bold', sans-serif !important; color:#777; font-weight:bold; background:white; }
 .setting_content .list .ion-ios-arrow-right { font-size:1.6em;}
 

@@ -16,7 +16,7 @@
   <div class="list ">
 
     <div class="img_block" ng-repeat="item in eventTileList" ng-click="goDetail(item)">
-      <img src="{{item.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      <img src="{{item?.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
       <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
     </div>
   </div>

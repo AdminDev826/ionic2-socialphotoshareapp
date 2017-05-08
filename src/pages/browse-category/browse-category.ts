@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { Services } from "../../providers/services";
+import * as moment from "moment";
+import { EventDetail } from "../event-detail/event-detail";
+import { VenueDetail } from "../venue-detail/venue-detail";
 
-/**
- * Generated class for the BrowseCategory page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
+
 @IonicPage()
 @Component({
   selector: 'page-browse-category',
@@ -14,11 +14,147 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BrowseCategory {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  loading: any;
+  selectedData: any;
+  eventTileList: any;
+  sortedArray: any;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private services: Services,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+    ) {
+      this.loading = this.loadingCtrl.create({
+        spinner: 'dots',
+        content: ''
+      });
+      this.selectedData = JSON.parse(this.navParams.get("selectedData"));
+      console.log(this.selectedData);
+      this.loadEventsData();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BrowseCategory');
+  }
+  showToast(title) {
+    let toast = this.toastCtrl.create({
+      message: title,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  loadEventsData(){
+    this.eventTileList = new Array();
+    this.loading.present();
+      this.services.getGalleryAll().subscribe(data=>{
+        this.loading.dismiss();
+        if(this.services.getStatus){
+          var now = new Date();
+          var today = moment(now).valueOf();
+          for(var index in data){
+            var event = {
+              id:data[index].id,
+              videoStillURL:data[index].get('videoStillURL'),
+              dressCode:data[index].get('dressCode'),
+              active:data[index].get('active'),
+              dayOfWeek:data[index].get('dayOfWeek'),
+              theme:data[index].get('theme'),
+              endDate:data[index].get('endDate'),
+              name:data[index].get('name'),
+              venue:data[index].get('venue'),
+              venueId:data[index].get('venue').id,
+              venueLogo:data[index].get('venue').get("imageThumbURL"),
+              startDate:data[index].get('startDate'),
+              desc:data[index].get('desc'),
+              ordering:data[index].get('ordering'),
+              imageURL:data[index].get('imageURL'),
+              imageThumbURL:data[index].get('imageThumbURL'),
+              imageFeatureURL:data[index].get('imageFeatureURL'),
+              videoURL:data[index].get('videoURL'),
+              feature:data[index].get('feature'),
+              deleted:data[index].get('deleted'),
+              age:data[index].get('age'),
+              description:data[index].get('description'),
+              timestamp:moment(data[index].get('startDate')).valueOf(),
+              browseVenue:data[index].get('browseVenue'),
+              browseEvent:data[index].get('browseEvent'),
+              browseVenueType: {id:""},
+              formatted_date: ""
+            };
+            if(event.venue){
+              var venueType = event.venue.get('browseVenueType');
+              console.log(venueType);
+              event.browseVenueType = event.venue.get('browseVenueType');
+            }
+            event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
+
+            if((event.timestamp >= today) && (event.timestamp <= ((today)+ 7* 24 * 60 * 60 * 1000)))
+            {
+              //if(event.feature == 1){
+                if(this.selectedData.type == "event" && event.browseEvent && this.selectedData.id == event.browseEvent.id)
+                  this.eventTileList.push(event);
+
+                if(this.selectedData.type == "venue" && event.browseEvent && this.selectedData.id == event.browseEvent.id)
+                {
+                    var flag = false;
+                    for(var i in this.eventTileList){
+                      if(event.venueId == this.eventTileList[i].venueId){
+                        flag = true;
+                      }
+                    }
+                    if(flag == false){
+                      event.imageThumbURL = event.venueLogo;
+                      this.eventTileList.push(event);
+                    }
+                }
+
+                // if(this.selectedData.type == "venue" && event.browseVenue && this.selectedData.id == event.browseVenue.id)
+                // {
+                //   event.imageThumbURL = event.venueLogo;
+                //   this.eventTileList.push(event);
+                // }
+
+                if(this.selectedData.type == "venueType" && event.browseVenueType && this.selectedData.id == event.browseVenueType.id)
+                {
+                  var flag = false;
+                  for(var i in this.eventTileList){
+                    if(event.venueId == this.eventTileList[i].venueId){
+                      flag = true;
+                    }
+                  }
+                  if(flag == false){
+                    event.imageThumbURL = event.venueLogo;
+                    this.eventTileList.push(event);
+                  }
+                }
+
+                // this.sortedArray = $filter('orderBy')(this.eventTileList, 'timestamp', false);
+                this.sortedArray = this.eventTileList.sort ( (a, b) => {
+                    return a.timestamp - b.timestamp;
+                });
+                this.eventTileList = this.sortedArray;
+                console.log(this.eventTileList);
+              //}
+            }
+          }
+        }else{
+          this.showToast(data.message);
+        }
+      });
+  }
+  
+  goDetail = function(item){
+    if(this.selectedData.type == "venue" || this.selectedData.type == "venueType"){
+      // $state.go("app.venue_detail", {selectedEvent:angular.toJson(item)});
+      this.navCtrl.push(VenueDetail, {selectedEvent:JSON.stringify(item)});
+    }else{
+      // $state.go("app.event_detail", {selectedEvent:angular.toJson(item)});
+      this.navCtrl.push(EventDetail, {selectedEvent:JSON.stringify(item)});
+    }
   }
 
 }

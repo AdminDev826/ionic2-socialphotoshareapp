@@ -1,15 +1,56 @@
 <ion-header>
   <ion-navbar color="dark">
     <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
       <img src="../../assets/img/Logo1.png" class="logo1"/>
     </ion-title>
+    <ion-buttons end>
+      <button ion-button clear class="button button-clear" (click)="onSave()">Save</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="setting_content">
+  <ion-item no-padding class="profile_img_area">
+    <img [src]="currentUser.profileImage" class="profile_img"/>
+  </ion-item>
 
+  <div class="list item item-divider">
+    <ion-item no-padding detail-push class="item-toggle"><ion-label class="toggle toggle-balanced">EDIT PROFILE</ion-label></ion-item>
+    <ion-item no-padding>
+      <label class="item-input">
+        <span class="input-label">FIRST NAME</span>
+        <input type="text" [(ngModel)]="currentUser.firstName">
+      </label>
+      <label class="item-input">
+        <span class="input-label">SECOND NAME</span>
+        <input type="text" [(ngModel)]="currentUser.lastName">
+      </label>
+    </ion-item>
+    <ion-item no-padding detail-push class="item-toggle">
+      <a href="#/app/change_password"><span class="toggle toggle-balanced">CHANGE PASSWORD</span></a>
+    </ion-item>
+    <ion-item no-padding>
+      <ion-label class="toggle toggle-balanced">PUSH NOTIFICATIONS</ion-label>
+      <ion-toggle [(ngModel)]="currentUser.pushNotification" (ionChange)="changePush($event)"></ion-toggle>
+      <div class="track">
+        <div class="handle"></div>
+      </div>
+    </ion-item>
+    <ion-item no-padding detail-push class="item-toggle">
+      <a href="#/app/about"><span class="toggle toggle-balanced">ABOUT WUGI</span></a>
+    </ion-item>
+    <ion-item no-padding detail-push (click)="onContact()" class="item-toggle">
+      <ion-label class="toggle toggle-balanced">CONTACT WUGI</ion-label>
+    </ion-item>
+    <ion-item no-padding detail-push class="item-toggle">
+      <a href="#/app/privacy"><span class="toggle toggle-balanced">PRIVACY POLICY</span></a>
+    </ion-item>
+    <ion-item no-padding detail-push class="item-toggle">
+      <a href="#/app/terms"><span class="toggle toggle-balanced">TERMS AND CONDITIONS</span></a>
+    </ion-item>
+  </div>
 </ion-content>

@@ -1,17 +1,21 @@
-<ion-content class="photo_detail_content has-header" scroll="false">
-  <div class="bar bar-header bar-dark photo-detail-header">
-    <button class="button button-clear button-icon ion-android-close" ng-click="closePhotoDetail()"></button>
+<ion-content class="photo_detail_content has-header no-scroll">
+  <div class="photo-detail-header">
+    <button ion-button style="position: absolute; left: 0px; top: 0px;" clear class="button button-clear button-icon ion-android-close" (click)="closePhotoDetail()">
+      <ion-icon name="close" style="font-size: -webkit-xxx-large; font-weight: bold;"></ion-icon>
+    </button>
     <h1 class="title">{{selectedPhoto.title}}</h1>
-    <button class="button button-clear button-icon ion-share" ng-click="shareImg()"></button>
+    <button ion-button style="position: absolute; right: 0px; top: 0px;" clear class="button button-clear button-icon ion-share" (click)="shareImg()">
+      <ion-icon name="share-alt"></ion-icon>
+    </button>
   </div>
-  <ion-slides (ionSlideDidChange) = "slideHasChanged($index)" class="home_slider" style="margin-bottom:4px;" autoplay="3000" loop="true" speed="1000">
-      <ion-slide *ngFor="let item of photoTileList">
-          <div (click)="goSliderDetail(slider)">
-            <div class="box blue"><img src="{{item.filename}}" class="full-image"/></div>
+  <ion-slides (ionSlideDidChange) = "slideHasChanged($event)" class="home_slider" style="margin-bottom:4px; height: 60%;" autoplay="3000" loop="true" speed="1000">
+      <ion-slide style="height: 100% !important;" *ngFor="let item of photoTileList">
+          <div class="box blue" (click)="goSliderDetail(slider)" style="height: 100% !important;">
+            <img src="{{item.filename}}" class="full-image"/>
           </div>
       </ion-slide>
   </ion-slides>
   <h2>{{selectedPhoto.title}}</h2>
   <h4>{{selectedPhoto.eventDate}}</h4>
-  <img class="logo" src="img/Logo.png" />
+  <img class="logo" src="assets/img/Logo.png" />
 </ion-content>

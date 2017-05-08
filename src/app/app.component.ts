@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ToastController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
 import { First } from "../pages/first/first";
-import {Parse} from 'parse';
+import {Parse, parsePlugin} from 'parse';
 import { Login } from "../pages/login/login";
 import { Services } from "../providers/services";
 import { Facebook } from "@ionic-native/facebook";
@@ -53,6 +53,7 @@ export class MyApp {
     splashScreen: SplashScreen,
     menu: MenuController,
     public toastCtrl: ToastController,
+    private services: Services,
     public events: Events
     ) {
       this.menu = menu;
@@ -85,10 +86,61 @@ export class MyApp {
         Parse.initialize("G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", "GlKvpo90mEnPJCvlnvYPbnEApCUHPWS4TFkYxr7y");
         Parse.serverURL = "https://parseapi.back4app.com";
 
+        try{
+          parsePlugin.register({
+          appId:"G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", clientKey:"DDpKun5fbQLzvuXdKwDtTnwgIQdln6BAV0m7qBxe", server:"https://parseapi.back4app.com", ecb:"onNotification", pushOpen: "onPushOpen" },
+          function() {
+              console.log('successfully registered device!');
+              this.doWhatever();
+          }, function(e) {
+              console.log('error registering device: ' + e);
+          });
+        }catch(e){
+          console.log(e);
+        }
+
         statusBar.styleDefault();
         splashScreen.hide();
       });
   }
+
+  doWhatever(){
+    parsePlugin.getInstallationId(function(id) {
+        console.log(id);
+        this.services.installationID = id;
+    }, function(e) {
+        console.log('error');
+    });
+
+    parsePlugin.getSubscriptions(function(subscriptions) {
+        console.log(subscriptions);
+    }, function(e) {
+        console.log('error');
+    });
+    /*
+    parsePlugin.subscribe('SampleChannel', function() {
+        console.log('OK');
+    }, function(e) {
+        console.log('error');
+    });
+
+    parsePlugin.unsubscribe('SampleChannel', function(msg) {
+        console.log('OK');
+    }, function(e) {
+        console.log('error');
+    });
+    */
+  } 
+
+    onNotification(pnObj){
+        //alert("received pn: " + JSON.stringify(pnObj));
+        // navigator.notification.alert(angular.toJson(pnObj), function(index){}, "Wugi", "Ok");
+    }
+
+    onPushOpen(pnObj){
+        //alert("open from pn: " + JSON.stringify(pnObj));
+        // navigator.notification.alert(angular.toJson(pnObj), function(index){}, "Wugi", "Ok");
+    }
 
   openPage(page) {
 		// close the menu when clicking a link from the menu

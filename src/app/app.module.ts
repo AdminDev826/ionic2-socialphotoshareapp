@@ -33,6 +33,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';    
 import { IonicImageLoader } from 'ionic-image-loader';
 import { PhotoDetail } from "../pages/photo-detail/photo-detail";
+import { EmailComposer } from '@ionic-native/email-composer';
+
 
 
 @NgModule({
@@ -102,6 +104,7 @@ import { PhotoDetail } from "../pages/photo-detail/photo-detail";
     Http,
     Geolocation,
     InAppBrowser,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, Slides } from 'ionic-angular';
 import { Services } from "../../providers/services";
 
 
@@ -11,6 +11,8 @@ import { Services } from "../../providers/services";
 })
 export class PhotoDetail {
 
+  @ViewChild(Slides) slides: Slides;
+
   selectedPhoto: any;
   photoTileList: any;
 
@@ -18,6 +20,7 @@ export class PhotoDetail {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private services: Services, 
+    private viewCtrl: ViewController
     ) {
       this.selectedPhoto = this.navParams.get("selectedPhoto");
       console.log(this.selectedPhoto);
@@ -29,6 +32,14 @@ export class PhotoDetail {
   }
   slideHasChanged(index){
     console.log(index);
+  }
+  closePhotoDetail(){
+    this.viewCtrl.dismiss();
+  }
+  shareImg(){
+    var i = this.slides.getActiveIndex();
+    console.log(i);
+    // window.plugins.socialsharing.shareViaInstagram('', $scope.photoTileList[$ionicSlideBoxDelegate.currentIndex()].filename, function() {console.log('share ok')}, function(errormsg){console.log(errormsg)});
   }
 
 }

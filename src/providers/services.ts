@@ -21,6 +21,7 @@ export class Services {
 	status = true;
 	temp = 5;
 	photoTileList: any;
+	installationID: any;
 
   constructor() {
     console.log('Hello Services Provider');
