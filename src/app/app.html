@@ -1,6 +1,6 @@
-<ion-menu id="leftMenu" type="overlay" [content]="content">
-	<ion-content class="menu_content" [menuClose]="wide">
-        <div class="item user_profile" menu-close ng-click="goProfile()">
+<ion-menu id="leftMenu" [content]="content">
+	<ion-content class="menu_content">
+        <div class="item user_profile" menu-close (click)="goProfile()">
             <img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>
             <div class="name"  *ngIf="!loginAsGuest">{{currentUser.name}}</div>
         </div>

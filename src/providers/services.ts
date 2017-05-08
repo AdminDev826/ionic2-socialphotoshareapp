@@ -124,6 +124,26 @@ export class Services {
   			});
 		});
 	}
+	getVenueAll(){
+		var ParseVenueObject = Parse.Object.extend("Venue");
+		var offset = 0;
+		return Observable.create(observer => {
+			var query = new Parse.Query(ParseVenueObject);
+			query.include("browseVenueType");
+			query.limit(1000);
+			query.skip(1000 * offset);
+			query.find({
+				success: function(results) {
+					this.status = true;
+					observer.next(results);
+				},
+				error: function(error) {
+					this.status = true;
+					observer.next(error);
+				}
+			});
+		});
+	}
 
   ParseEventService(q) {
     var ParseEventObject = Parse.Object.extend("Event");

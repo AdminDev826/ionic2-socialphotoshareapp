@@ -5,6 +5,11 @@ import { First } from '../first/first';
 import * as moment from "moment";
 import { Services } from "../../providers/services";
 import { EmailComposer } from '@ionic-native/email-composer';
+import { ChangePassword } from "../change-password/change-password";
+import { Forgotpassword } from "../forgotpassword/forgotpassword";
+import { About } from "../about/about";
+import { Terms } from "../terms/terms";
+import { Privacy } from "../privacy/privacy";
 
 
 
@@ -140,6 +145,21 @@ export class Settings {
         }
       });
     }
+  }
+  gotoChangePasswordPage(){
+    this.navCtrl.push(ChangePassword);
+  }
+  gotoForgotPasswordPage(){
+    this.navCtrl.push(Forgotpassword);
+  }
+  gotoTermsPage(){
+    this.navCtrl.push(Terms);
+  }
+  gotoPrivacyPage(){
+    this.navCtrl.push(Privacy);
+  }
+  gotoAboutPage(){
+    this.navCtrl.push(About);
   }
 
   onContact(){

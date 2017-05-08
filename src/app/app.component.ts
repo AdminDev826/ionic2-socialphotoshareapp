@@ -76,12 +76,7 @@ export class MyApp {
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
-        let toast = this.toastCtrl.create({
-          message: "hello",
-          duration: 2000,
-          position: "bottom"
-        });
-        toast.present();
+      
 
         Parse.initialize("G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", "GlKvpo90mEnPJCvlnvYPbnEApCUHPWS4TFkYxr7y");
         Parse.serverURL = "https://parseapi.back4app.com";

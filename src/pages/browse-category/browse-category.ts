@@ -50,7 +50,7 @@ export class BrowseCategory {
   loadEventsData(){
     this.eventTileList = new Array();
     this.loading.present();
-      this.services.getGalleryAll().subscribe(data=>{
+      this.services.getEventAll().subscribe(data=>{
         this.loading.dismiss();
         if(this.services.getStatus){
           var now = new Date();
@@ -87,67 +87,66 @@ export class BrowseCategory {
             };
             if(event.venue){
               var venueType = event.venue.get('browseVenueType');
-              console.log(venueType);
               event.browseVenueType = event.venue.get('browseVenueType');
             }
             event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
 
             if((event.timestamp >= today) && (event.timestamp <= ((today)+ 7* 24 * 60 * 60 * 1000)))
             {
+              this.eventTileList.push(event);
               //if(event.feature == 1){
-                if(this.selectedData.type == "event" && event.browseEvent && this.selectedData.id == event.browseEvent.id)
-                  this.eventTileList.push(event);
-
-                if(this.selectedData.type == "venue" && event.browseEvent && this.selectedData.id == event.browseEvent.id)
-                {
-                    var flag = false;
-                    for(var i in this.eventTileList){
-                      if(event.venueId == this.eventTileList[i].venueId){
-                        flag = true;
-                      }
-                    }
-                    if(flag == false){
-                      event.imageThumbURL = event.venueLogo;
-                      this.eventTileList.push(event);
-                    }
-                }
-
-                // if(this.selectedData.type == "venue" && event.browseVenue && this.selectedData.id == event.browseVenue.id)
-                // {
-                //   event.imageThumbURL = event.venueLogo;
+                // if(this.selectedData.type == "event" && event.browseEvent && this.selectedData.id == event.browseEvent.id)
                 //   this.eventTileList.push(event);
+
+                // if(this.selectedData.type == "venue" && event.browseEvent && this.selectedData.id == event.browseEvent.id)
+                // {
+                //     var flag = false;
+                //     for(var i in this.eventTileList){
+                //       if(event.venueId == this.eventTileList[i].venueId){
+                //         flag = true;
+                //       }
+                //     }
+                //     if(flag == false){
+                //       event.imageThumbURL = event.venueLogo;
+                //       this.eventTileList.push(event);
+                //     }
                 // }
 
-                if(this.selectedData.type == "venueType" && event.browseVenueType && this.selectedData.id == event.browseVenueType.id)
-                {
-                  var flag = false;
-                  for(var i in this.eventTileList){
-                    if(event.venueId == this.eventTileList[i].venueId){
-                      flag = true;
-                    }
-                  }
-                  if(flag == false){
-                    event.imageThumbURL = event.venueLogo;
-                    this.eventTileList.push(event);
-                  }
-                }
+                // // if(this.selectedData.type == "venue" && event.browseVenue && this.selectedData.id == event.browseVenue.id)
+                // // {
+                // //   event.imageThumbURL = event.venueLogo;
+                // //   this.eventTileList.push(event);
+                // // }
 
-                // this.sortedArray = $filter('orderBy')(this.eventTileList, 'timestamp', false);
-                this.sortedArray = this.eventTileList.sort ( (a, b) => {
-                    return a.timestamp - b.timestamp;
-                });
-                this.eventTileList = this.sortedArray;
-                console.log(this.eventTileList);
-              //}
+                // if(this.selectedData.type == "venueType" && event.browseVenueType && this.selectedData.id == event.browseVenueType.id)
+                // {
+                //   var flag = false;
+                //   for(var i in this.eventTileList){
+                //     if(event.venueId == this.eventTileList[i].venueId){
+                //       flag = true;
+                //     }
+                //   }
+                //   if(flag == false){
+                //     event.imageThumbURL = event.venueLogo;
+                //     this.eventTileList.push(event);
+                //   }
+                // }
             }
           }
+          console.log(this.eventTileList);
+          // this.sortedArray = $filter('orderBy')(this.eventTileList, 'timestamp', false);
+          this.sortedArray = this.eventTileList.sort ( (a, b) => {
+              return a.timestamp - b.timestamp;
+          });
+          this.eventTileList = this.sortedArray;
+        //}
         }else{
           this.showToast(data.message);
         }
       });
   }
   
-  goDetail = function(item){
+  goDetail(item){
     if(this.selectedData.type == "venue" || this.selectedData.type == "venueType"){
       // $state.go("app.venue_detail", {selectedEvent:angular.toJson(item)});
       this.navCtrl.push(VenueDetail, {selectedEvent:JSON.stringify(item)});

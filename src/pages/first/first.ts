@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, MenuController } from 'ionic-angular';
 import { Termsofuse } from "../termsofuse/termsofuse";
 import { Terms1 } from "../terms1/terms1";
 import { Login } from "../login/login";
@@ -19,7 +19,7 @@ export class First {
   termsmodal: any;
   loading: any;
 
-  constructor(public nav: NavController, private fb: Facebook, private loadingCtrl: LoadingController, private toastCtrl: ToastController, public navParams: NavParams, private modal: ModalController) {
+  constructor(private menu: MenuController, public nav: NavController, private fb: Facebook, private loadingCtrl: LoadingController, private toastCtrl: ToastController, public navParams: NavParams, private modal: ModalController) {
     this.termsmodal = this.modal.create(Terms1);
     this.loading = this.loadingCtrl.create({
       spinner: 'dots',
@@ -29,7 +29,9 @@ export class First {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad First');
-    
+  }
+  ionViewDidEnter(){
+    this.menu.swipeEnable(false, 'leftMenu');
   }
 
   goGuest(){
@@ -135,17 +137,69 @@ export class First {
     //     });
     // }
 
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-    .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-    .catch(e => console.log('Error logging into Facebook', e));
+    this.fb.login(['public_profile'])
+    .then(function(response){
+        let userId = response.authResponse.userID;
+        let params = new Array();
 
-    // Facebook.login(["public_profile"], fbLoginSuccess,
-    //       function loginError (error) {
-    //           console.error(error);
-    //           _this.loading.dismiss();
-    //       }
-    // );
-    
+        //Getting name and gender properties
+        this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", ['public_profile'])
+        .then(function(response) {
+          console.log(response);
+          _this.loading.present();
+          var query = new Parse.Query(Parse.User);
+          query.equalTo("username", response.id);
+          query.equalTo("facebookLogin", true);
+          query.find({
+            success: function(aUser) {
+              console.log(aUser);
+              if(aUser.length > 0){
+                Parse.User.logIn(response.id, response.id, {
+                  success: function(user) {
+                      console.log(user);
+                      _this.loading.dismiss();
+                      _this.closeLogin();
+                  },
+                  error: function(user, error) {
+                    console.log(error);
+                    _this.loading.dismiss();
+                    _this.showToast(error.message);
+                  }
+                });
+              }else{
+                _this.loading.present();
+                var user = new Parse.User();
+                user.set("username", response.id);
+                user.set("password", response.id);
+                user.set("firstName", response.first_name);
+                user.set("lastName", response.last_name);
+                user.set("gender", response.gender);
+                user.set("profileImage", response.picture.data.url);
+                user.set("facebookLogin", true);
+                user.set("pushNotification", false);
+                user.set("Venues", []);
+                user.signUp(null, {
+                  success: function(user) {
+                    console.log(user);
+                    _this.loading.dismiss();
+                    _this.closeLogin();
+                  },
+                  error: function(user, error) {
+                    console.log("Error: " + error.code + " " + error.message);
+                    this.showToast(error.message);
+                    _this.loading.dismiss();
+                  }
+                });
+              }
+            }
+        });
+      }, function(error){
+        console.log(error);
+      });
+    });
+  }
+  closeLogin(){
+    this.nav.setRoot(HomePage);
   }
 
 }

@@ -36,7 +36,6 @@ export class Browse {
       this.loadBrowseEventsData();
       this.loadBrowseVenueData();
       this.loadBrowseVenueTypeData();
-
   }
 
   ionViewDidLoad() {
@@ -173,7 +172,7 @@ export class Browse {
   loadBrowseVenueTypeData(){
       this.browseVenueTypeList = new Array();
       // this.loading.present();
-      this.services.getGalleryAll().subscribe(data=>{
+      this.services.getVenueAll().subscribe(data=>{
         // this.loading.dismiss();
         if(this.services.getStatus){
           for(var index in data){

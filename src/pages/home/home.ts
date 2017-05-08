@@ -37,7 +37,7 @@ export class HomePage {
     private services: Services,
     private toastCtrl: ToastController
     ) {
-    this.events.publish('user:created', "test user", "../assets/img/image.png");
+    // this.events.publish('user:created', "test user", "../assets/img/image.png");
     this.loading = this.loadingCtrl.create({
     });
     this.services.temp = 10;
