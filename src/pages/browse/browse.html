@@ -9,24 +9,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-tabs>
-  <ion-tab tabIcon="heart" [root]="tab1"></ion-tab>
-  <ion-tab tabIcon="star" [root]="tab2"></ion-tab>
-</ion-tabs>
-
-<ion-content class="browse_content has-custom-header" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
+<ion-content class="browse_content" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
   <div class="subheader_area">
-    <div class="row tab_row">
-      <div class="col-33">
-        <button class="button button-balanced" [ngClass]="currentTab=='event'?'':'button-clear'" (click)="changeTab('event')">EVENT</button>
-      </div>
-      <div class="col-34">
-        <button class="button button-balanced" [ngClass]="currentTab=='venue'?'':'button-clear'" (click)="changeTab('venue')">VENUE</button>
-      </div>
-      <div class="col-33">
-        <button class="button button-balanced" [ngClass]="currentTab=='type'?'':'button-clear'" (click)="changeTab('type')">TYPE</button>
-      </div>
-    </div>
+    <ion-row class="row tab_row">
+      <ion-col width-33 class="col-33">
+        <button ion-button class="button button-balanced" [ngClass]="currentTab=='event'?'':'button-clear'" (click)="changeTab('event')">EVENT</button>
+      </ion-col>
+      <ion-col width-34 class="col-34">
+        <button ion-button class="button button-balanced" [ngClass]="currentTab=='venue'?'':'button-clear'" (click)="changeTab('venue')">VENUE</button>
+      </ion-col>
+      <ion-col width-33 class="col-33">
+        <button ion-button class="button button-balanced" [ngClass]="currentTab=='type'?'':'button-clear'" (click)="changeTab('type')">TYPE</button>
+      </ion-col>
+    </ion-row>
   </div>
   <div class="list" *ngIf="currentTab=='event'">
     <div class="full-image" *ngFor="let item of browseEventList" (click)="goEventCategory(item)">

@@ -91,4 +91,5 @@
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.6.3" />
     <plugin name="cordova-plugin-email" spec="~1.2.6" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="~5.1.8" />
 </widget>

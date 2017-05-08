@@ -150,6 +150,8 @@ select { border: none; }
 .photo_detail_content .slider-pager .slider-pager-page{ color:white;}
 
 .browse_content .list .full-image { position:relative; margin-bottom:-2px;}
+.browse_content .button-balanced {border-color: transparent;background-color: #348c7f;color: #fff; }
+.browse_content .button-clear { background-color: white !important; color: #348c7f !important;}
 .browse_content .list .full-image h2{ position:absolute; bottom:10px; color:white; right:20px;}
 
 .previous-title img{ display:none;}

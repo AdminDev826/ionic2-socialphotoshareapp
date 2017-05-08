@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Services } from "../../providers/services";
 import * as moment from "moment";
@@ -12,8 +14,10 @@ import { BrowseCategory } from "../browse-category/browse-category";
 })
 export class Browse {
 
+  @ViewChild(Content) content: Content;
+
   currentTab = "event";
-  loading: any;
+  // loading: any;
   browseEventList = new Array();
   browseVenueList = new Array();
   browseVenueTypeList = new Array();
@@ -25,11 +29,14 @@ export class Browse {
     private loadingCtrl: LoadingController,
     private services: Services
     ) {
-      this.loading = this.loadingCtrl.create({
-        spinner: 'dots',
-        content: ''
-      });
-      this.changeTab("event");
+      // this.loading = this.loadingCtrl.create({
+      //   spinner: 'dots',
+      //   content: ''
+      // });
+      this.loadBrowseEventsData();
+      this.loadBrowseVenueData();
+      this.loadBrowseVenueTypeData();
+
   }
 
   ionViewDidLoad() {
@@ -45,19 +52,10 @@ export class Browse {
   }
 
   changeTab(name){
+    if(this.currentTab == name){
+      return;
+    }
     this.currentTab = name;
-
-    if(name == 'event'){
-      this.loadBrowseEventsData();
-    }
-
-    if(name == 'venue'){
-      this.loadBrowseVenueData();
-    }
-
-    if(name == 'type'){
-      this.loadBrowseVenueTypeData();
-    }
   }
 
   onSwipeRight(){
@@ -89,9 +87,9 @@ export class Browse {
   
   loadBrowseEventsData(){
     this.browseEventList = new Array();
-    this.loading.present();
+    // this.loading.present();
     this.services.getEventAll().subscribe(data=>{
-        this.loading.dismiss();
+        // this.loading.dismiss();
         if(this.services.getStatus){
           for(var index in data){
           var event = {
@@ -129,9 +127,9 @@ export class Browse {
 
   loadBrowseVenueData(){
       this.browseVenueList = new Array();
-      this.loading.present();
+      // this.loading.present();
       this.services.getEventAll().subscribe(data=>{
-          this.loading.dismiss();
+          // this.loading.dismiss();
           if(this.services.getStatus){
             for(var index in data){
             var event = {
@@ -174,9 +172,9 @@ export class Browse {
   
   loadBrowseVenueTypeData(){
       this.browseVenueTypeList = new Array();
-      this.loading.present();
+      // this.loading.present();
       this.services.getGalleryAll().subscribe(data=>{
-        this.loading.dismiss();
+        // this.loading.dismiss();
         if(this.services.getStatus){
           for(var index in data){
 

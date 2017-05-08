@@ -34,6 +34,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { PhotoDetail } from "../pages/photo-detail/photo-detail";
 import { EmailComposer } from '@ionic-native/email-composer';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 
 
@@ -105,6 +107,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     Geolocation,
     InAppBrowser,
     EmailComposer,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
