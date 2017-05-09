@@ -97,7 +97,7 @@ export class Browse {
             startDate:moment(data[index].get('startDate')).valueOf()
           };
           var now = new Date();
-          var today = moment(now).valueOf();
+          var today = moment(now).add(4, "hours").valueOf();
           var lastDay = (today) + 7 * 24 * 60 * 60 * 1000;
           if((event.startDate) > (today) && (event.startDate) < (lastDay)){
             //console.log(event);
@@ -138,7 +138,7 @@ export class Browse {
               venue:data[index].get('venue'),
             };
             var now = new Date();
-            var today = moment(now).valueOf();
+            var today = moment(now).add(4, "hours").valueOf();
             var lastDay = (today) + 7 * 24 * 60 * 60 * 1000;
             if((event.startDate) > (today) && (event.startDate) < (lastDay)){
 

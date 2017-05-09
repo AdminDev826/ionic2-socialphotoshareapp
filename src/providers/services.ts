@@ -3,7 +3,6 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Parse} from 'parse';
 import {Observable} from 'rxjs/Observable';
-import * as moment from "moment";
 
 
 

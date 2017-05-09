@@ -34,9 +34,10 @@
             </label>
           </ion-col>
           <ion-col width-40>
-            <div>
-              <img class="img_btn" src="assets/img/Profile.png" *ngIf="newuser.profileImage==''" (click)="showCameraSheet()"/>
-              <img class="img_btn" src="{{newuser.profileImage}}" *ngIf="newuser.profileImage!=''" (click)="showCameraSheet()"/>
+            <div (click)="showCameraSheet()">
+              <img class="img_btn" src="assets/img/Profile.png" *ngIf="newuser.profileImage==''"/>
+              <img class="img_btn" src="{{newuser.profileImage}}" *ngIf="newuser.profileImage!=''" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+              <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded && newuser.profileImage!=''"></ion-spinner>              
             </div>
           </ion-col>
         </ion-row>

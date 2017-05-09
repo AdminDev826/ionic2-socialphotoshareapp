@@ -98,7 +98,7 @@ export class Notifications {
       this.loading.dismiss();
       if(this.services.getStatus){
         var now = new Date();
-        var today = moment(now).valueOf();
+        var today = moment(now).add(4, "hours").valueOf();
         for(var index in data){
           var event = {
             id:data[index].id,

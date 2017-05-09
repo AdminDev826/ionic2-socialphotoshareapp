@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, Events } from 'ionic-angular';
+import { Platform, MenuController, Nav, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ToastController } from 'ionic-angular';
@@ -54,7 +54,8 @@ export class MyApp {
     menu: MenuController,
     public toastCtrl: ToastController,
     private services: Services,
-    public events: Events
+    public events: Events,
+    private alertCtrl: AlertController
     ) {
       this.menu = menu;
       this.nativePages = [
@@ -130,11 +131,23 @@ export class MyApp {
     onNotification(pnObj){
         //alert("received pn: " + JSON.stringify(pnObj));
         // navigator.notification.alert(angular.toJson(pnObj), function(index){}, "Wugi", "Ok");
+        let alert = this.alertCtrl.create({
+          title: 'Wugi',
+          subTitle: JSON.stringify(pnObj),
+          buttons: ['Ok']
+        });
+        alert.present();
     }
 
     onPushOpen(pnObj){
         //alert("open from pn: " + JSON.stringify(pnObj));
         // navigator.notification.alert(angular.toJson(pnObj), function(index){}, "Wugi", "Ok");
+        let alert = this.alertCtrl.create({
+          title: 'Wugi',
+          subTitle: JSON.stringify(pnObj),
+          buttons: ['Ok']
+        });
+        alert.present();
     }
 
   openPage(page) {

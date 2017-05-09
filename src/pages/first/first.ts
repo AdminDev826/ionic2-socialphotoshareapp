@@ -6,6 +6,7 @@ import { Login } from "../login/login";
 import { HomePage } from "../home/home";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
 import {Parse} from 'parse';
+import * as moment from "moment";
 
 
 
@@ -42,7 +43,7 @@ export class First {
       this.termsmodal.present();
   }
 
-  showSignin() {   
+  showSignin() {
     var mmodal = this.modal.create(Login, {isTab: "signin"});
     mmodal.onDidDismiss(item => {
       if (!item) {

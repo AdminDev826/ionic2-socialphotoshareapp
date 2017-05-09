@@ -105,9 +105,10 @@ export class Login {
       let _this = this;
       Parse.User.logIn(this.user.username, this.user.password, {
         success: function(user) {
-          console.log(user);
+          let username = user.get('firstName') + " " + user.get('lastName');
+          let profileImage = user.get('profileImage');
           _this.loading.dismiss();
-          _this.events.publish('user:created', "test user", "assets/img/image.png");
+          _this.events.publish('user:created', username, profileImage);
           _this.closeLogin(true);
         },
         error: function(user, error) {
@@ -286,9 +287,11 @@ export class Login {
           //$ionicLoading.hide();
           //ionicToast.show("Please verify your email before Login.", 'bottom',false, 3000);
           //$state.go("signin");
-          _this.events.publish('user:created', "test user", "assets/img/image.png");
+          let username = user.get('firstName') + " " + user.get('lastName');
+          let profileImage = user.get('profileImage');
+          _this.events.publish('user:created', username, profileImage);
           _this.loading.dismiss();
-          _this.closeLogin(true);
+          _this.closeLogin(false);
           
         },
         error: function(user, error) {
