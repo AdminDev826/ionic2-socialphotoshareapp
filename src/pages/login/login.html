@@ -4,108 +4,101 @@
       <button class="closeBtn" (click)="closeLogin()"><ion-icon ios="ios-close" md="md-close-outline" style="font-size: 30px;"></ion-icon></button>
       <img class="logo" src="assets/img/Logo.png" />
     </div>
-    <div class="button_rows">
+    <div class="button-rows">
       <ion-row>
-        <ion-col width-40 [ngClass]="isTab=='signup'?'active':''">
-          <button ion-button button-clear button-light (click)="changeTab('signup')">SIGN UP</button>
+        <ion-col col-6>
+          <button ion-button button-clear button-light [ngClass]="isTab=='signup'?'active':''" (click)="changeTab('signup')">SIGN UP</button>
         </ion-col>
-        <ion-col width-40 [ngClass]="isTab=='signin'?'active':''">
-          <button ion-button button-clear button-light  (click)="changeTab('signin')">SIGN IN</button>
+        <ion-col col-6>
+          <button ion-button button-clear button-light [ngClass]="isTab=='signin'?'active':''"  (click)="changeTab('signin')">SIGN IN</button>
         </ion-col>
       </ion-row>
       <ion-row class="row arrow_row">
-        <ion-col width-40>
+        <ion-col col-6>
           <div class="arrow" *ngIf="isTab=='signup'"></div>
         </ion-col>
-        <ion-col width-40>
+        <ion-col col-6>
           <div class="arrow" *ngIf="isTab!=='signup'"></div>
         </ion-col>
       </ion-row>
     </div>
-
-    <div class="list signup_list" *ngIf="isTab=='signup'">
-        <ion-row>
-          <ion-col width-40>
-            <label class="item item-input">
-              <input type="text" placeholder="First" [(ngModel)]="newuser.firstName">
-            </label>
-            <label class="item item-input">
-              <input type="text" placeholder="Last" [(ngModel)]="newuser.lastName">
-            </label>
-          </ion-col>
-          <ion-col width-40>
-            <div (click)="showCameraSheet()">
-              <img class="img_btn" src="assets/img/Profile.png" *ngIf="newuser.profileImage==''"/>
-              <img class="img_btn" src="{{newuser.profileImage}}" *ngIf="newuser.profileImage!=''" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
-              <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded && newuser.profileImage!=''"></ion-spinner>              
-            </div>
-          </ion-col>
-        </ion-row>
-        <label class="item item-input">
-          <input type="email" placeholder="E-mail"  [(ngModel)]="newuser.email">
-        </label>
-        <label class="item item-input">
-          <input type="password" placeholder="Password"  [(ngModel)]="newuser.password">
-        </label>
-        <label class="item item-input">
-          <input type="password" placeholder="Confirm Password"  [(ngModel)]="newuser.confirm">
-        </label>
-
-        <ion-row>
-          <ion-col width-40>
-            <label class="item item-input" style="padding-left:30px; height:40px;">
-              <!--<input type="date" placeholder="Birthday" [(ngModel)]="newuser.dob" style=" line-height:50px; padding-top:0px;">-->
-              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newuser.dob"></ion-datetime>
-            </label>
-          </ion-col>
-          <ion-col width-40>
-            <label class="item item-input">
-              <ion-select [(ngModel)]="newuser.gender">
-                <ion-option value="Male">Male</ion-option>
-                <ion-option value="Female">Female</ion-option>
-              </ion-select>
-            </label>
-            
-            <!--<label class="item item-input item-select">
-              <select ng-model="newuser.gender" style="width: 100%; height: 100%;">
-                <option selected>Male</option>
-                <option>Female</option>
-              </select>
-            </label>-->
-          </ion-col>
-          <ion-col width-10></ion-col>
-        </ion-row>
-        <br>
-        <ion-row>
-          <ion-col width-40>
-            <button ion-button color="light" class="signup_btn" outline (click)="signup()">Create Account</button>
-          </ion-col>
-          <ion-col width-40>
-            <button ion-button icon-right class="fb_btn" (click)="fbLogin()">
-              Sign Up With
-              <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-    </div>
-
-    <div class="list signin_list" *ngIf="isTab!=='signup'">
-      <label class="item item-input">
-        <input type="email" placeholder="E-mail or Username" [(ngModel)]="user.username">
-      </label>
-      <label class="item item-input">
-        <input type="password" placeholder="Password" [(ngModel)]="user.password">
-      </label>
-      <button ion-button button-outline button-light class="sign_btn" (click)="login()" style="margin-top:50px;">Sign In</button>
-      <button ion-button button-positive class="fb_btn" (click)="fbLogin()">Sign In With Facebook</button>
+    <ion-grid class="signup_form" *ngIf="isTab=='signup'">
       <ion-row>
-        <ion-col width-40>
-          <button ion-button button-light clear (click)="goGuest()">Continue As Guest</button>
+        <ion-col col-6>
+          <ion-item no-padding text-center>
+            <ion-input type="text" placeholder="First" [(ngModel)]="newuser.firstName"></ion-input>
+          </ion-item>
+          <ion-item no-padding text-center>
+            <ion-input type="text" placeholder="Last" [(ngModel)]="newuser.lastName"></ion-input>
+          </ion-item>
         </ion-col>
-        <ion-col width-40>
-          <button ion-button button-light clear (click)="onForgotPassword()">Forgot Password?</button>
+        <ion-col col-6>
+          <div (click)="showCameraSheet()">
+            <img class="img_btn" src="assets/img/Profile.png" *ngIf="newuser.profileImage==''"/>
+            <img class="img_btn" src="{{newuser.profileImage}}" *ngIf="newuser.profileImage!=''" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+            <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded && newuser.profileImage!=''"></ion-spinner>              
+          </div>
         </ion-col>
       </ion-row>
-    </div>
+      <ion-row>
+        <ion-item no-padding>
+          <ion-input type="email" placeholder="E-mail"  [(ngModel)]="newuser.email"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item no-padding>
+          <ion-input type="password" placeholder="Password"  [(ngModel)]="newuser.password"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item no-padding>
+        <ion-input type="password" placeholder="Confirm Password"  [(ngModel)]="newuser.confirm"></ion-input>
+      </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newuser.dob"></ion-datetime>
+        </ion-col>
+        <ion-col col-6>
+          <ion-select [(ngModel)]="newuser.gender">
+            <ion-option value="Male">Male</ion-option>
+            <ion-option value="Female">Female</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button color="light" class="signup_btn" outline (click)="signup()">Create Account</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button icon-right class="fb_btn" (click)="fbLogin()">
+            Sign Up With
+            <ion-icon name="logo-facebook"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="signin_form" *ngIf="isTab!=='signup'">
+      <ion-row>
+        <ion-item no-padding>
+          <ion-input type="email" placeholder="E-mail or Username" [(ngModel)]="user.username"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item no-padding>
+          <ion-input type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col><button ion-button button-outline button-light class="sign_btn" (click)="login()">Sign In</button></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><button ion-button button-positive class="fb_btn" (click)="fbLogin()">Sign In With Facebook</button></ion-col>
+      </ion-row>
+      <ion-row style="position: absolute;bottom: -10px;">
+        <ion-col col-6><button ion-button button-light clear (click)="goGuest()">Continue As Guest</button></ion-col>
+        <ion-col col-6><button ion-button button-light clear (click)="onForgotPassword()">Forgot Password?</button></ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

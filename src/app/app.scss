@@ -28,6 +28,7 @@ body, .ionic-body{
 
 .button{
 	font-family: 'Lato_Regular', sans-serif;
+  font-size: 1em;
 }
 
 a { text-decoration: none; color: #333;}
@@ -87,32 +88,32 @@ select { border: none; }
 }
 .home_content .fb_btn{ background:#3e549c; border-width: 0px;}
 
-.login_content {text-align: center;}
-.login_content .closeBtn { color:white; position:absolute;left:10px; top:10px; background: transparent;}
-.login_content .custom_header{ position:relative; width:100%; height:250px; background:url("../assets/img/image.png"); background-size:100% 100%; background-repeat:no-repeat; background-position: center center;}
-.login_content .custom_header .logo{ width:60%; margin-top:60px;}
-.login_content .button_rows { position:relative; width:100%; height:55px; background:#171717 !important;}
-.login_content .button_rows .row{ position:absolute; bottom:0px; border-top:1px solid #444;}
-.login_content .button_rows .row .button{color:#aaa; background: transparent;}
-.login_content .button_rows .row .active .button{ color:white;}
-.login_content .button_rows .arrow_row { z-index:999; text-align:center; border:0px !important; margin-left:10px;}
-.login_content .button_rows .arrow_row .arrow{-ms-transform: rotate(45deg); -webkit-transform: rotate(45deg);  transform: rotate(45deg); width:20px; height:20px; background:white; margin-bottom:-20px; margin-left:40%;}
-.login_content .signin_list { margin-top:50px;}
-.login_content .signin_list label{ width:80%; margin-left:10%; margin-right: 10%; border:0px; margin-top:5px; border-bottom:1px solid #ddd; }
-.login_content .signin_list label input{ text-align:center;}
-.login_content .signin_list .sign_btn{ color:black; width:80%; margin-top:20px; margin-bottom:10px; border-radius:20px;}
-.login_content .signin_list .fb_btn{ color:white; width:80%;  margin-bottom:0px; border-radius:20px; background:#3e549c;}
-.login_content .signin_list .row .button{color:#333;}
+// .login_content {text-align: center;}
+// .login_content .closeBtn { color:white; position:absolute;left:10px; top:10px; background: transparent;}
+// .login_content .custom_header{ position:relative; width:100%; height:250px; background:url("../assets/img/image.png"); background-size:100% 100%; background-repeat:no-repeat; background-position: center center;}
+// .login_content .custom_header .logo{ width:60%; margin-top:60px;}
+// .login_content .button_rows { position:relative; width:100%; height:55px; background:#171717 !important;}
+// .login_content .button_rows .row{ position:absolute; bottom:0px; border-top:1px solid #444;}
+// .login_content .button_rows .row .button{color:#aaa; background: transparent;}
+// .login_content .button_rows .row .active .button{ color:white;}
+// .login_content .button_rows .arrow_row { z-index:999; text-align:center; border:0px !important; margin-left:10px;}
+// .login_content .button_rows .arrow_row .arrow{-ms-transform: rotate(45deg); -webkit-transform: rotate(45deg);  transform: rotate(45deg); width:20px; height:20px; background:white; margin-bottom:-20px; margin-left:40%;}
+// .login_content .signin_list { margin-top:50px;}
+// .login_content .signin_list label{ width:80%; margin-left:10%; margin-right: 10%; border:0px; margin-top:5px; border-bottom:1px solid #ddd; }
+// .login_content .signin_list label input{ text-align:center;}
+// .login_content .signin_list .sign_btn{ color:black; width:80%; margin-top:20px; margin-bottom:10px; border-radius:20px;}
+// .login_content .signin_list .fb_btn{ color:white; width:80%;  margin-bottom:0px; border-radius:20px; background:#3e549c;}
+// .login_content .signin_list .row .button{color:#333;}
 
-.login_content .signup_list { margin-top:30px; text-align:center; width:80%; margin-left:10%; margin-right: 10%;}
-.login_content .signup_list .img_btn{  width: 90px;  height: auto !important; border-radius:50%;}
-.login_content .item{ padding: 0px !important; border:0px; border-bottom:1px solid #ddd; margin-top:2px;}
-.login_content .signup_list label input{ text-align:center; border: none; outline:none;}
-.login_content .signup_list .signup_btn { border-radius:20px; color:#333; border-color:#333; font-size:1em;}
-.login_content .signup_list .fb_btn { border-radius:20px; font-size:1em; background:#3e549c;}
-.login_content .select { max-width: 100% !important; }
-.login_content .item-select{ width:95%; max-width: 100% !important; }
-.login_content .item-select select {  max-width:100%;  text-align:center; right:auto; width:50%; padding:0px; color:#bbb;}
+// .login_content .signup_list { margin-top:30px; text-align:center;}
+// .login_content .signup_list .img_btn{  width: 90px;  height: auto !important; border-radius:50%;}
+// .login_content .item1{ padding: 0px !important; border:0px; border-bottom:1px solid #ddd; margin-top:2px;}
+// .login_content .signup_list label input{ text-align:center; border: none; outline:none;}
+// .login_content .signup_list .signup_btn { border-radius:20px; color:#333; border-color:#333; font-size:1em;}
+// .login_content .signup_list .fb_btn { border-radius:20px; font-size:1em; background:#3e549c;}
+// .login_content .select { max-width: 100% !important; }
+// .login_content .item-select{ width:95%; max-width: 100% !important; }
+// .login_content .item-select select {  max-width:100%;  text-align:center; right:auto; width:50%; padding:0px; color:#bbb;}
 
 
 .menu_content , .menu_content .item, .menu_content .item-content{ font-family: 'Lato_Regular', sans-serif !important;  background:#348c7f; color:white;}

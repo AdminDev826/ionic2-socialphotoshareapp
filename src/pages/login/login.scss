@@ -1,3 +1,71 @@
 page-login {
+    text-align: center;
+    .text-input{
+        text-align: center;
+    }
+    input::-webkit-input-placeholder {
+        font-size: 15px;
+    }
+    .item { 
+        height: 40px; 
+        font-family: 'Lato_Regular', sans-serif;
+        font-size: 15px;
+    }
+    .custom_header{ 
+        position:relative; width:100%; 
+        height:250px; 
+        background:url("../assets/img/image.png"); 
+        background-size:100% 100%; 
+        background-repeat:no-repeat; 
+        background-position: center center;
+        
+        .logo{ width:60%; margin-top:60px;}
+        .closeBtn { color:white; position:absolute;left:10px; top:10px; background: transparent;}
+        .custom_header .logo{ width:60%; margin-top:60px;}
+    }
+    .button-rows { 
+        position:relative; 
+        width:100%; 
+        height:55px; 
+        background:#171717 !important;
 
+        .row{ 
+            position:absolute; 
+            bottom:0px; 
+            border-top:1px solid #444;
+
+            .col{padding: 0px;}
+            .button{
+                color:#aaa; background: transparent;
+            }
+            .active{ color:white;}
+        }
+        .arrow_row { 
+            z-index:999; text-align:center; border:0px !important; margin-left:10px;
+            .arrow{
+                -ms-transform: rotate(45deg); 
+                -webkit-transform: rotate(45deg);  
+                transform: rotate(45deg); width:20px; height:20px; 
+                background:white; margin-bottom:-20px; margin-left:40%;
+            }
+        }
+    }
+    .signup_form{
+        margin-top: 1.5em;
+        img {
+            height: 90px;
+            width: 90px;
+        }
+        .select{
+            max-width: 90% !important;
+        }
+        .signup_btn { border-radius:20px; color:#333; border-color:#333;}
+        .fb_btn { border-radius:20px; background:#3e549c;}
+    }
+    .signin_form {
+        .sign_btn{ color:white; width: 80%; border-radius:20px;}
+        .fb_btn{ color:white; width: 80%; border-radius:20px; background:#3e549c;}
+    }
+    
+    
 }
