@@ -51,6 +51,14 @@ export class Login {
     this.newuser.dob = now.toISOString();
   }
 
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: ''
+    });
+    this.loading.present();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad Login');
   }
@@ -101,7 +109,7 @@ export class Login {
         return;
       }
 
-      this.loading.present();
+      this.showLoading();
       let _this = this;
       Parse.User.logIn(this.user.username, this.user.password, {
         success: function(user) {

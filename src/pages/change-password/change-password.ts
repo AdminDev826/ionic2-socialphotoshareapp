@@ -50,22 +50,24 @@ export class ChangePassword {
       this.showToast('Please enter cell phone number.');
       return;
     }
+    let _this = this;
 
     var currentUser = Parse.User.current();
     if(currentUser){
         // $ionicLoading.show();
-        Parse.User.logIn(currentUser.get('username'), this.user.current_psw, {
+        Parse.User.logIn(currentUser.get('username'), _this.user.current_psw, {
           success: function(userAgain) {
             // Do stuff after successful login.
             //console.log(userAgain);
-            userAgain.set("password", this.user.new_psw);
+            userAgain.set("password", _this.user.new_psw);
               userAgain.save(null, {
                 success:function(userAgagin1){
                   // $ionicLoading.hide();
-                  this.showToast("Password has been changed successfully.");
+                  _this.showToast("Password has been changed successfully.");
                   // $ionicHistory.goBack();
                 },
                 error: function(userAgain1, error) {
+                  _this.showToast("Please enter exact current password.");
                   // This will error, since the Parse.User is not authenticated
                   console.log(userAgain1);
                   // $ionicLoading.hide();
@@ -77,7 +79,7 @@ export class ChangePassword {
             // The login failed. Check error to see why.
             console.log(error);
             // $ionicLoading.hide();
-            this.showToast("Please enter exact current password.");
+            _this.showToast("Please enter exact current password.");
 
           }
         });

@@ -133,7 +133,8 @@ export class Settings {
     }else{
       this.loading.present();
       // let id = $rootScope.installationId;------------
-      let id = "";
+      let id = this.services.installationID;
+      this.services.installationID
       Parse.Cloud.run("removeInstallation", {installationId:id}, {
         success:function(result){
           console.log(result);

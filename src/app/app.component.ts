@@ -36,6 +36,7 @@ import { global } from "../providers/services";
 
 export class MyApp {
   rootPage:any = First;
+  loginAsGuest = false;
   nativePages;
   private menu: MenuController;
 
@@ -70,8 +71,22 @@ export class MyApp {
 
       this.events.subscribe('user:created', (name, photo) => {
         // user and time are the same arguments passed in `events.publish(user, time)`
+        this.loginAsGuest = false;
         this.currentUser.name = name;
         this.currentUser.photo = photo;
+      });
+      this.events.subscribe('login:guest', (flag) => {
+        this.loginAsGuest = flag;
+        if(flag){
+          this.nativePages =  [
+            { title: 'HOME', component: HomePage, icon_name: 'home-outline' },
+            { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar-outline' },
+            { title: 'PHOTOS', component: Photos, icon_name: 'camera-outline' },
+            { title: 'BROWSE', component: Browse, icon_name: 'options-outline' },
+            { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard-outline' },
+            { title: 'LOGOUT', component: null, icon_name: 'exit-outline' }
+          ];
+        }
       });
 
       platform.ready().then(() => {
@@ -161,6 +176,9 @@ export class MyApp {
     }else{
       this.nav.setRoot(component);
     }
+  }
+  goProfile() {
+
   }
 }
 
