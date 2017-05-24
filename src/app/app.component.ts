@@ -110,7 +110,7 @@ export class MyApp {
           console.log(e);
         }
 
-        statusBar.styleDefault();
+        // statusBar.styleDefault();
         splashScreen.hide();
       });
   }

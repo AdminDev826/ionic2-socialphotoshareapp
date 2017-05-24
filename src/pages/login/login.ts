@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, trigger, transition, style, animate } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, ActionSheetController, ViewController,Events } from 'ionic-angular';
 import {Parse} from 'parse';
 import { Forgotpassword } from "../forgotpassword/forgotpassword";
@@ -20,11 +20,11 @@ import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
   templateUrl: 'login.html',
 })
 export class Login {
-
+  show:boolean = false;
   loginAsGuest = false;
   loading: any;
   user = {username:"", password:""};
-  newuser={firstName:"", lastName:"", email:"", password:"", confirm:"", dob:"", gender:"Male", facebookLogin:false, profileImage:""}
+  newuser={firstName:"", lastName:"", email:"", password:"", confirm:"", dob:"", gender:"", facebookLogin:false, profileImage:""}
   isTab = 'signin';
 
 
@@ -43,12 +43,6 @@ export class Login {
     Parse.serverURL = "https://parseapi.back4app.com";
 
     this.isTab = navParams.get("isTab");
-    this.loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: ''
-    });
-    let now = new Date();
-    this.newuser.dob = now.toISOString();
   }
 
   showLoading(){
@@ -97,7 +91,8 @@ export class Login {
     let toast = this.toastCtrl.create({
       message: title,
       duration: 3000,
-      position: 'bottom'
+      position: 'bottom',
+      cssClass: "toast"
     });
     toast.present();
   }
@@ -217,6 +212,8 @@ export class Login {
     }
 
     signup(){
+      // let now = new Date();
+      // this.newuser.dob = now.toISOString();
       let ddate = new Date(this.newuser.dob);
       console.log(ddate);
       if(this.newuser.firstName == undefined || this.newuser.firstName == "")
@@ -299,7 +296,7 @@ export class Login {
           let profileImage = user.get('profileImage');
           _this.events.publish('user:created', username, profileImage);
           _this.loading.dismiss();
-          _this.closeLogin(false);
+          _this.closeLogin(true);
           
         },
         error: function(user, error) {
@@ -311,17 +308,14 @@ export class Login {
       });
     }
     fbLogin(){
-    this.loading.present();
     var _this = this;
-
-    
     this.fb.login(['public_profile'])
     .then(function(response){
         let userId = response.authResponse.userID;
         let params = new Array();
 
         //Getting name and gender properties
-        this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", ['public_profile'])
+        _this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", ['public_profile'])
         .then(function(response) {
           console.log(response);
           _this.loading.present();

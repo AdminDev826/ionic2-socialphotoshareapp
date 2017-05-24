@@ -1,7 +1,7 @@
 <ion-content class="login_content">
   <div (swipe)="swipeEvent($event)">
     <div class="custom_header">
-      <button class="closeBtn" (click)="closeLogin()"><ion-icon ios="ios-close" md="md-close-outline" style="font-size: 30px;"></ion-icon></button>
+      <button class="closeBtn" (click)="closeLogin()"><ion-icon ios="ios-close" md="md-close-outline" style="font-size: 35px;"></ion-icon></button>
       <img class="logo" src="assets/img/Logo.png" />
     </div>
     <div class="button-rows">
@@ -22,7 +22,7 @@
         </ion-col>
       </ion-row>
     </div>
-    <ion-grid class="signup_form" *ngIf="isTab=='signup'">
+    <ion-grid padding class="signup_form" *ngIf="isTab=='signup'">
       <ion-row>
         <ion-col col-6>
           <ion-item no-padding text-center>
@@ -57,10 +57,10 @@
       </ion-row>
       <ion-row>
         <ion-col col-6>
-          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newuser.dob"></ion-datetime>
+          <ion-datetime style="border-bottom: 0.55px solid #c8c7cc;" displayFormat="DD/MM/YYYY" placeholder="DD/MM/YYYY" [(ngModel)]="newuser.dob"></ion-datetime>
         </ion-col>
         <ion-col col-6>
-          <ion-select [(ngModel)]="newuser.gender">
+          <ion-select style="border-bottom: 0.55px solid #c8c7cc;" placeholder="Gender" [(ngModel)]="newuser.gender">
             <ion-option value="Male">Male</ion-option>
             <ion-option value="Female">Female</ion-option>
           </ion-select>
@@ -78,7 +78,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid class="signin_form" *ngIf="isTab!=='signup'">
+    <ion-grid padding class="signin_form" *ngIf="isTab!=='signup'">
       <ion-row>
         <ion-item no-padding>
           <ion-input type="email" placeholder="E-mail or Username" [(ngModel)]="user.username"></ion-input>
@@ -89,15 +89,15 @@
           <ion-input type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
         </ion-item>
       </ion-row>
-      <ion-row>
-        <ion-col><button ion-button button-outline button-light class="sign_btn" (click)="login()">Sign In</button></ion-col>
+      <ion-row style="margin-top: 20px;">
+        <ion-col><button ion-button button-outline button-light outline color="cgray" class="sign_btn" (click)="login()">Sign In</button></ion-col>
       </ion-row>
       <ion-row>
         <ion-col><button ion-button button-positive class="fb_btn" (click)="fbLogin()">Sign In With Facebook</button></ion-col>
       </ion-row>
-      <ion-row style="position: absolute;bottom: -10px;">
-        <ion-col col-6><button ion-button button-light clear (click)="goGuest()">Continue As Guest</button></ion-col>
-        <ion-col col-6><button ion-button button-light clear (click)="onForgotPassword()">Forgot Password?</button></ion-col>
+      <ion-row class="bottom-item">
+        <ion-col col-6><button ion-button button-light style="font-size: 1em;" clear (click)="goGuest()">Continue As Guest</button></ion-col>
+        <ion-col col-6><button ion-button button-light style="font-size: 1em;" clear (click)="onForgotPassword()">Forgot Password?</button></ion-col>
       </ion-row>
     </ion-grid>
   </div>

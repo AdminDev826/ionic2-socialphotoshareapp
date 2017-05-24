@@ -1,4 +1,27 @@
 page-login {
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translate3d(-100%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translate3d(100%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
     text-align: center;
     .text-input{
         text-align: center;
@@ -7,7 +30,7 @@ page-login {
         font-size: 15px;
     }
     .item { 
-        height: 40px; 
+        height: 50px; 
         font-family: 'Lato_Regular', sans-serif;
         font-size: 15px;
     }
@@ -51,21 +74,28 @@ page-login {
         }
     }
     .signup_form{
+        animation-name: fadeInLeft;
+        animation-duration: 0.2s;
         margin-top: 1.5em;
         img {
             height: 90px;
             width: 90px;
+            border-radius:50%;
         }
         .select{
             max-width: 90% !important;
         }
-        .signup_btn { border-radius:20px; color:#333; border-color:#333;}
-        .fb_btn { border-radius:20px; background:#3e549c;}
+        .signup_btn { border-radius:20px; color:#333; border-color:#333;height: 50px;}
+        .fb_btn { border-radius:20px; background:#3e549c;height: 50px;}
     }
     .signin_form {
-        .sign_btn{ color:white; width: 80%; border-radius:20px;}
-        .fb_btn{ color:white; width: 80%; border-radius:20px; background:#3e549c;}
+        animation-name: fadeInRight;
+        animation-duration: 0.2s;
+        .sign_btn{ color: black; width: 80%; border-radius:20px;height: 50px;}
+        .fb_btn{ color:white; width: 80%; border-radius:20px; background:#3e549c;height: 50px;}
     }
-    
-    
+    .bottom-item {
+        position: absolute;
+        bottom: 0px;
+    }
 }

@@ -26,14 +26,18 @@ export class Forgotpassword {
     private loadingCtrl: LoadingController
 
     ) {
-      this.loading = this.loadingCtrl.create({
-        spinner: 'dots',
-        content: ''
-      });
+      
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Forgotpassword');
+  }
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+        spinner: 'bubbles',
+        content: ''
+      });
+      this.loading.present();
   }
   
   showToast(title) {
@@ -53,25 +57,26 @@ export class Forgotpassword {
 
   send(){
     console.log(this.user.email);
+    let _this = this;
     if(this.user.email == undefined || this.user.email == "" || !this.looksLikeMail(this.user.email))
     {
       this.showToast('Please enter valid email address.');
       return;
     }
 
-    this.loading.present();
+    this.showLoading();
     Parse.User.requestPasswordReset(this.user.email, {
       success: function() {
         // Password reset request was sent successfully
-        this.loading.dismiss();
-        this.showToast("Email has been sent. Please check your inbox.");
+        _this.loading.dismiss();
+        _this.showToast("Email has been sent. Please check your inbox.");
         //$ionicHistory.goBack();
       },
       error: function(error) {
         // Show the error message somewhere
         //alert("Error: " + error.code + " " + error.message);
-        this.loading.dismiss();
-        this.showToast(error.message);
+        _this.loading.dismiss();
+        _this.showToast(error.message);
       }
     });
   };

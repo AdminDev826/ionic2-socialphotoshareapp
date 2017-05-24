@@ -14,10 +14,10 @@
 </ion-content>
 
 
-<ion-content class="upcomming_content has-custom-header" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()" style="padding-top:30px;">
+<ion-content class="upcomming_content" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()" >
   <div class="subheader_area">
     <ion-row class="row calender_row">
-      <ion-col width-14 class="col-14" *ngFor="let dayOfWeek of calendar_list">{{dayOfWeek.dayOfWeek}}</ion-col>
+      <ion-col width-14 class="col-14" *ngFor="let dayOfWeek of calendar_list"><h6>{{dayOfWeek.dayOfWeek}}</h6></ion-col>
     </ion-row>
     <ion-row class="row calender_date_row">
       <ion-col width-14 class="col-14" *ngFor="let day of calendar_list">

@@ -1,4 +1,5 @@
-<ion-content class="home_content " scroll="false">
+<ion-content class="home_content ">
+  <div ion-fixed>
     <br><br><br>
     <img class="logo" src="assets/img/Logo.png" />
     <br><br><br><br><br><br><br>
@@ -8,10 +9,11 @@
 
     <ion-row center>
       <ion-col width-50>
-        <button ion-button color='light' clear class="" (click)="goGuest()">Continue As Guest</button>
+        <button ion-button color='light' clear style="font-size: 1em;" (click)="goGuest()">Continue As Guest</button>
       </ion-col>
       <ion-col width-50>
-        <button ion-button color='light' clear class="" (click)="onTerms()">Terms of Use</button>
+        <button ion-button color='light' clear style="font-size: 1em;" (click)="onTerms()">Terms of Use</button>
       </ion-col>
     </ion-row>
+  </div>
 </ion-content>
