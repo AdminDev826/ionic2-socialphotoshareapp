@@ -1,13 +1,13 @@
 <ion-content class="home_content ">
-  <div ion-fixed>
+  <div ion-fixed style="height: 100%;">
     <br><br><br>
     <img class="logo" src="assets/img/Logo.png" />
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br>
     <button ion-button color='light' button-outline class="login_btn" (click)="showSignup()">Sign Up</button>
     <button ion-button color='light' button-outline class="login_btn" (click)="showSignin()">Sign In</button>
     <button ion-button color='light' button-outline class="login_btn fb_btn" (click)="fbLogin()">Sign In With Facebook</button>
 
-    <ion-row center>
+    <ion-row class="bottom-item" center>
       <ion-col width-50>
         <button ion-button color='light' clear style="font-size: 1em;" (click)="goGuest()">Continue As Guest</button>
       </ion-col>

@@ -85,14 +85,14 @@ page-login {
         .select{
             max-width: 90% !important;
         }
-        .signup_btn { border-radius:20px; color:#333; border-color:#333;height: 50px;}
-        .fb_btn { border-radius:20px; background:#3e549c;height: 50px;}
+        .signup_btn { font-size: 1em; border-radius:20px; color:#333; border-color:#333;height: 50px;}
+        .fb_btn { font-size: 1em; border-radius:20px; background:#3e549c;height: 50px;}
     }
     .signin_form {
         animation-name: fadeInRight;
         animation-duration: 0.2s;
-        .sign_btn{ color: black; width: 80%; border-radius:20px;height: 50px;}
-        .fb_btn{ color:white; width: 80%; border-radius:20px; background:#3e549c;height: 50px;}
+        .sign_btn{ color: black; font-size: 1em; width: 80%; border-radius:20px;height: 50px;}
+        .fb_btn{ color:white; font-size: 1em; width: 80%; border-radius:20px; background:#3e549c;height: 50px;}
     }
     .bottom-item {
         position: absolute;

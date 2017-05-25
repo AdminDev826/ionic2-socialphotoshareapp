@@ -35,6 +35,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { PhotoDetail } from "../pages/photo-detail/photo-detail";
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 
 
@@ -108,6 +109,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     InAppBrowser,
     EmailComposer,
     SocialSharing,
+    LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

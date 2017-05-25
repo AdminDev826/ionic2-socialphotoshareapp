@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Platform, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { VenueDetail } from "../venue-detail/venue-detail";
 import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 
-/**
- * Generated class for the EventDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-event-detail',
@@ -26,7 +22,9 @@ export class EventDetail {
     private iab: InAppBrowser, 
     public geolocation: Geolocation, 
     public navParams: NavParams,
-    private toastCtrl: ToastController    
+    private toastCtrl: ToastController,
+    private launchNavigator: LaunchNavigator,
+    private platform: Platform
     ) {
 
     this.event = JSON.parse(navParams.get("selectedEvent"));
@@ -70,13 +68,14 @@ export class EventDetail {
 
   
   getDistance(){
+    let _this = this;
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
     this.geolocation.getCurrentPosition(posOptions).then(function (position) {
-        this.myLocation.lat  = position.coords.latitude;
-        this.myLocation.long = position.coords.longitude;
+        _this.myLocation.lat  = position.coords.latitude;
+        _this.myLocation.long = position.coords.longitude;
 
-        var dist = this.distance(this.myLocation.lat, this.myLocation.long, this.event.venue.geolocation.latitude, this.event.venue.geolocation.longitude);
-        this.event.venue.dist = dist;
+        var dist = _this.distance(_this.myLocation.lat, _this.myLocation.long, _this.event.venue.geolocation.latitude, _this.event.venue.geolocation.longitude, null);
+        _this.event.venue.dist = dist;
       }, function(err) {
         // error
       });
@@ -105,12 +104,32 @@ export class EventDetail {
   navigatorApp(){
     var destination = [this.event.venue.geolocation.latitude, this.event.venue.geolocation.longitude];
   	var start = [this.myLocation.lat, this.myLocation.long];
+    // 1--------------
     // var options = {app:launchnavigator.APP.UBER};
     // $cordovaLaunchNavigator.navigate(destination, start,  options).then(function() {
     //   console.log("Navigator launched");
     // }, function (err) {
     //   console.error(err);
-    // });
+    // });-----
+    
+    let options: LaunchNavigatorOptions = {
+      start: start
+      // app: LaunchNavigator.APPS.UBER
+    };
+    this.launchNavigator.navigate(destination, options)
+      .then(
+        success => console.log('Launched navigator'),
+        error => console.log('Error launching navigator', error)
+      );
+    
+    // 3-----------
+    // let destination1 = this.event.venue.geolocation.latitude + ',' + this.event.venue.geolocation.longitude;
+    // if(this.platform.is('ios')){
+    //   window.open('maps://?q=' + destination, '_system');
+    // } else {
+    //   let label = encodeURI('My Label');
+    //   window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
+    // }
   }
 
   goMapBrowser(){
