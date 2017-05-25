@@ -74,6 +74,15 @@ export class MyApp {
         this.loginAsGuest = false;
         this.currentUser.name = name;
         this.currentUser.photo = photo;
+        this.nativePages = [
+          { title: 'HOME', component: HomePage, icon_name: 'home-outline' },
+          { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar-outline' },
+          { title: 'PHOTOS', component: Photos, icon_name: 'camera-outline' },
+          { title: 'BROWSE', component: Browse, icon_name: 'options-outline' },
+          { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard-outline' },
+          { title: 'SETTINGS', component: Settings, icon_name: 'settings-outline' },
+          { title: 'LOGOUT', component: null, icon_name: 'exit-outline' }
+        ];
       });
       this.events.subscribe('login:guest', (flag) => {
         this.loginAsGuest = flag;
@@ -88,6 +97,21 @@ export class MyApp {
           ];
         }
       });
+      Parse.initialize("G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", "GlKvpo90mEnPJCvlnvYPbnEApCUHPWS4TFkYxr7y");
+        Parse.serverURL = "https://parseapi.back4app.com";
+
+        try{
+          parsePlugin.register({
+          appId:"G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", clientKey:"DDpKun5fbQLzvuXdKwDtTnwgIQdln6BAV0m7qBxe", server:"https://parseapi.back4app.com", ecb:"onNotification", pushOpen: "onPushOpen" },
+          function() {
+              console.log('successfully registered device!');
+              this.doWhatever();
+          }, function(e) {
+              console.log('error registering device: ' + e);
+          });
+        }catch(e){
+          console.log(e);
+        }
 
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.

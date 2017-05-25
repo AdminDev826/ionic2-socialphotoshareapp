@@ -98,4 +98,9 @@ page-login {
         position: absolute;
         bottom: 0px;
     }
+    @media only screen and (max-width: 330px) {
+       .bottom-item {
+            position: relative;
+        }
+    }
 }

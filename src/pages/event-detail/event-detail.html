@@ -27,8 +27,8 @@
       <div *ngIf="event?.venue?.address" (click)="navigatorApp()">{{event.venue.address[0]}}</div>
       <div *ngIf="event?.venue?.address" (click)="navigatorApp()">{{event.venue.address[1]}}</div>
       <div class="item location">
-        <ion-icon name="pin" style="color:#60a398; margin-top: -25px;"></ion-icon>&nbsp;
-        {{event?.venue?.dist}} miles
+        <ion-icon name="pin" style="color:#60a398; margin-top: -25px;"></ion-icon>
+        {{event?.venue?.dist}}miles
       </div>
     </ion-col>
   </ion-row>
@@ -37,31 +37,31 @@
     <ion-col width-33>
       <a class="col-33" href="tel:{{event?.venue?.phoneNumber}}">
           <ion-icon name="call-outline"></ion-icon>
-          <div>Call</div>
+          <div style="margin-top: -3px;">Call</div>
       </a>
     </ion-col>
     <ion-col width-34>
       <div class="col-34" (click)="openWebsite(event?.venue?.siteURL)">
         <ion-icon name="globe-outline"></ion-icon>
-        <div>Website</div>
+        <div style="margin-top: -3px;">Website</div>
       </div>
     </ion-col>
     <ion-col width-33>
       <div class="col-33" (click)="navigatorApp()">
         <ion-icon name="md-map"></ion-icon>
-        <div>Map</div>
+        <div style="margin-top: -3px;">Map</div>
     </div>
     </ion-col>
   </ion-row>
   <ion-list class="padding" padding>
-    <div class="item divider">DESCRIPTION</div>
-    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" style="margin-left: -27px;font-size:0.6em; color:#60a398; line-height:40px; height:25px;"></ion-icon> {{event.description}}</div>
-    <div class="item divider">THEME</div>
-    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" style="margin-left: -27px;font-size:0.6em; color:#60a398; line-height:40px;"></ion-icon> {{event.theme}}</div>
-    <div class="item divider">DRESS CODE</div>
-    <div class="value item item-icon-left" *ngFor="let d of event.dressCode" style="padding-left:40px;"><ion-icon name="radio-button-on" style="margin-left: -27px;font-size:0.6em; color:#60a398; line-height:40px;"></ion-icon> {{d}}</div>
-    <div class="item divider">AGE LIMIT</div>
-    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" style="margin-left: -27px;font-size:0.6em; color:#60a398; line-height:40px;"></ion-icon> {{event.age}}</div>
+    <div class="divider">DESCRIPTION</div>
+    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.description}}</div>
+    <div class="divider">THEME</div>
+    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.theme}}</div>
+    <div class="divider">DRESS CODE</div>
+    <div class="value item item-icon-left" *ngFor="let d of event.dressCode" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{d}}</div>
+    <div class="divider">AGE LIMIT</div>
+    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.age}}</div>
 <!--
     <div class="item divider item-icon-right" ng-if="event.venue.photos">
       PHOTO GALLERY

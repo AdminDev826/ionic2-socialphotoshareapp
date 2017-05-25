@@ -29,29 +29,29 @@
       <ion-col width-33>
         <a class="col-33" href="tel:{{event.venue.phoneNumber}}">
             <ion-icon name="call-outline"></ion-icon>
-            <div>Call</div>
+            <div style="margin-top: -3px;">Call</div>
         </a>
       </ion-col>
       <ion-col width-34>
         <div class="col-34" (click)="openWebsite(event.venue.siteURL)">
           <ion-icon name="globe-outline"></ion-icon>
-          <div>Website</div>
+          <div style="margin-top: -3px;">Website</div>
         </div>
       </ion-col>
       <ion-col width-33>
         <div class="col-33" (click)="navigatorApp()">
             <ion-icon name="md-map"></ion-icon>
-            <div>Map</div>
+            <div style="margin-top: -3px;">Map</div>
         </div>
       </ion-col>
     </ion-row>
     <ion-list padding class="list padding">
-      <div class="item divider">VENUE TYPE</div>
-      <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" style="font-size:0.6em; color:#60a398; line-height:40px; height:25px;"></ion-icon> {{event.venue.type}}</div>
-      <div class="item divider">NEIGBORHOOD</div>
-      <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" style="font-size:0.6em; color:#60a398; line-height:40px;"></ion-icon> {{event.venue.neighborhood}}</div>
-      <div class="item divider">PARKING</div>
-      <div class="value item item-icon-left" *ngFor="let d of event.venue.parking" style="padding-left:40px;"><ion-icon name="radio-button-on" style="font-size:0.6em; color:#60a398; line-height:40px;"></ion-icon> {{d}}</div>
+      <div class=" divider">VENUE TYPE</div>
+      <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.venue.type}}</div>
+      <div class=" divider">NEIGBORHOOD</div>
+      <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.venue.neighborhood}}</div>
+      <div class=" divider">PARKING</div>
+      <div class="value item item-icon-left" *ngFor="let d of event.venue.parking" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{d}}</div>
       <ion-item detail-push class="divider1" *ngIf="event.venue.photos">
         PHOTO GALLERY
         <span class="item-note">

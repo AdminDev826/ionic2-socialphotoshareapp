@@ -39,10 +39,6 @@ export class Settings {
     private services: Services,
     private emailComposer: EmailComposer
     ) {
-      this.loading = this.loadingCtrl.create({
-        spinner: 'dots',
-        content: ''
-      });
       var currentUser = Parse.User.current();
       // this.currentUser = {firstName:"", lastName:"", profileImage:"", password:"", email:"", $timeout, pusNotification:""};
       if (currentUser) {
@@ -54,6 +50,13 @@ export class Settings {
       } else {
           // this.navCtrl.setRoot(First);
       }
+  }
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: ''
+    });
+    this.loading.present();
   }
 
   ionViewDidLoad() {
@@ -94,7 +97,7 @@ export class Settings {
     }
 
 
-    this.loading.present();
+    this.showLoading();
     var currentUser = Parse.User.current();
     var query = new Parse.Query(Parse.User);
     query.get(currentUser.id, {
@@ -122,27 +125,27 @@ export class Settings {
   changePush(){
     console.log(this.currentUser.pushNotification);
     if(this.currentUser.pushNotification){
-      this.loading.present();
+      this.showLoading();
       parsePlugin.subscribe('SampleChannel', function() {
           console.log('OK');
           this.loading.dismiss();
       }, function(e) {
           console.log('error');
-          this.loading.dismiss();
+          this.loading.dismissAll();
       });
     }else{
-      this.loading.present();
+      this.showLoading();
       // let id = $rootScope.installationId;------------
       let id = this.services.installationID;
       this.services.installationID
       Parse.Cloud.run("removeInstallation", {installationId:id}, {
         success:function(result){
           console.log(result);
-          this.loading.dismiss();
+          this.loading.dismissAll();
         },
         error:function(error){
           console.log(error);
-          this.loading.dismiss();
+          this.loading.dismissAll();
         }
       });
     }

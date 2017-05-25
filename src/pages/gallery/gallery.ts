@@ -75,7 +75,7 @@ export class Gallery {
 
   showPhotoDetail(index) {
     var data = this.photoTileList[index];
-    var mmodal = this.modal.create(PhotoDetail, {selectedPhoto: data});
+    var mmodal = this.modal.create(PhotoDetail, {selectedPhoto: data, index: index, title: this.selectedGallery.title});
     mmodal.onDidDismiss(item => {
       if (!item) {
         return;

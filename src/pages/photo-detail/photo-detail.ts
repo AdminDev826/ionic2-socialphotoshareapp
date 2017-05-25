@@ -14,7 +14,9 @@ export class PhotoDetail {
 
   @ViewChild(Slides) slides: Slides;
 
+  title: any;
   selectedPhoto: any;
+  selectedIndex: any;
   photoTileList: any;
 
   constructor(
@@ -27,6 +29,8 @@ export class PhotoDetail {
 
     ) {
       this.selectedPhoto = this.navParams.get("selectedPhoto");
+      this.selectedIndex = this.navParams.get("index");
+      this.title = this.navParams.get("title");
       console.log(this.selectedPhoto);
       this.photoTileList = this.services.getPhotoTileList();
   }
@@ -42,8 +46,11 @@ export class PhotoDetail {
     });
     toast.present();
   }
-  slideHasChanged(index){
+  slideHasChanged(slide){
+    let index = slide._activeIndex;
     console.log(index);
+    if(index < this.photoTileList.length)
+     this.selectedPhoto = this.photoTileList[index];
   }
   closePhotoDetail(){
     this.viewCtrl.dismiss();
@@ -58,6 +65,9 @@ export class PhotoDetail {
     }).catch(()=> {
       this.showToast("Failed !");
     })
+  }
+  goSliderDetail(slider){
+
   }
 
 }

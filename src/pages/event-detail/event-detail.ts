@@ -62,8 +62,9 @@ export class EventDetail {
   	dist = dist * 60 * 1.1515;
   	if (unit=="K") { dist = dist * 1.609344 }
   	if (unit=="N") { dist = dist * 0.8684 }
-    dist = (dist * 100) / 100;
-  	return dist
+    // dist = (dist * 100) / 100;
+    let distt = dist.toFixed(2);
+  	return distt
   }
 
   

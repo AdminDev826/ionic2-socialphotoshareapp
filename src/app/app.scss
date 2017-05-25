@@ -117,7 +117,7 @@ select { border: none; }
 // .login_content .item-select select {  max-width:100%;  text-align:center; right:auto; width:50%; padding:0px; color:#bbb;}
 
 
-.menu_content , .menu_content .item, .menu_content .item-content{ font-family: 'Lato_Regular', sans-serif !important;  background:#348c7f; color:white;}
+.menu_content , .menu_content .item, .menu_content .item-content{ font-family: 'Lato_Regular', sans-serif !important;  background:black; color:white;}
 .menu_content .item{ border:0px; text-align:left; font-weight: bold; margin-top:0px; padding-bottom: 0px;}
 .menu_content .item .icon{ font-size:1.4em; color:white;}
 .menu_content .user_profile{ text-align:center; color:white; font-weight: bold;}
@@ -144,7 +144,7 @@ select { border: none; }
 
 .photo-detail-header { background:#0c0b0e !important; text-align: center; }
 .photo-detail-header ion-icon { font-size: 2em; color: #398c7f; }
-.photo-detail-header h1 { color: white; margin-top: 1rem; font-size: 2rem; }
+.photo-detail-header h1 { color: white; }
 .photo-detail-header .button { color:#398c7f !important;}
 .photo_detail_content{ background:#0c0b0e !important; }
 .photo_detail_content .full-image{margin-top:30px; width: 100%; height: auto !important; }
@@ -178,7 +178,7 @@ select { border: none; }
 .event_detail_content .address{ font-family: 'Lato_Light', sans-serif; font-size: 1.2em;}
 .event_detail_content .divider{ font-family: 'Lato_Regular' !important;font-size:1.2em; border:0px; border-bottom:1px solid #ddd; font-weight:bold; }
 .event_detail_content .divider1{ font-family: 'Lato_Regular' !important;font-size:1.2em; border:0px; border-bottom:0px solid #ddd; font-weight:bold; }
-.event_detail_content .value { font-family: 'Lato_Light', sans-serif; font-size: 1.2em; margin-top:0px; border:0px; white-space:normal; margin-top:2px; padding-top:3px; padding-bottom:3px; margin-left:-7px;}
+.event_detail_content .value { font-family: 'Lato_Light', sans-serif; font-size: 1em; margin-top:0px; border:0px; white-space:normal; margin-top:2px; padding-top:3px; padding-bottom:3px; margin-left:-7px;}
 .event_detail_content .e_logo .img_div{ margin-top:35px; border:1px solid #999; border-radius: 50%; width:150px; height:150px; background-position: center center; background-size: 125% 125%; margin-left:30px;}
 .event_detail_content .item-note { float: right; }
 

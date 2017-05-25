@@ -24,11 +24,14 @@ export class Notifications {
     public navParams: NavParams,
     private toastCtrl: ToastController
     ) {
-      this.loading = this.loadingCtrl.create({
-        spinner: 'dots',
-        content: ''
-      });
       this.loadNotificationsData();
+  }
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: ''
+    });
+    this.loading.present();
   }
 
   ionViewDidLoad() {
@@ -43,11 +46,12 @@ export class Notifications {
     toast.present();
   }
   loadNotificationsData(){
+    let _cthis = this;
     this.notificationList = new Array();
-    this.loading.present();
+    this.showLoading();
     this.services.getNotificationAll().subscribe(data => {
-      this.loading.dismiss();
-        if(this.services.getStatus){
+      _cthis.loading.dismiss();
+        if(_cthis.services.getStatus){
           for(var i in data){
             var notification = {
               title:data[i].get('title'),
@@ -67,10 +71,10 @@ export class Notifications {
                 notification.isWhat = "gallery";
 
               console.log(notification);
-              this.notificationList.push(notification);
+              _cthis.notificationList.push(notification);
           }
         }else{
-          this.showToast(data.message);
+          _cthis.showToast(data.message);
         }
     });
   }
@@ -92,11 +96,12 @@ export class Notifications {
   }
 
   goEvent(item){
+    let _cthis = this;
     var selectedEvent = {};
-    this.loading.present();
+    this.showLoading();
      this.services.getEventAll().subscribe(data=> {
-      this.loading.dismiss();
-      if(this.services.getStatus){
+      _cthis.loading.dismiss();
+      if(_cthis.services.getStatus){
         var now = new Date();
         var today = moment(now).add(4, "hours").valueOf();
         for(var index in data){
@@ -133,9 +138,9 @@ export class Notifications {
           }
         }
         // $state.go("app.event_detail", {selectedEvent:angular.toJson(selectedEvent)});
-        this.navCtrl.push(EventDetail, {selectedEvent: JSON.stringify(selectedEvent)});
+        _cthis.navCtrl.push(EventDetail, {selectedEvent: JSON.stringify(selectedEvent)});
       }else{
-        this.showToast(data.message);
+        _cthis.showToast(data.message);
       }
     });
   }
