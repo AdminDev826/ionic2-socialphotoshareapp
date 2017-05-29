@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, MenuController } from 'ionic-angular';
 import { Termsofuse } from "../termsofuse/termsofuse";
+import { Forgotpassword } from "../forgotpassword/forgotpassword";
 import { Terms1 } from "../terms1/terms1";
 import { Login } from "../login/login";
 import { HomePage } from "../home/home";
@@ -46,10 +47,10 @@ export class First {
   showSignin() {
     var mmodal = this.modal.create(Login, {isTab: "signin"});
     mmodal.onDidDismiss(item => {
-      if (!item) {
-        return;
-      }
-      this.nav.setRoot(HomePage);
+      if(item == "login") this.nav.setRoot(HomePage);
+      else if(item == "Termsofuse") this.nav.push(Termsofuse);
+      else if(item == "Forgotpassword") this.nav.push(Forgotpassword);
+      
     });
     mmodal.present();
   }

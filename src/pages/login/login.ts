@@ -82,10 +82,12 @@ export class Login {
     }
   }
   goGuest(){
-      this.nav.push(Termsofuse);
+      // this.nav.push(Termsofuse);
+      this.viewCtrl.dismiss("Termsofuse");
   }
   onForgotPassword(){
-    this.nav.push(Forgotpassword);
+    // this.nav.push(Forgotpassword);
+    this.viewCtrl.dismiss("Forgotpassword");
   }
   showToast(title) {
     let toast = this.toastCtrl.create({
@@ -112,7 +114,7 @@ export class Login {
           let profileImage = user.get('profileImage');
           _this.loading.dismiss();
           _this.events.publish('user:created', username, profileImage);
-          _this.closeLogin(true);
+          _this.viewCtrl.dismiss("login");
         },
         error: function(user, error) {
           // The login failed. Check error to see why.
@@ -124,11 +126,7 @@ export class Login {
       });
     }
     closeLogin(flag) {
-      if(flag){
-        this.viewCtrl.dismiss(flag);
-      }else{
-        this.viewCtrl.dismiss();
-      }
+      this.viewCtrl.dismiss();
     }
 
     showCameraSheet() {
@@ -296,7 +294,7 @@ export class Login {
           let profileImage = user.get('profileImage');
           _this.events.publish('user:created', username, profileImage);
           _this.loading.dismiss();
-          _this.closeLogin(true);
+          _this.viewCtrl.dismiss("login");
           
         },
         error: function(user, error) {
@@ -330,7 +328,7 @@ export class Login {
                   success: function(user) {
                       console.log(user);
                       _this.loading.dismiss();
-                      _this.closeLogin(true);
+                      _this.viewCtrl.dismiss("login");
                   },
                   error: function(user, error) {
                     console.log(error);
@@ -354,7 +352,7 @@ export class Login {
                   success: function(user) {
                     console.log(user);
                     _this.loading.dismiss();
-                    _this.closeLogin(true);
+                    _this.viewCtrl.dismiss("login");
                   },
                   error: function(user, error) {
                     console.log("Error: " + error.code + " " + error.message);

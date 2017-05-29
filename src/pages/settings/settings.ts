@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController, ToastController } from 'ionic-angular';
-import {Parse, parsePlugin} from 'parse';
+import {Parse} from 'parse';
 import { First } from '../first/first';
 import * as moment from "moment";
 import { Services } from "../../providers/services";
@@ -11,7 +11,7 @@ import { About } from "../about/about";
 import { Terms } from "../terms/terms";
 import { Privacy } from "../privacy/privacy";
 
-
+declare var parsePlugin;
 
 @IonicPage()
 @Component({
@@ -124,30 +124,37 @@ export class Settings {
 
   changePush(){
     console.log(this.currentUser.pushNotification);
+    let _this = this;
     if(this.currentUser.pushNotification){
       this.showLoading();
       parsePlugin.subscribe('SampleChannel', function() {
           console.log('OK');
-          this.loading.dismiss();
+          _this.loading.dismiss();
       }, function(e) {
           console.log('error');
-          this.loading.dismissAll();
+          _this.loading.dismissAll();
       });
     }else{
       this.showLoading();
-      // let id = $rootScope.installationId;------------
       let id = this.services.installationID;
-      this.services.installationID
       Parse.Cloud.run("removeInstallation", {installationId:id}, {
         success:function(result){
           console.log(result);
-          this.loading.dismissAll();
+          _this.loading.dismissAll();
         },
         error:function(error){
           console.log(error);
-          this.loading.dismissAll();
+          _this.loading.dismissAll();
         }
       });
+      //-------------------
+      // parsePlugin.unsubscribe('SampleChannel', function(msg) {
+      //   _this.loading.dismissAll();
+      //   console.log(msg)
+      // }, function(e) {
+      //   _this.loading.dismissAll();
+      //   console.log(e);
+      // });
     }
   }
   gotoChangePasswordPage(){

@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ToastController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
 import { First } from "../pages/first/first";
-import {Parse, parsePlugin} from 'parse';
+import { Parse } from 'parse';
 import { Login } from "../pages/login/login";
 import { Services } from "../providers/services";
 import { Facebook } from "@ionic-native/facebook";
@@ -29,6 +29,8 @@ import { Termsofuse } from "../pages/termsofuse/termsofuse";
 import { Upcomming } from "../pages/upcomming/upcomming";
 import { VenueDetail } from "../pages/venue-detail/venue-detail";
 import { global } from "../providers/services";
+
+declare var parsePlugin;
 
 @Component({
   templateUrl: 'app.html'
@@ -97,21 +99,6 @@ export class MyApp {
           ];
         }
       });
-      Parse.initialize("G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", "GlKvpo90mEnPJCvlnvYPbnEApCUHPWS4TFkYxr7y");
-        Parse.serverURL = "https://parseapi.back4app.com";
-
-        try{
-          parsePlugin.register({
-          appId:"G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", clientKey:"DDpKun5fbQLzvuXdKwDtTnwgIQdln6BAV0m7qBxe", server:"https://parseapi.back4app.com", ecb:"onNotification", pushOpen: "onPushOpen" },
-          function() {
-              console.log('successfully registered device!');
-              this.doWhatever();
-          }, function(e) {
-              console.log('error registering device: ' + e);
-          });
-        }catch(e){
-          console.log(e);
-        }
 
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
@@ -122,11 +109,12 @@ export class MyApp {
         Parse.serverURL = "https://parseapi.back4app.com";
 
         try{
+          let _cthis = this;
           parsePlugin.register({
           appId:"G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", clientKey:"DDpKun5fbQLzvuXdKwDtTnwgIQdln6BAV0m7qBxe", server:"https://parseapi.back4app.com", ecb:"onNotification", pushOpen: "onPushOpen" },
           function() {
               console.log('successfully registered device!');
-              this.doWhatever();
+              _cthis.doWhatever();
           }, function(e) {
               console.log('error registering device: ' + e);
           });
@@ -140,9 +128,10 @@ export class MyApp {
   }
 
   doWhatever(){
+    let _cthis = this;
     parsePlugin.getInstallationId(function(id) {
         console.log(id);
-        this.services.installationID = id;
+        _cthis.services.installationID = id;
     }, function(e) {
         console.log('error');
     });
@@ -152,13 +141,14 @@ export class MyApp {
     }, function(e) {
         console.log('error');
     });
-    /*
+    
     parsePlugin.subscribe('SampleChannel', function() {
-        console.log('OK');
+        console.log('parsePlugin.subscribe :  ^^^^^^ OK');
     }, function(e) {
-        console.log('error');
+        console.log('parsePlugin.subscribe :  ^^^^^^error');
     });
 
+    /*
     parsePlugin.unsubscribe('SampleChannel', function(msg) {
         console.log('OK');
     }, function(e) {
