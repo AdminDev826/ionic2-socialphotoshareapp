@@ -41,7 +41,7 @@ export class First {
   }
   showLoading(){
     this.loading = this.loadingCtrl.create({
-      spinner: 'dots',
+      spinner: 'bubbles',
       content: ''
     });
     this.loading.present();

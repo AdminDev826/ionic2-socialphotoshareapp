@@ -21,9 +21,11 @@
     </ion-row>
     <ion-row class="row calender_date_row">
       <ion-col width-14 class="col-14" *ngFor="let day of calendar_list; let i = index;">
-        <span class="active1" *ngIf="activeDate.timestamp == day.timestamp && i !== 0">{{day.dayNum}}</span>
+        <!--<span class="active1" *ngIf="activeDate.timestamp == day.timestamp && i !== 0">{{day.dayNum}}</span>
         <span class="active" *ngIf="i == 0" (click)="changeDate(day)">{{day.dayNum}}</span>
-        <span *ngIf="activeDate.timestamp !== day.timestamp && i !== 0" (click)="changeDate(day)">{{day.dayNum}}</span>
+        <span *ngIf="activeDate.timestamp !== day.timestamp && i !== 0" (click)="changeDate(day)">{{day.dayNum}}</span>-->
+        <span class="active" *ngIf="activeDate.timestamp == day.timestamp">{{day.dayNum}}</span>
+        <span *ngIf="activeDate.timestamp !== day.timestamp" (click)="changeDate(day)">{{day.dayNum}}</span>
       </ion-col>
     </ion-row>
   </div>

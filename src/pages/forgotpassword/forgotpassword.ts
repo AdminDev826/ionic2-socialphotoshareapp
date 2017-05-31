@@ -44,7 +44,8 @@ export class Forgotpassword {
     let toast = this.toastCtrl.create({
       message: title,
       duration: 3000,
-      position: 'bottom'
+      position: 'bottom',
+      cssClass: "toast"
     });
     toast.present();
   }

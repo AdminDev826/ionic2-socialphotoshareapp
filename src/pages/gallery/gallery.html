@@ -11,7 +11,7 @@
 
 
 <ion-content class="photos_content ">
-  <div class="padding text-center lightfont" style="color:#666; font-size:2em; line-height:40px; text-align: center; font-weight:bold;">{{selectedGallery.title}}</div>
+  <div class="padding text-center lightfont" style="color:#666; font-size:1.7em; line-height:40px; text-align: center; font-weight:bolder;">{{selectedGallery.title}}</div>
   <div class="text-center lightfont" style="color:#666; width:100%; padding-bottom:10px; font-size:1.4em; text-align: center;" >{{selectedGallery.eventDate}}</div>
   <div class="img_block" *ngFor="let item of photoTileList; let i = index" (click)="showPhotoDetail(i)">
     <!--<img src="{{item.filename}}" (click)="showPhotoDetail($index)">-->

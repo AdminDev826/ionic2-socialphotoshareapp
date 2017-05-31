@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Slides, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Slides, ToastController, LoadingController } from 'ionic-angular';
 import { Services } from "../../providers/services";
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -18,6 +18,7 @@ export class PhotoDetail {
   selectedPhoto: any;
   selectedIndex: any;
   photoTileList: any;
+  loading: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -26,6 +27,7 @@ export class PhotoDetail {
     private services: Services, 
     private viewCtrl: ViewController,
     private socialSharing: SocialSharing,
+    private loadingCtrl: LoadingController
 
     ) {
       this.selectedPhoto = this.navParams.get("selectedPhoto");
@@ -38,11 +40,13 @@ export class PhotoDetail {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhotoDetail');
   }
+  
   showToast(title) {
     let toast = this.toastCtrl.create({
       message: title,
       duration: 3000,
-      position: 'bottom'
+      position: 'bottom',
+      cssClass: 'toast'
     });
     toast.present();
   }
@@ -56,15 +60,23 @@ export class PhotoDetail {
     this.viewCtrl.dismiss();
   }
   shareImg(){
+    var _tthis = this;
     var i = this.slides.getActiveIndex();
     console.log(i);
     console.log(this.photoTileList[i - 1].filename);
+    this.loading = this.loadingCtrl.create({
+      spinner: "bubbles"
+    });
+    this.loading.present().then(
+        _tthis.socialSharing.shareViaInstagram('wugi', this.photoTileList[i].filename).then(()=> {
+          _tthis.loading.dismiss();
+          _tthis.showToast("Success !");
+        }).catch(()=> {
+          _tthis.loading.dismiss();
+          _tthis.showToast("Failed !");
+       })
+    );
     // window.plugins.socialsharing.shareViaInstagram('', $scope.photoTileList[$ionicSlideBoxDelegate.currentIndex()].filename, function() {console.log('share ok')}, function(errormsg){console.log(errormsg)});
-    this.socialSharing.shareViaInstagram('wugi', this.photoTileList[i].filename).then(()=> {
-      this.showToast("Success !");
-    }).catch(()=> {
-      this.showToast("Failed !");
-    })
   }
   goSliderDetail(slider){
 

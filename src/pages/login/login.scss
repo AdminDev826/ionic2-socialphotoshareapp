@@ -34,6 +34,11 @@ page-login {
         font-family: 'Lato_Regular', sans-serif;
         font-size: 15px;
     }
+    .item-select{
+        border-bottom: 0.55px solid #c8c7cc;
+        height: 100%;
+        width: 60%;
+    }
     .custom_header{ 
         position:relative; width:100%; 
         height:250px; 
@@ -43,7 +48,7 @@ page-login {
         background-position: center center;
         
         .logo{ width:60%; margin-top:60px;}
-        .closeBtn { color:white; position:absolute;left:10px; top:10px; background: transparent;}
+        .closeBtn { color:white; position:absolute;left:10px; top:18px; background: transparent;}
         .custom_header .logo{ width:60%; margin-top:60px;}
     }
     .button-rows { 

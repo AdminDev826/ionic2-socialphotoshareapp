@@ -47,7 +47,7 @@ export class Login {
 
   showLoading(){
     this.loading = this.loadingCtrl.create({
-      spinner: 'dots',
+      spinner: 'bubbles',
       content: ''
     });
     this.loading.present();
@@ -265,7 +265,7 @@ export class Login {
       if(this.newuser.profileImage == undefined || this.newuser.profileImage == "")
       {
         this.showToast('Please select your photo.');
-        return;
+        // return;
       }
 
       this.showLoading();
@@ -362,7 +362,8 @@ export class Login {
                   },
                   error: function(user, error) {
                     console.log("Error: " + error.code + " " + error.message);
-                    this.showToast(error.message);
+                    // this.showToast(error.message);
+                    this.showToast("Account already exists for this e-mail");
                     _this.loading.dismissAll();
                   }
                 });

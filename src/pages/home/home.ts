@@ -39,6 +39,8 @@ export class HomePage {
     ) {
     // this.events.publish('user:created', "test user", "../assets/img/image.png");
     this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: ''
     });
     this.services.temp = 10;
     this.loadEventsData();

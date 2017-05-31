@@ -10,12 +10,12 @@
   </div>
   <ion-slides [initialSlide]="selectedIndex" (ionSlideDidChange) = "slideHasChanged($event)" class="home_slider" style="margin-top:10px; height: 60%;">
       <ion-slide style="height: 100% !important;" *ngFor="let item of photoTileList">
-          <div class="box blue" (click)="goSliderDetail(slider)" style="height: 100% !important;">
+          <div class="box blue" (click)="goSliderDetail(item)" style="height: 100% !important;">
             <img src="{{item.filename}}" class="full-image"/>
           </div>
       </ion-slide>
   </ion-slides>
   <h2>{{selectedPhoto.title}}</h2>
-  <h4>{{selectedPhoto.eventDate}}</h4>
+  <div class="text">{{selectedPhoto.eventDate}}</div>
   <img class="logo" src="assets/img/Logo.png" />
 </ion-content>

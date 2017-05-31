@@ -18,16 +18,15 @@
   <ion-row>
     <ion-col width-50 class="e_logo text-center" (click)="goVenueDetail()">
         <!--<img class="full-image" image-lazy-src="{{event.venue.imageThumbURL}}" image-lazy-loader="lines" />-->
-        <div *ngIf="item?.shipping"></div>
         <div class="img_div" *ngIf="event?.venue?.imageThumbURL" [ngStyle]="{ 'background-image': 'url(' + event.venue.imageThumbURL + ')'}"></div>
     </ion-col>
     <ion-col width-50 class="text-center address">
-      <h3>{{event.name}}</h3>
-      <div style="font-size:12px; padding-bottom:10px;">{{event.formatted_date}}</div>
-      <div *ngIf="event?.venue?.address" (click)="navigatorApp()">{{event.venue.address[0]}}</div>
-      <div *ngIf="event?.venue?.address" (click)="navigatorApp()">{{event.venue.address[1]}}</div>
+      <h3>{{event.name}}</h3><br>
+      <!--<div style="font-size:12px; padding-bottom:10px;">{{event.formatted_date}}</div>-->
+      <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[0]}}</div>
+      <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[1]}}</div>
       <div class="item location">
-        <ion-icon name="pin" style="color:#60a398; margin-top: -25px;"></ion-icon>
+        <ion-icon name="pin" style="color:#60a398; margin-top: -25px; margin-left: -20px;"></ion-icon>
         {{event?.venue?.dist}}miles
       </div>
     </ion-col>
@@ -55,7 +54,10 @@
   </ion-row>
   <ion-list class="padding" padding>
     <div class="divider">DESCRIPTION</div>
-    <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.description}}</div>
+    <div class="value item item-icon-left" style="padding-left:40px;">
+      <ion-icon name="radio-button-on" class="item-icon"></ion-icon>
+      <div style="display: inline-flex;">{{event.description}}</div>
+    </div>
     <div class="divider">THEME</div>
     <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.theme}}</div>
     <div class="divider">DRESS CODE</div>

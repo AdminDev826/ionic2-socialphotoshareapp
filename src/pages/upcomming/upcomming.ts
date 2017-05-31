@@ -79,7 +79,8 @@ export class Upcomming {
 
     for(var j=0; j<7; j++){
       this.calendar_list[j].dayNum = moment(this.calendar_list[j].timestamp).format("DD");
-      this.calendar_list[j].dayOfWeek = moment(this.calendar_list[j].timestamp).format("dd");
+      let weekday = moment(this.calendar_list[j].timestamp).format("dd");
+      this.calendar_list[j].dayOfWeek = weekday.charAt(0);
     }
 
     console.log(this.calendar_list);
