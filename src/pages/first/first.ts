@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, MenuController, Events } from 'ionic-angular';
 import { Termsofuse } from "../termsofuse/termsofuse";
 import { Forgotpassword } from "../forgotpassword/forgotpassword";
 import { Terms1 } from "../terms1/terms1";
@@ -21,12 +21,8 @@ export class First {
   termsmodal: any;
   loading: any;
 
-  constructor(private menu: MenuController, public nav: NavController, private fb: Facebook, private loadingCtrl: LoadingController, private toastCtrl: ToastController, public navParams: NavParams, private modal: ModalController) {
+  constructor(public events: Events, private menu: MenuController, public nav: NavController, private fb: Facebook, private loadingCtrl: LoadingController, private toastCtrl: ToastController, public navParams: NavParams, private modal: ModalController) {
     this.termsmodal = this.modal.create(Terms1);
-    this.loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: 'please wait ...'
-    });
   }
 
   ionViewDidLoad() {
@@ -42,6 +38,13 @@ export class First {
 
   onTerms(){
       this.termsmodal.present();
+  }
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: ''
+    });
+    this.loading.present();
   }
 
   showSignin() {
@@ -75,80 +78,17 @@ export class First {
   }
 
   fbLogin(){
-    this.loading.present();
     var _this = this;
-
-    // var fbLoginSuccess = function (userData) {
-    //     console.log(userData);
-    //     Facebook.api('/me?fields=first_name,last_name,email,gender,id,picture',["public_profile"],
-    //         function(response) {
-    //               console.log(response);
-    //               // $ionicLoading.show({template:'Getting Parse User Information...'});
-
-    //               var query = new Parse.Query(Parse.User);
-    //               query.equalTo("username", response.id);
-    //               query.equalTo("facebookLogin", true);
-    //               query.find({
-    //                 success: function(aUser) {
-    //                   console.log(aUser);
-    //                   if(aUser.length > 0){
-
-    //                     Parse.User.logIn(response.id, response.id, {
-    //                       success: function(user) {
-    //                           console.log(user);
-    //                           _this.loading.dismiss();
-    //                           _this.nav.setRoot(HomePage);
-    //                       },
-    //                       error: function(user, error) {
-    //                         console.log(error);
-    //                         _this.loading.dismiss();
-    //                         _this.showToast(error.message);
-    //                       }
-    //                     });
-    //                   }else{
-    //                     // $ionicLoading.show({template:'Sign up processing...'});
-    //                     var user = new Parse.User();
-    //                     user.set("username", response.id);
-    //                     user.set("password", response.id);
-    //                     user.set("firstName", response.first_name);
-    //                     user.set("lastName", response.last_name);
-    //                     user.set("gender", response.gender);
-    //                     user.set("profileImage", response.picture.data.url);
-    //                     user.set("facebookLogin", true);
-    //                     user.set("pushNotification", false);
-    //                     user.set("Venues", []);
-    //                     user.signUp(null, {
-    //                       success: function(user) {
-    //                         console.log(user);
-    //                         _this.loading.dismiss();
-    //                         _this.nav.setRoot(HomePage);
-    //                       },
-    //                       error: function(user, error) {
-    //                         console.log("Error: " + error.code + " " + error.message);
-    //                           _this.loading.dismiss();
-    //                         this.showToast(error.message);
-    //                       }
-    //                     });
-    //                   }
-    //                 },
-    //                 error:function(user, error){
-    //                   console.log(error);
-    //                   _this.loading.dismiss();
-    //                 }
-    //               });
-    //     });
-    // }
-
-    this.fb.login(['public_profile'])
+    this.fb.login(['public_profile', 'email'])
     .then(function(response){
         let userId = response.authResponse.userID;
         let params = new Array();
 
         //Getting name and gender properties
-        this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", ['public_profile'])
+        _this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", params)
         .then(function(response) {
           console.log(response);
-          _this.loading.present();
+          _this.showLoading();
           var query = new Parse.Query(Parse.User);
           query.equalTo("username", response.id);
           query.equalTo("facebookLogin", true);
@@ -159,37 +99,43 @@ export class First {
                 Parse.User.logIn(response.id, response.id, {
                   success: function(user) {
                       console.log(user);
-                      _this.loading.dismiss();
+                      let username = user.get('firstName') + " " + user.get('lastName');
+                      let profileImage = user.get('profileImage');
+                      _this.events.publish('user:created', username, profileImage);
+                      _this.loading.dismissAll();
                       _this.closeLogin();
                   },
                   error: function(user, error) {
                     console.log(error);
-                    _this.loading.dismiss();
+                    _this.loading.dismissAll();
                     _this.showToast(error.message);
                   }
                 });
               }else{
-                _this.loading.present();
                 var user = new Parse.User();
                 user.set("username", response.id);
                 user.set("password", response.id);
+                user.set("email", response.email);
                 user.set("firstName", response.first_name);
                 user.set("lastName", response.last_name);
                 user.set("gender", response.gender);
                 user.set("profileImage", response.picture.data.url);
                 user.set("facebookLogin", true);
-                user.set("pushNotification", false);
+                user.set("pushNotification", true);
                 user.set("Venues", []);
                 user.signUp(null, {
                   success: function(user) {
                     console.log(user);
-                    _this.loading.dismiss();
+                    let username = user.get('firstName') + " " + user.get('lastName');
+                    let profileImage = user.get('profileImage');
+                    _this.events.publish('user:created', username, profileImage);
+                    _this.loading.dismissAll();
                     _this.closeLogin();
                   },
                   error: function(user, error) {
                     console.log("Error: " + error.code + " " + error.message);
                     this.showToast(error.message);
-                    _this.loading.dismiss();
+                    _this.loading.dismissAll();
                   }
                 });
               }

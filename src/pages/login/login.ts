@@ -100,31 +100,31 @@ export class Login {
   }
 
   login(user){
-      if(this.user.username == undefined || this.user.password == undefined || this.user.username == "" || this.user.password == "")
-      {
-        this.showToast('Please fill out email and password fields.');
-        return;
-      }
-
-      this.showLoading();
-      let _this = this;
-      Parse.User.logIn(this.user.username, this.user.password, {
-        success: function(user) {
-          let username = user.get('firstName') + " " + user.get('lastName');
-          let profileImage = user.get('profileImage');
-          _this.loading.dismiss();
-          _this.events.publish('user:created', username, profileImage);
-          _this.viewCtrl.dismiss("login");
-        },
-        error: function(user, error) {
-          // The login failed. Check error to see why.
-          console.log(error);
-          _this.loading.dismiss();
-          _this.showToast(error.message);
-          this.user = {username:"", password:""};
-        }
-      });
+    if(this.user.username == undefined || this.user.password == undefined || this.user.username == "" || this.user.password == "")
+    {
+      this.showToast('Please fill out email and password fields.');
+      return;
     }
+
+    this.showLoading();
+    let _this = this;
+    Parse.User.logIn(this.user.username, this.user.password, {
+      success: function(user) {
+        let username = user.get('firstName') + " " + user.get('lastName');
+        let profileImage = user.get('profileImage');
+        _this.loading.dismiss();
+        _this.events.publish('user:created', username, profileImage);
+        _this.viewCtrl.dismiss("login");
+      },
+      error: function(user, error) {
+        // The login failed. Check error to see why.
+        console.log(error);
+        _this.loading.dismiss();
+        _this.showToast(error.message);
+        this.user = {username:"", password:""};
+      }
+    });
+  }
     closeLogin(flag) {
       this.viewCtrl.dismiss();
     }
@@ -144,7 +144,7 @@ export class Login {
                 destinationType: _this.camera.DestinationType.DATA_URL,
                 sourceType: _this.camera.PictureSourceType.CAMERA,
               };
-              _this.loading.present();
+              _this.showLoading();
               _this.camera.getPicture(options).then((imageData) => {
                 let base64Image = 'data:image/jpeg;base64,' + imageData;
                 // var parseFile = new Parse.File("mypic.jpg", base64Image);
@@ -268,7 +268,7 @@ export class Login {
         return;
       }
 
-      this.loading.present();
+      this.showLoading();
       let _this = this;
       
       var user = new Parse.User();
@@ -307,16 +307,16 @@ export class Login {
     }
     fbLogin(){
     var _this = this;
-    this.fb.login(['public_profile'])
+    this.fb.login(['public_profile', 'email'])
     .then(function(response){
         let userId = response.authResponse.userID;
         let params = new Array();
 
         //Getting name and gender properties
-        _this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", ['public_profile'])
+        _this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", params)
         .then(function(response) {
           console.log(response);
-          _this.loading.present();
+          _this.showLoading();
           var query = new Parse.Query(Parse.User);
           query.equalTo("username", response.id);
           query.equalTo("facebookLogin", true);
@@ -327,37 +327,43 @@ export class Login {
                 Parse.User.logIn(response.id, response.id, {
                   success: function(user) {
                       console.log(user);
-                      _this.loading.dismiss();
+                      let username = user.get('firstName') + " " + user.get('lastName');
+                      let profileImage = user.get('profileImage');
+                      _this.events.publish('user:created', username, profileImage);
+                      _this.loading.dismissAll();
                       _this.viewCtrl.dismiss("login");
                   },
                   error: function(user, error) {
                     console.log(error);
-                    _this.loading.dismiss();
+                    _this.loading.dismissAll();
                     _this.showToast(error.message);
                   }
                 });
               }else{
-                _this.loading.present();
                 var user = new Parse.User();
                 user.set("username", response.id);
                 user.set("password", response.id);
+                user.set("email", response.email);
                 user.set("firstName", response.first_name);
                 user.set("lastName", response.last_name);
                 user.set("gender", response.gender);
                 user.set("profileImage", response.picture.data.url);
                 user.set("facebookLogin", true);
-                user.set("pushNotification", false);
+                user.set("pushNotification", true);
                 user.set("Venues", []);
                 user.signUp(null, {
                   success: function(user) {
                     console.log(user);
-                    _this.loading.dismiss();
+                    let username = user.get('firstName') + " " + user.get('lastName');
+                    let profileImage = user.get('profileImage');
+                    _this.events.publish('user:created', username, profileImage);
+                    _this.loading.dismissAll();
                     _this.viewCtrl.dismiss("login");
                   },
                   error: function(user, error) {
                     console.log("Error: " + error.code + " " + error.message);
                     this.showToast(error.message);
-                    _this.loading.dismiss();
+                    _this.loading.dismissAll();
                   }
                 });
               }
