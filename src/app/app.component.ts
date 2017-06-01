@@ -39,7 +39,7 @@ declare var parsePlugin;
 export class MyApp {
   rootPage:any = First;
   loginAsGuest = false;
-  nativePages;
+  nativePages: any;
   private menu: MenuController;
 
   currentUser = {

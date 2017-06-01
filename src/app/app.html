@@ -1,4 +1,4 @@
-<ion-menu id="leftMenu" [content]="content">
+<!--<ion-menu id="leftMenu" [content]="content">
 	<ion-content class="menu_content">
         <div class="item user_profile" menu-close (click)="goProfile()">
             <img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>
@@ -13,4 +13,24 @@
 	</ion-content>
 </ion-menu>
 
-<ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>
+<ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>-->
+
+<ion-menu id="leftMenu" [content]="content">
+
+  <ion-content class="menu_content">
+	<div class="item user_profile" menu-close (click)="goProfile()">
+		<img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>
+		<div class="name"  *ngIf="!loginAsGuest">{{currentUser.name}}</div>
+	</div>
+    <ion-list no-lines>
+      <button menuClose ion-item detail-none *ngFor="let p of nativePages" (click)="openPage(p)">
+		<ion-icon [name]="p.icon_name" item-left></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

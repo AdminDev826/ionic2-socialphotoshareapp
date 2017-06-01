@@ -40,6 +40,12 @@ export class PhotoDetail {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhotoDetail');
   }
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+      spinner: "bubbles"
+    });
+    this.loading.present();
+  }
   
   showToast(title) {
     let toast = this.toastCtrl.create({
@@ -60,23 +66,33 @@ export class PhotoDetail {
     this.viewCtrl.dismiss();
   }
   shareImg(){
+    this.showLoading();
     var _tthis = this;
     var i = this.slides.getActiveIndex();
     console.log(i);
-    console.log(this.photoTileList[i - 1].filename);
-    this.loading = this.loadingCtrl.create({
-      spinner: "bubbles"
-    });
-    this.loading.present().then(
-        _tthis.socialSharing.shareViaInstagram('wugi', this.photoTileList[i].filename).then(()=> {
-          _tthis.loading.dismiss();
-          _tthis.showToast("Success !");
-        }).catch(()=> {
-          _tthis.loading.dismiss();
-          _tthis.showToast("Failed !");
-       })
-    );
-    // window.plugins.socialsharing.shareViaInstagram('', $scope.photoTileList[$ionicSlideBoxDelegate.currentIndex()].filename, function() {console.log('share ok')}, function(errormsg){console.log(errormsg)});
+    _tthis.socialSharing.shareViaInstagram('wugi', _tthis.photoTileList[i].filename).then(()=> {
+        _tthis.loading.dismiss();
+        console.log('share ok')
+        // _tthis.showToast("Success !");
+      }).catch(()=> {
+        _tthis.loading.dismiss();
+        // _tthis.showToast("Failed !");
+      });
+    
+    
+    // this.loading = this.loadingCtrl.create({
+    //   spinner: "bubbles"
+    // });
+    // this.loading.present().then(
+    //     _tthis.socialSharing.shareViaInstagram('wugi', _tthis.photoTileList[i].filename).then(()=> {
+    //       _tthis.loading.dismiss();
+    //       console.log('share ok')
+    //       // _tthis.showToast("Success !");
+    //     }).catch(()=> {
+    //       _tthis.loading.dismiss();
+    //       // _tthis.showToast("Failed !");
+    //    })
+    // );
   }
   goSliderDetail(slider){
 
