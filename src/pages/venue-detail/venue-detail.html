@@ -15,7 +15,7 @@
         <div class="img_div" [ngStyle]="{ 'background-image': 'url(' + event.venue.imageThumbURL + ')'}"></div>
       </ion-col>
       <ion-col width-50 class="col-50 text-center address">
-        <h3>{{event.venue.name}}</h3><br>
+        <h3 style="text-align: center;">{{event.venue.name}}</h3>
         <div (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[0]}}</div>
         <div (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[1]}}</div>
         <div class="item location">

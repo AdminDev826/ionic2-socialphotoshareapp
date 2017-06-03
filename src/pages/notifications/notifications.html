@@ -12,7 +12,7 @@
 
 <ion-content class="notification_content">
   <ion-list>
-    <ion-item no-padding   *ngFor="let item of notificationList">
+    <ion-item no-padding   *ngFor="let item of notificationList" detail-push>
       <li class="item item-icon-right" *ngIf="item.isWhat=='gallery'" (click)="goGallery(item)">
         <h2>{{item.title}}</h2>
         <p>{{item.description}}</p>

@@ -21,7 +21,7 @@
         <div class="img_div" *ngIf="event?.venue?.imageThumbURL" [ngStyle]="{ 'background-image': 'url(' + event.venue.imageThumbURL + ')'}"></div>
     </ion-col>
     <ion-col width-50 class="text-center address">
-      <h3>{{event.name}}</h3><br>
+      <h3 style="text-align: center;">{{event.name}}</h3>
       <!--<div style="font-size:12px; padding-bottom:10px;">{{event.formatted_date}}</div>-->
       <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[0]}}</div>
       <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[1]}}</div>

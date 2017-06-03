@@ -1,7 +1,7 @@
 <ion-content class="login_content">
   <div (swipe)="swipeEvent($event)">
     <div class="custom_header">
-      <button class="closeBtn" (click)="closeLogin()"><ion-icon ios="ios-close" md="md-close-outline" style="font-size: 3.3em; font-weight: bold;"></ion-icon></button>
+      <button class="closeBtn" (click)="closeLogin()"><ion-icon ios="ios-close" md="md-close-outline" style="font-size: 3.5em; font-weight: 600;"></ion-icon></button>
       <img class="logo" src="assets/img/Logo.png" />
     </div>
     <div class="button-rows">
@@ -57,7 +57,7 @@
       </ion-row>
       <ion-row>
         <ion-col col-6>
-          <ion-datetime style="border-bottom: 0.55px solid #c8c7cc;" displayFormat="DD/MM/YYYY" placeholder="DD/MM/YYYY" [(ngModel)]="newuser.dob"></ion-datetime>
+          <ion-datetime style="border-bottom: 0.55px solid #c8c7cc;" displayFormat="MM/DD/YYYY" placeholder="MM/DD/YYYY" [(ngModel)]="newuser.dob"></ion-datetime>
         </ion-col>
         <ion-col col-6>
           <ion-select interface="action-sheet" style="border-bottom: 0.55px solid #c8c7cc;" placeholder="Gender" [(ngModel)]="newuser.gender">
@@ -94,15 +94,15 @@
           <ion-input type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
         </ion-item>
       </ion-row>
-      <ion-row style="margin-top: 20px;">
+      <ion-row style="margin-top: 6rem;">
         <ion-col><button ion-button button-outline button-light outline color="cgray" class="sign_btn" (click)="login()">Sign In</button></ion-col>
       </ion-row>
       <ion-row>
         <ion-col><button ion-button button-positive class="fb_btn" (click)="fbLogin()">Sign In With Facebook</button></ion-col>
       </ion-row>
       <ion-row class="bottom-item">
-        <ion-col col-6 style="text-align: left;"><button no-padding ion-button button-light style="font-size: 1em;" clear (click)="goGuest()">Continue As Guest</button></ion-col>
-        <ion-col col-6><button ion-button button-light style="font-size: 1em;" clear (click)="onForgotPassword()">Forgot Password?</button></ion-col>
+        <ion-col col-6 style="text-align: left;"><button no-padding ion-button button-light style="font-size: 1em; color: black;" clear (click)="goGuest()">Continue As Guest</button></ion-col>
+        <ion-col col-6><button ion-button button-light style="font-size: 1em; color: black;" clear (click)="onForgotPassword()">Forgot Password?</button></ion-col>
       </ion-row>
     </ion-grid>
   </div>

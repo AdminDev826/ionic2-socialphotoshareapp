@@ -48,7 +48,7 @@ select { border: none; }
   flex: 0 0 14.28%;
   max-width: 14.28%; }
 
-.logo1 { height:35px; margin-top:5px;}
+.logo1 { height:35px; margin-top:5px; margin-left: 5px;}
 .row { width: 100% }
 .nav-icon {
   background: transparent;
@@ -173,7 +173,7 @@ select { border: none; }
 .setting_content .list .item-toggle { font-size: 0.9em;  font-family: 'Lato_Bold', sans-serif !important; color:#777; font-weight:bold; background:white; }
 .setting_content .list .ion-ios-arrow-right { font-size:1.6em;}
 
-.event_detail_content h3{ margin-top:35px; font-family: 'Lato_Regular' !important;}
+.event_detail_content h3{ margin-top:35px; font-family: 'Lato_Regular' !important; margin-bottom: 14px;}
 .event_detail_content .location{ border:0px; height:30px; margin-top:10px; line-height:0px; font-size: 1em;}
 .event_detail_content .button_row{ color:#333; width:80%; margin-left:10%; text-align: center; margin-top:10px;}
 .event_detail_content .button_row .icon { font-size:3em;}
@@ -187,7 +187,7 @@ select { border: none; }
 .lightfont { font-family: 'Lato_Light', sans-serif;  }
 .photos_content { padding-left:4px; padding-right:4px;}
 .notification_content .item{white-space:normal; font-family: 'Lato_Light', sans-serif; padding-top: 0px; padding-bottom: 0px; }
-.notification_content .item-note{ position:absolute; top:10px; right:18px; color: #aaa; font-size: 14px;}
+.notification_content .item-note{ position:absolute; top:5px; right:18px; color: #aaa; font-size: 11px;}
 .notification_content img{ width:80px; height:80px; padding-left:5px;}
 
 

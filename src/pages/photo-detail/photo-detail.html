@@ -1,10 +1,10 @@
 <ion-content class="photo_detail_content has-header no-scroll">
   <div class="photo-detail-header">
-    <button ion-button style="position: absolute; left: 0px; top: 6px;" clear class="button button-clear button-icon ion-android-close" (click)="closePhotoDetail()">
+    <button ion-button style="position: absolute; left: 0px; top: 14px;" clear class="button button-clear button-icon ion-android-close" (click)="closePhotoDetail()">
       <ion-icon name="close" style="font-size: -webkit-xxx-large; font-weight: bold;"></ion-icon>
     </button>
-    <h1 class="title">{{title}}</h1>
-    <button ion-button style="position: absolute; right: 0px; top: 6px;" clear class="button button-clear button-icon ion-share" (click)="shareImg()">
+    <h1 class="title" style="margin-top: 27px;">{{title}}</h1>
+    <button ion-button style="position: absolute; right: 0px; top: 14px;" clear class="button button-clear button-icon ion-share" (click)="shareImg()">
       <ion-icon name="share-alt"></ion-icon>
     </button>
   </div>
@@ -15,7 +15,7 @@
           </div>
       </ion-slide>
   </ion-slides>
-  <h2>{{selectedPhoto.title}}</h2>
+  <h2 style="margin-top: 2.8rem;">{{selectedPhoto.title}}</h2>
   <div class="text">{{selectedPhoto.eventDate}}</div>
   <img class="logo" src="assets/img/Logo.png" />
 </ion-content>
