@@ -24,16 +24,16 @@
     </ion-row>
   </div>
   <div class="list" *ngIf="currentTab=='event'">
-    <div class="full-image" *ngFor="let item of browseEventList" (click)="goEventCategory(item)">
+    <button class="full-image" *ngFor="let item of browseEventList" (click)="goEventCategory(item)">
       <img [src]="item.BrowseEventImg" class="full-image">
       <h2>{{item.EventName}}</h2>
-    </div>
+    </button>
   </div>
   <div class="list" *ngIf="currentTab=='venue'">
-    <div class="full-image" *ngFor="let item of browseEventList" (click)="goVenueCategory(item)">
+    <button class="full-image" *ngFor="let item of browseEventList" (click)="goVenueCategory(item)">
       <img [src]="item.BrowseEventImg" class="full-image">
       <h2>{{item.EventName}}</h2>
-    </div>
+    </button>
     <!--<div class="full-image" *ngFor="let item of browseVenueList" (click)="goVenueCategory(item)">
       <img [src]="item.VenueThumImag" class="full-image" style="height:250px;">
       <h2>{{item.VenueName}}</h2>
@@ -43,9 +43,9 @@
     </div>-->
   </div>
   <div class="list" *ngIf="currentTab=='type'">
-    <div class="full-image" *ngFor="let item of browseVenueTypeList" (click)="goVenueTypeCategory(item)">
+    <button class="full-image" *ngFor="let item of browseVenueTypeList" (click)="goVenueTypeCategory(item)">
       <img [src]="item.VenueTypeThumImg" class="full-image">
       <h2>{{item.VenueTypeName}}</h2>
-    </div>
+    </button>
   </div>
 </ion-content>

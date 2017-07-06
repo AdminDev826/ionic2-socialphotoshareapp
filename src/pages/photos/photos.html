@@ -12,9 +12,9 @@
 
 <ion-content class="photos_content ">
   <div class="padding text-center lightfont" style="color:#666; font-size:2em; text-align: center; line-height:40px; margin: 12px;">Recent Photos</div>
-  <div class="img_block" *ngFor="let item of eventTileList">
+  <button class="img_block" *ngFor="let item of eventTileList" (click)="goPhotoGallery(item)">
     <!--<img image-lazy-src="{{item.cover}}" image-lazy-loader="lines" ng-click="goPhotoGallery(item)">-->
-    <img src="{{item.cover}}" (load)="loaded = true" (click)="goPhotoGallery(item)" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+    <img src="{{item.cover}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
     <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
-  </div>
+  </button>
 </ion-content>

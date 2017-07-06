@@ -10,9 +10,10 @@
 </ion-header>
 
 
+
+
 <ion-content class="event_detail_content" lazy-scroll>
-  <!--<img class="full-image" image-lazy-src="{{event.imageThumbURL}}" image-lazy-loader="lines" />-->
-  <img src="{{event.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+  <img src="{{event.imageURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
   <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
 
   <ion-row>

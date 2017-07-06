@@ -31,10 +31,10 @@
   </div>
   <div (swipe)="swipeEvent($event)" style="width:100%; height:100%">
     <div *ngFor="let item of eventTileList">
-      <div class="img_block" *ngIf="(item.timestamp > activeDate.timestamp) && (item.timestamp < activeNextDate.timestamp)"  (click)="goDetail(item)">
+      <button class="img_block" *ngIf="(item.timestamp > activeDate.timestamp) && (item.timestamp < activeNextDate.timestamp)"  (click)="goDetail(item)">
           <img src="{{item.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
           <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
-      </div>
+      </button>
     </div>
   </div>
 </ion-content>

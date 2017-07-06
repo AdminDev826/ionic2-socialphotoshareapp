@@ -118,7 +118,7 @@ select { border: none; }
 
 
 .menu_content , .menu_content .item, .menu_content .item-content{ font-family: 'Lato_Regular', sans-serif !important;  background:black; color:white;}
-.menu_content .item{ border:0px; text-align:left; margin-top:0px; padding-bottom: 0px; }
+.menu_content .item{ border:0px; text-align:left; margin-top:0px; padding-bottom: 8px; padding-top: 8px; }
 .menu_content .activated { background-color: #2d776c;}
 .menu_content .item .icon{ font-size:1.4em; color:white;}
 .menu_content .user_profile{ text-align:center; color:white; font-weight: bold;}

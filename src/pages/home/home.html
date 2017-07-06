@@ -24,10 +24,10 @@
         </ion-slides>
       </div>
       <div *ngIf="eventTileList.length">
-        <div class="img_block" *ngFor="let item of eventTileList" (click)="goDetail(item)">
+        <button class="img_block" *ngFor="let item of eventTileList" (click)="goDetail(item)">
           <img src="{{item.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
           <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
-        </div>
+        </button>
       </div>
       
     </ion-list>
