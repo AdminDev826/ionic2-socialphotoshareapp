@@ -82,10 +82,14 @@ page-login {
         animation-name: fadeInLeft;
         animation-duration: 0.2s;
         margin-top: 1.5em;
-        img {
-            height: 90px;
-            width: 90px;
-            border-radius:50%;
+        .ion-block { background-color: white; }
+        .img_btn {
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-size: cover !important;
         }
         .select{
             max-width: 90% !important;

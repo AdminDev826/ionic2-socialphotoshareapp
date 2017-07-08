@@ -1,27 +1,11 @@
-<!--<ion-menu id="leftMenu" [content]="content">
-	<ion-content class="menu_content">
-        <div class="item user_profile" menu-close (click)="goProfile()">
-            <img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>
-            <div class="name"  *ngIf="!loginAsGuest">{{currentUser.name}}</div>
-        </div>
-		<ion-list no-lines>
-			<ion-item no-lines *ngFor="let p of nativePages" (click)="openPage(p)">
-				<ion-icon [name]="p.icon_name" item-left></ion-icon>
-				{{p.title}}
-			</ion-item>
-		</ion-list>
-	</ion-content>
-</ion-menu>
-
-<ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>-->
-
 <ion-menu id="leftMenu" [content]="content">
 
   <ion-content class="menu_content">
-	<div class="item user_profile" menu-close (click)="goProfile()">
-		<img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>
+	<button class="item user-profile" menu-close (click)="goProfile()">
+		<!--<img src="{{currentUser.photo}}"  *ngIf="!loginAsGuest"/><br>-->
+		<div class="img-user" [ngStyle]="{'background': 'url(' + currentUser.photo + ')'}"></div>
 		<div class="name"  *ngIf="!loginAsGuest">{{currentUser.name}}</div>
-	</div>
+	</button>
     <ion-list no-lines>
       <button menuClose ion-item detail-none *ngFor="let p of nativePages" (click)="openPage(p)">
 		<ion-icon [name]="p.icon_name" item-left></ion-icon>

@@ -7,13 +7,6 @@ import { Termsofuse } from "../termsofuse/termsofuse";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
 
 
-
-/**
- * Generated class for the Login page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -24,7 +17,7 @@ export class Login {
   loginAsGuest = false;
   loading: any;
   user = {username:"", password:""};
-  newuser={firstName:"", lastName:"", email:"", password:"", confirm:"", dob:"", gender:"", facebookLogin:false, profileImage:""}
+  newuser={firstName:"", lastName:"", email:"", password:"", confirm:"", dob:"", gender:"", facebookLogin:false, profileImage:"../assets/img/Profile.png"}
   isTab = 'signin';
 
 
@@ -82,11 +75,9 @@ export class Login {
     }
   }
   goGuest(){
-      // this.nav.push(Termsofuse);
       this.viewCtrl.dismiss("Termsofuse");
   }
   onForgotPassword(){
-    // this.nav.push(Forgotpassword);
     this.viewCtrl.dismiss("Forgotpassword");
   }
   showToast(title) {
@@ -117,7 +108,6 @@ export class Login {
         _this.viewCtrl.dismiss("login");
       },
       error: function(user, error) {
-        // The login failed. Check error to see why.
         console.log(error);
         _this.loading.dismiss();
         _this.showToast(error.message);
@@ -210,10 +200,6 @@ export class Login {
     }
 
     signup(){
-      // let now = new Date();
-      // this.newuser.dob = now.toISOString();
-      let ddate = new Date(this.newuser.dob);
-      console.log(ddate);
       if(this.newuser.firstName == undefined || this.newuser.firstName == "")
       {
         this.showToast('Please enter first name.');
@@ -270,7 +256,7 @@ export class Login {
 
       this.showLoading();
       let _this = this;
-      
+      let ddate = new Date(this.newuser.dob);
       var user = new Parse.User();
       user.set("username", this.newuser.email);
       user.set("password", this.newuser.password);
@@ -285,20 +271,16 @@ export class Login {
       user.set("Venues", []);
       user.signUp(null, {
         success: function(user) {
-          // Hooray! Let them use the app now.
           console.log(user);
-          //$ionicLoading.hide();
-          //ionicToast.show("Please verify your email before Login.", 'bottom',false, 3000);
-          //$state.go("signin");
           let username = user.get('firstName') + " " + user.get('lastName');
           let profileImage = user.get('profileImage');
           _this.events.publish('user:created', username, profileImage);
           _this.loading.dismiss();
-          _this.viewCtrl.dismiss("login");
+          // _this.viewCtrl.dismiss("login");
+          _this.goGuest();
           
         },
         error: function(user, error) {
-          // Show the error message somewhere and let the user try again.
           console.log("Error: " + error.code + " " + error.message);
           _this.showToast(error.message);
           _this.loading.dismiss();
@@ -312,7 +294,6 @@ export class Login {
         let userId = response.authResponse.userID;
         let params = new Array();
 
-        //Getting name and gender properties
         _this.fb.api("/me?fields=first_name,last_name,email,gender,id,picture", params)
         .then(function(response) {
           console.log(response);
@@ -358,7 +339,8 @@ export class Login {
                     let profileImage = user.get('profileImage');
                     _this.events.publish('user:created', username, profileImage);
                     _this.loading.dismissAll();
-                    _this.viewCtrl.dismiss("login");
+                    // _this.viewCtrl.dismiss("login");
+                    _this.goGuest();
                   },
                   error: function(user, error) {
                     console.log("Error: " + error.code + " " + error.message);
