@@ -12,7 +12,48 @@
 
 <ion-content class="notification_content">
   <ion-list>
-    <ion-item no-padding   *ngFor="let item of notificationList" detail-push>
+    <div *ngFor="let item of notificationList">
+      <button *ngIf="item.isWhat=='gallery'" (click)="goGallery(item)">
+        <ion-item no-padding detail-push>
+        <li class="item item-icon-right">
+          <h2>{{item.title}}</h2>
+          <p>{{item.description}}</p>
+          <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy $index"/>
+          <span class="item-note">
+            {{item.date}}
+          </span>
+          <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+        </li>  
+      </ion-item>
+      </button>
+      <button *ngIf="item.isWhat=='event'" (click)="goEvent(item)">
+        <ion-item no-padding detail-push>
+          <li class="item item-icon-right">
+            <h2>{{item.title}}</h2>
+            <p>{{item.description}}</p>
+            <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy  $index"/>
+            <span class="item-note">
+              {{item.date}}
+            </span>
+            <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+          </li>
+        </ion-item>
+      </button>
+      <button *ngIf="item.isWhat=='nothing'">
+        <ion-item no-padding>
+          <li class="item item-icon-right">
+          <h2>{{item.title}}</h2>
+          <p>{{item.description}}</p>
+          <img src="{{isrc}}" *ngFor="let isrc of item.images; trackBy  $index"/>
+          <span class="item-note">
+            {{item.date}}
+          </span>
+          <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
+        </li>
+        </ion-item>
+      </button>
+    </div>
+    <!--<ion-item no-padding   *ngFor="let item of notificationList" detail-push>
       <li class="item item-icon-right" *ngIf="item.isWhat=='gallery'" (click)="goGallery(item)">
         <h2>{{item.title}}</h2>
         <p>{{item.description}}</p>
@@ -40,6 +81,6 @@
         </span>
         <i class="icon  ion-ios-arrow-right" style="font-size:1em; color:#999"></i>
       </li>
-    </ion-item>
+    </ion-item>-->
   </ion-list>
 </ion-content>

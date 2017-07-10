@@ -16,8 +16,8 @@
       </ion-col>
       <ion-col width-50 class="col-50 text-center address">
         <h3 style="text-align: center;">{{event.venue.name}}</h3>
-        <div (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[0]}}</div>
-        <div (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[1]}}</div>
+        <div (click)="navigatorApp()" style="margin-bottom: 5px; text-align: center;">{{event.venue.address[0]}}</div>
+        <div (click)="navigatorApp()" style="margin-bottom: 5px; text-align: center;">{{event.venue.address[1]}}</div>
         <div class="item location">
           <ion-icon name="pin" style="color:#60a398; margin-top: -15px; margin-left: -20px;"></ion-icon>&nbsp;
           {{event.venue.dist}} miles
@@ -52,16 +52,16 @@
       <div class="value item item-icon-left" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{event.venue.neighborhood}}</div>
       <div class=" divider">PARKING</div>
       <div class="value item item-icon-left" *ngFor="let d of event.venue.parking" style="padding-left:40px;"><ion-icon name="radio-button-on" class="item-icon"></ion-icon> {{d}}</div>
-      <ion-item detail-push class="divider1" *ngIf="event.venue.photos">
+      <ion-item detail-push class="divider1" *ngIf="event.venue.photos" (click)="goPhotoPage()" >
         PHOTO GALLERY
         <span class="item-note">
           {{event.venue.photos.length}}
         </span>
       </ion-item>
-      <div class="img_block" *ngFor="let item1 of event.venue.photos" style="margin-top:3px;">
+      <button class="img_block" *ngFor="let item1 of event.venue.photos" style="margin-top:3px;" (click)="goPhotoGallery(item1)">
         <!--<img image-lazy-src="{{item1.cover}}" image-lazy-loader="lines" (click)="goPhotoGallery(item1)">-->
-        <img src="{{item1.cover}}" (load)="loaded = true" (click)="goPhotoGallery(item1)" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+        <img src="{{item1.cover}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
         <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
-      </div>
+      </button>
     </ion-list>
   </ion-content>

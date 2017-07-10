@@ -77,7 +77,8 @@ export class Photos {
   }
 
   goPhotoGallery(item) {
-    this.navCtrl.push(Gallery, {selectedPhoto:JSON.stringify(item)});
+    let s_item = JSON.stringify(item);
+    this.navCtrl.push(Gallery, {selectedPhoto:JSON.parse(s_item)});
   }
 
 }

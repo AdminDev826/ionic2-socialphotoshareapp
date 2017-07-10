@@ -91,7 +91,9 @@ export class Notifications {
       cover:item.gallery.get('cover'),
       title:item.gallery.get('title')
     };
-    this.navCtrl.push(Gallery,{selectedPhoto: JSON.stringify(event)});
+    
+    let s_event = JSON.stringify(event);
+    this.navCtrl.push(Gallery,{selectedPhoto: JSON.parse(s_event)});
     // $state.go("app.gallery", {selectedPhoto:angular.toJson(event)});
   }
 

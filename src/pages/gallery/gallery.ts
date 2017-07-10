@@ -29,7 +29,9 @@ export class Gallery {
         spinner: 'dots',
         content: ''
       });
-      this.selectedGallery = JSON.parse(navParams.get("selectedPhoto"));
+      console.log(navParams.get("selectedPhoto"));
+      // this.selectedGallery = JSON.parse(navParams.get("selectedPhoto"));
+      this.selectedGallery = navParams.get("selectedPhoto");
       console.log(this.selectedGallery);
       this.loadEventsData();
   }

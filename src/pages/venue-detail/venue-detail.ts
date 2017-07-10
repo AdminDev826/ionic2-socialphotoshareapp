@@ -4,6 +4,7 @@ import { Services } from "../../providers/services";
 import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { Gallery } from "../gallery/gallery";
+import { Photos } from "../photos/photos";
 import * as moment from "moment";
 
 /**
@@ -95,6 +96,10 @@ export class VenueDetail {
       this.showToast("Cannot find Venue !");
       this.navCtrl.popTo( this.navCtrl.getByIndex(1));
     }
+  }
+
+  goPhotoPage(){
+    this.navCtrl.push(Photos);
   }
   
   goPhotoGallery(gallery){

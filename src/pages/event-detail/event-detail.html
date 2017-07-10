@@ -24,8 +24,8 @@
     <ion-col width-50 class="text-center address">
       <h3 style="text-align: center;">{{event.name}}</h3>
       <!--<div style="font-size:12px; padding-bottom:10px;">{{event.formatted_date}}</div>-->
-      <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[0]}}</div>
-      <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px;">{{event.venue.address[1]}}</div>
+      <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px; text-align: center;">{{event.venue.address[0]}}</div>
+      <div *ngIf="event?.venue?.address" (click)="navigatorApp()" style="margin-bottom: 5px; text-align: center;">{{event.venue.address[1]}}</div>
       <div class="item location">
         <ion-icon name="pin" style="color:#60a398; margin-top: -25px; margin-left: -20px;"></ion-icon>
         {{event?.venue?.dist}}miles
