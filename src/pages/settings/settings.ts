@@ -21,6 +21,9 @@ declare var parsePlugin;
 export class Settings {
 
   loading: any;
+  shownName = false;
+  shownPassword = false;
+
   currentUser = {
     firstName:"", 
     lastName:"", 
@@ -30,6 +33,7 @@ export class Settings {
     timeout:"", 
     pushNotification:""
   };
+  user = {current_psw:"", new_psw:""};
 
   constructor(
     public navCtrl: NavController, 
@@ -40,7 +44,6 @@ export class Settings {
     private emailComposer: EmailComposer
     ) {
       var currentUser = Parse.User.current();
-      // this.currentUser = {firstName:"", lastName:"", profileImage:"", password:"", email:"", $timeout, pusNotification:""};
       if (currentUser) {
           this.currentUser.firstName = currentUser.get('firstName');
           this.currentUser.lastName = currentUser.get('lastName');
@@ -48,7 +51,7 @@ export class Settings {
           this.currentUser.email = currentUser.get('email');
           this.currentUser.pushNotification = currentUser.get('pushNotification');
       } else {
-          // this.navCtrl.setRoot(First);
+          this.navCtrl.setRoot(First);
       }
   }
   showLoading(){
@@ -57,6 +60,19 @@ export class Settings {
       content: ''
     });
     this.loading.present();
+  }
+
+  showNameView(){
+    if(this.shownName)
+      this.shownName = false;
+    else
+      this.shownName = true;
+  }
+  showPasswordView(){
+    if(this.shownPassword)
+      this.shownPassword = false;
+    else
+      this.shownPassword = true;
   }
 
   ionViewDidLoad() {
@@ -75,6 +91,54 @@ export class Settings {
     var lastAtPos = str.lastIndexOf('@');
     var lastDotPos = str.lastIndexOf('.');
     return (lastAtPos < lastDotPos && lastAtPos > 0 && str.indexOf('@@') == -1 && lastDotPos > 2 && (str.length - lastDotPos) > 2);
+  }
+
+  onSavePassword(){
+    if(this.user.current_psw == undefined || this.user.current_psw == "")
+    {
+      this.showToast('Please enter current password.');
+      return;
+    }
+
+    if(this.user.new_psw == undefined || this.user.new_psw == "")
+    {
+      this.showToast('Please enter new password.');
+      return;
+    }
+    let _this = this;
+
+    var currentUser = Parse.User.current();
+    if(currentUser){
+        // $ionicLoading.show();
+        Parse.User.logIn(currentUser.get('username'), _this.user.current_psw, {
+          success: function(userAgain) {
+            // Do stuff after successful login.
+            //console.log(userAgain);
+            userAgain.set("password", _this.user.new_psw);
+              userAgain.save(null, {
+                success:function(userAgagin1){
+                  // $ionicLoading.hide();
+                  _this.showToast("Password has been changed successfully.");
+                  // $ionicHistory.goBack();
+                },
+                error: function(userAgain1, error) {
+                  _this.showToast("Please enter exact current password.");
+                  // This will error, since the Parse.User is not authenticated
+                  console.log(userAgain1);
+                  // $ionicLoading.hide();
+                }
+            });
+
+          },
+          error: function(user, error) {
+            // The login failed. Check error to see why.
+            console.log(error);
+            // $ionicLoading.hide();
+            _this.showToast("Please enter exact current password.");
+
+          }
+        });
+    }
   }
 
   onSave(){

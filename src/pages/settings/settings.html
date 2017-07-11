@@ -15,12 +15,17 @@
 
 <ion-content class="setting_content">
   <ion-item no-padding class="profile_img_area">
-    <img [src]="currentUser.profileImage" class="profile_img"/>
+    <!--<img [src]="currentUser.profileImage" class="profile_img"/>-->
+    <div class="img_btn" [ngStyle]="{'background': 'url(' + currentUser.profileImage + ')'}"></div>
   </ion-item>
 
   <div class="list item item-divider">
-    <ion-item no-padding detail-push class="item-toggle"><ion-label class="toggle toggle-balanced">EDIT PROFILE</ion-label></ion-item>
-    <ion-item no-padding>
+    <ion-item no-padding class="item-toggle" (click)="showNameView()">
+      <ion-label icon-right class="toggle toggle-balanced">EDIT PROFILE</ion-label>
+      <ion-icon name="arrow-forward" item-right *ngIf="!shownName"></ion-icon>
+      <ion-icon name="arrow-down" item-right *ngIf="shownName"></ion-icon>
+    </ion-item>
+    <ion-item no-padding [class.hide]="!shownName">
       <label class="item-input">
         <span class="input-label">FIRST NAME</span>
         <input type="text" [(ngModel)]="currentUser.firstName">
@@ -30,9 +35,35 @@
         <input type="text" [(ngModel)]="currentUser.lastName">
       </label>
     </ion-item>
-    <ion-item (click)="gotoChangePasswordPage()" no-padding detail-push class="item-toggle">
-      <span class="toggle toggle-balanced">CHANGE PASSWORD</span>
+
+    <ion-item no-padding class="item-toggle" (click)="showPasswordView()">
+      <ion-label icon-right class="toggle toggle-balanced">CHANGE PASSWORD</ion-label>
+      <ion-icon name="arrow-forward" item-right *ngIf="!shownPassword"></ion-icon>
+      <ion-icon name="arrow-down" item-right *ngIf="shownPassword"></ion-icon>
     </ion-item>
+
+    <ion-list class="border" no-padding [class.hide]="!shownPassword">
+      <ion-item no-padding>
+        <h2>Current Password</h2>
+        <ion-icon class="margin-16" name="ios-lock-outline" item-left></ion-icon>
+      </ion-item>
+      <ion-item no-padding>
+        <ion-input type="password" placeholder="Enter Current Password"  [(ngModel)]="user.current_psw"></ion-input>
+      </ion-item>
+      <ion-item style="height: 45px;" no-padding>
+        <h2>New Password</h2>
+        <ion-icon name="ios-lock-outline" item-left></ion-icon>
+      </ion-item>
+      <ion-item style="height: 45px;" no-padding>
+        <ion-input type="password" placeholder="Enter New Password"  [(ngModel)]="user.new_psw"></ion-input>
+      </ion-item>
+      <button ion-button full (click)="onSavePassword()">Save</button>
+    </ion-list>
+
+    <!--<ion-item (click)="gotoChangePasswordPage()" no-padding detail-push class="item-toggle">
+      <span class="toggle toggle-balanced">CHANGE PASSWORD</span>
+    </ion-item>-->
+
     <ion-item no-padding>
       <ion-label class="toggle toggle-balanced">PUSH NOTIFICATIONS</ion-label>
       <ion-toggle [(ngModel)]="currentUser.pushNotification" (ionChange)="changePush($event)"></ion-toggle>
