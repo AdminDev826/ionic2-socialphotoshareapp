@@ -17,7 +17,7 @@ export class Login {
   loginAsGuest = false;
   loading: any;
   user = {username:"", password:""};
-  newuser={firstName:"", lastName:"", email:"", password:"", confirm:"", dob:"", gender:"", facebookLogin:false, profileImage:"../assets/img/Profile.png"}
+  newuser={firstName:"", lastName:"", email:"", password:"", confirm:"", dob:"", gender:"", facebookLogin:false, profileImage:""}
   isTab = 'signin';
 
 

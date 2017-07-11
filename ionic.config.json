@@ -1,5 +1,6 @@
 {
   "name": "wugi-app3",
   "app_id": "",
-  "type": "ionic-angular"
+  "v2": true,
+  "typescript": true
 }
