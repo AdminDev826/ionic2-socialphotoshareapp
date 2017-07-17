@@ -27,21 +27,17 @@ export class First {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad First');
-    var a = moment("2017-07-17 03:12").date();
-    console.log(a);
-    a = moment("2017-07-17 03:12").add(-4, "hours").date();
-    console.log(a);
   }
   ionViewDidEnter(){
     this.menu.swipeEnable(false, 'leftMenu');
   }
 
   goGuest(){
-      this.nav.push(Termsofuse);
+    this.nav.push(Termsofuse);
   }
 
   onTerms(){
-      this.termsmodal.present();
+    this.termsmodal.present();
   }
   showLoading(){
     this.loading = this.loadingCtrl.create({
@@ -57,7 +53,6 @@ export class First {
       if(item == "login") this.nav.setRoot(HomePage);
       else if(item == "Termsofuse") this.nav.push(Termsofuse);
       else if(item == "Forgotpassword") this.nav.push(Forgotpassword);
-      
     });
     mmodal.present();
   }
@@ -65,10 +60,9 @@ export class First {
   showSignup() {   
     var mmodal = this.modal.create(Login, {isTab: "signup"});
     mmodal.onDidDismiss(item => {
-      if (!item) {
-        return;
-      }
-      this.nav.setRoot(HomePage);
+      if(item == "login") this.nav.setRoot(HomePage);
+      else if(item == "Termsofuse") this.nav.push(Termsofuse);
+      else if(item == "Forgotpassword") this.nav.push(Forgotpassword);
     });
     mmodal.present();
   }

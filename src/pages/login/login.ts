@@ -75,7 +75,7 @@ export class Login {
     }
   }
   goGuest(){
-      this.viewCtrl.dismiss("Termsofuse");
+    this.viewCtrl.dismiss("Termsofuse");
   }
   onForgotPassword(){
     this.viewCtrl.dismiss("Forgotpassword");
@@ -200,6 +200,7 @@ export class Login {
     }
 
     signup(){
+      let _this = this;
       if(this.newuser.firstName == undefined || this.newuser.firstName == "")
       {
         this.showToast('Please enter first name.');
@@ -255,7 +256,6 @@ export class Login {
       }
 
       this.showLoading();
-      let _this = this;
       let ddate = new Date(this.newuser.dob);
       var user = new Parse.User();
       user.set("username", this.newuser.email);
