@@ -63,7 +63,8 @@ export class HomePage {
       this.loading.dismiss();
       if(this.services.getStatus){
         var now = new Date();
-        var today = moment(now).add(4, "hours").valueOf();
+        var today = moment(now).add(0, "hours").date();
+        
         for(var index in data){
           var event = {
             id:data[index].id,
@@ -90,8 +91,9 @@ export class HomePage {
             formatted_date:""
           };
           event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
+          var event_day = moment(event.timestamp).date();
 
-          if((event.timestamp >= today) && (event.timestamp <= (today) + 7* 24 * 60 * 60 * 1000))
+          if((event_day >= today) && (event_day <= (today + 1)))
           {
             if(event.feature == 1){
               this.eventTileList.push(event);

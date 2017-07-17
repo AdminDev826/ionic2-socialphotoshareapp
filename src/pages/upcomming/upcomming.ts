@@ -21,7 +21,6 @@ export class Upcomming {
   loading: any;
   calendar_list = new Array();
 	activeDate: any;
-  activeNextDate: any;
   activeDateIndex = 0;
 
   curEventList: any;
@@ -55,6 +54,7 @@ export class Upcomming {
         break;
     }
   }
+  
   showToast(title) {
     let toast = this.toastCtrl.create({
       message: title,
@@ -66,11 +66,10 @@ export class Upcomming {
   
   initData(){
 		var now = new Date();
-		var today = moment(now).add(4, "hours").valueOf();
+		var today = moment(now).add(0, "hours").valueOf();
 
     this.activeDate = {timestamp:today, dayNum:"", dayOfWeek:""};
     this.activeDateIndex = 0;
-    this.activeNextDate = {timestamp:(today)+24*60*60*1000, dayNum:"", dayOfWeek:""};
     this.calendar_list.push({timestamp:today, dayNum:"", dayOfWeek:""});
     for(var i=1; i<7; i++){
       var timestamp = (today) + i * 24 * 60 * 60 * 1000;
@@ -87,11 +86,10 @@ export class Upcomming {
     this.loadEventsData();
 	}
 
-  loadEventsData(){
+  async loadEventsData(){
     this.eventTileList = new Array();
     this.loading.present();
     this.services.getEventAll().subscribe(data=> {
-      this.loading.dismiss();
       if(this.services.getStatus){
         var firstFeatrue = [];
         var secondFeatrue = [];
@@ -119,19 +117,21 @@ export class Upcomming {
             age:data[index].get('age'),
             description:data[index].get('description'),
             timestamp:moment(data[index].get('startDate')).valueOf(),
+            dayNum: moment(data[index].get('startDate')).date(),
             formatted_date:""
           };
           event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
-          if(event.feature == 1 && ((event.timestamp >= parseInt(this.calendar_list[0].timestamp)) && (event.timestamp <= (parseInt(this.calendar_list[0].timestamp)+ 7* 24 * 60 * 60 * 1000)))){
+
+          if(event.feature == 1 && ((event.dayNum >= parseInt(this.calendar_list[0].dayNum)) && (event.dayNum <= (parseInt(this.calendar_list[0].dayNum)+ 7)))){
             firstFeatrue.push(event);
             //this.eventTileList.push(event);
           }
 
-          if(event.feature == 2 && ((event.timestamp >= parseInt(this.calendar_list[0].timestamp)) && (event.timestamp <= (parseInt(this.calendar_list[0].timestamp)+ 7* 24 * 60 * 60 * 1000)))){
+          if(event.feature == 2 && ((event.dayNum >= parseInt(this.calendar_list[0].dayNum)) && (event.dayNum <= (parseInt(this.calendar_list[0].dayNum)+ 7)))){
             secondFeatrue.push(event);
           }
 
-          if(event.feature == 0 && ((event.timestamp >= parseInt(this.calendar_list[0].timestamp)) && (event.timestamp <= (parseInt(this.calendar_list[0].timestamp)+ 7* 24 * 60 * 60 * 1000)))){
+          if(event.feature == 0 && ((event.dayNum >= parseInt(this.calendar_list[0].dayNum)) && (event.dayNum <= (parseInt(this.calendar_list[0].dayNum)+ 7)))){
             zeroFeatrue.push(event);
           }
         }
@@ -146,17 +146,18 @@ export class Upcomming {
         for(var index in zeroFeatrue){
           this.eventTileList.push(zeroFeatrue[index]);
         }
+        this.loading.dismiss();
+        this.changeDate(this.calendar_list[0]);
       }else{
         this.showToast(data.message);
+        this.loading.dismiss();
       }
     });
   }
 
   changeDate(day){
     console.log(day);
-    this.activeDate = day;
-    this.activeNextDate = {timestamp:parseInt(day.timestamp)+24*60*60*1000, dayNum:"", dayOfWeek:""};
-    
+    this.activeDate = day;    
   }
 
 

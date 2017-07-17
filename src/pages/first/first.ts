@@ -27,6 +27,10 @@ export class First {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad First');
+    var a = moment("2017-07-17 03:12").date();
+    console.log(a);
+    a = moment("2017-07-17 03:12").add(-4, "hours").date();
+    console.log(a);
   }
   ionViewDidEnter(){
     this.menu.swipeEnable(false, 'leftMenu');
