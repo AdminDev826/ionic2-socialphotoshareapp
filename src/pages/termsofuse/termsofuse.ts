@@ -16,9 +16,13 @@ import { HomePage } from "../home/home";
 })
 export class Termsofuse {
 
+  guest = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
     Parse.initialize("G9watfzx5oPJPdhlfDtW6wNXrEY7syqZYQnmW0nO", "GlKvpo90mEnPJCvlnvYPbnEApCUHPWS4TFkYxr7y");
     Parse.serverURL = "https://parseapi.back4app.com";
+
+    this.guest = navParams.get('guest');
   }
 
   ionViewDidLoad() {
@@ -26,7 +30,7 @@ export class Termsofuse {
   }
   
   loginAsGuest(){
-    this.events.publish('login:guest', true);
+    if(this.guest) this.events.publish('login:guest', true);
     this.navCtrl.setRoot(HomePage);
   };
 

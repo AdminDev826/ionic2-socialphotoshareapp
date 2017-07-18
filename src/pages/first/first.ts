@@ -33,7 +33,7 @@ export class First {
   }
 
   goGuest(){
-    this.nav.push(Termsofuse);
+    this.nav.push(Termsofuse, {guest: true});
   }
 
   onTerms(){
@@ -51,7 +51,7 @@ export class First {
     var mmodal = this.modal.create(Login, {isTab: "signin"});
     mmodal.onDidDismiss(item => {
       if(item == "login") this.nav.setRoot(HomePage);
-      else if(item == "Termsofuse") this.nav.push(Termsofuse);
+      else if(item == "Termsofuse") this.nav.push(Termsofuse, {guest: true});
       else if(item == "Forgotpassword") this.nav.push(Forgotpassword);
     });
     mmodal.present();
@@ -61,7 +61,7 @@ export class First {
     var mmodal = this.modal.create(Login, {isTab: "signup"});
     mmodal.onDidDismiss(item => {
       if(item == "login") this.nav.setRoot(HomePage);
-      else if(item == "Termsofuse") this.nav.push(Termsofuse);
+      else if(item == "Termsofuse") this.nav.push(Termsofuse, {guest: false});
       else if(item == "Forgotpassword") this.nav.push(Forgotpassword);
     });
     mmodal.present();
