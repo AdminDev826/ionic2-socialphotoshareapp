@@ -27,6 +27,10 @@ export class First {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad First');
+
+    var today = moment("2017-07-21T18:00:00.000Z".split('.')[0]).date();
+    console.log("2017-07-21T18:00:00.000Z" + "--------" + "2017-07-21T18:00:00.000Z".split('.')[0]);
+    console.log(today);
   }
   ionViewDidEnter(){
     this.menu.swipeEnable(false, 'leftMenu');

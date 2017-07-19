@@ -63,7 +63,7 @@ export class HomePage {
       this.loading.dismiss();
       if(this.services.getStatus){
         var now = new Date();
-        var today = moment(now).add(0, "hours").date();
+        var today = moment(now).add(-4, "hours").date();
         
         for(var index in data){
           var event = {

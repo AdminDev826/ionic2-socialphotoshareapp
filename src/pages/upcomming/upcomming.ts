@@ -66,7 +66,7 @@ export class Upcomming {
   
   initData(){
 		var now = new Date();
-		var today = moment(now).add(0, "hours").valueOf();
+		var today = moment(now).add(-4, "hours").valueOf();
 
     this.activeDate = {timestamp:today, dayNum:"", dayOfWeek:""};
     this.activeDateIndex = 0;
