@@ -7,7 +7,7 @@
 		<div class="name"  *ngIf="!loginAsGuest">{{currentUser.name}}</div>
 	</button>
     <ion-list no-lines>
-      <button menuClose ion-item detail-none *ngFor="let p of nativePages" (click)="openPage(p)">
+      <button menuClose ion-item icon-start detail-none *ngFor="let p of nativePages" (click)="openPage(p)">
 		<ion-icon [name]="p.icon_name" item-left></ion-icon>
         {{p.title}}
       </button>

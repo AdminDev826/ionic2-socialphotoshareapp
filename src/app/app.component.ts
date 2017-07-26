@@ -62,13 +62,13 @@ export class MyApp {
     ) {
       this.menu = menu;
       this.nativePages = [
-        { title: 'HOME', component: HomePage, icon_name: 'home-outline' },
-        { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar-outline' },
-        { title: 'PHOTOS', component: Photos, icon_name: 'camera-outline' },
-        { title: 'BROWSE', component: Browse, icon_name: 'options-outline' },
-        { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard-outline' },
-        { title: 'SETTINGS', component: Settings, icon_name: 'settings-outline' },
-        { title: 'LOGOUT', component: null, icon_name: 'exit-outline' }
+        { title: 'HOME', component: HomePage, icon_name: 'home' },
+        { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar' },
+        { title: 'PHOTOS', component: Photos, icon_name: 'camera' },
+        { title: 'BROWSE', component: Browse, icon_name: 'options' },
+        { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard' },
+        { title: 'SETTINGS', component: Settings, icon_name: 'settings' },
+        { title: 'LOGOUT', component: null, icon_name: 'exit' }
       ];
 
       this.events.subscribe('user:created', (name, photo) => {
@@ -77,25 +77,25 @@ export class MyApp {
         this.currentUser.name = name;
         this.currentUser.photo = photo;
         this.nativePages = [
-          { title: 'HOME', component: HomePage, icon_name: 'home-outline' },
-          { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar-outline' },
-          { title: 'PHOTOS', component: Photos, icon_name: 'camera-outline' },
-          { title: 'BROWSE', component: Browse, icon_name: 'options-outline' },
-          { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard-outline' },
-          { title: 'SETTINGS', component: Settings, icon_name: 'settings-outline' },
-          { title: 'LOGOUT', component: null, icon_name: 'exit-outline' }
+          { title: 'HOME', component: HomePage, icon_name: 'home' },
+          { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar' },
+          { title: 'PHOTOS', component: Photos, icon_name: 'camera' },
+          { title: 'BROWSE', component: Browse, icon_name: 'options' },
+          { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard' },
+          { title: 'SETTINGS', component: Settings, icon_name: 'settings' },
+          { title: 'LOGOUT', component: null, icon_name: 'exit' }
         ];
       });
       this.events.subscribe('login:guest', (flag) => {
         this.loginAsGuest = flag;
         if(flag){
           this.nativePages =  [
-            { title: 'HOME', component: HomePage, icon_name: 'home-outline' },
-            { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar-outline' },
-            { title: 'PHOTOS', component: Photos, icon_name: 'camera-outline' },
-            { title: 'BROWSE', component: Browse, icon_name: 'options-outline' },
-            { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard-outline' },
-            { title: 'LOGOUT', component: null, icon_name: 'exit-outline' }
+            { title: 'HOME', component: HomePage, icon_name: 'home' },
+            { title: 'UPCOMING', component: Upcomming, icon_name: 'calendar' },
+            { title: 'PHOTOS', component: Photos, icon_name: 'camera' },
+            { title: 'BROWSE', component: Browse, icon_name: 'options' },
+            { title: 'NOTIFICATIONS', component: Notifications, icon_name: 'clipboard' },
+            { title: 'LOGOUT', component: null, icon_name: 'exit' }
           ];
         }
       });
