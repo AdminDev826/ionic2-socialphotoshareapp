@@ -37,6 +37,19 @@ input {height: 40px; border: none; }
 select { border: none; }
 
 .no-padding { padding:0px; }
+.item-md.item-input.input-has-focus .item-inner {
+  box-shadow: none;
+}
+.input-md {
+  font-size: 20px !important;
+  .text-input {
+    margin-bottom: 0px;
+  }
+}
+.item-md {
+  .item-inner { border-bottom: 0px;}
+}
+
 
 .col-14 {
   -webkit-box-flex: 0;
