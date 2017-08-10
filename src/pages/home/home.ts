@@ -64,6 +64,7 @@ export class HomePage {
       if(this.services.getStatus){
         var now = new Date();
         var today = moment(now).add(-4, "hours").date();
+        var cur_week = moment(now).add(-4, "hours").week();
         
         for(var index in data){
           var event = {
@@ -91,10 +92,11 @@ export class HomePage {
             formatted_date:""
           };
           event.formatted_date = moment(event.startDate).format("MMMM Do YYYY");
-          var event_day = moment(event.timestamp).date();
+          // var event_day = moment(event.timestamp).date();
+          var event_week = moment(event.timestamp).week();
 
-          if((event_day >= today) && (event_day <= (today + 1)))
-          {
+          // if((event_day >= today) && (event_day <= (today + 1)))
+          if(event_week == cur_week){
             if(event.feature == 1){
               this.eventTileList.push(event);
             }
@@ -108,7 +110,6 @@ export class HomePage {
         var sortedArray = this.eventTileList.sort ( (a, b) => {
             return a.timestamp - b.timestamp;
         });
-        console.log(sortedArray);
         this.eventTileList = sortedArray;
       }else{
         this.showToast(data.message);
