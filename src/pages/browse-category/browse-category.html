@@ -14,10 +14,9 @@
   <div class="padding text-center lightfont" style="text-align: center; color:#666; font-size:2em; line-height:40px; font-weight:bold;">{{selectedData.name}} Events</div>
   <div class="text-center lightfont" style="text-align: center; color:#666; width:100%; padding-bottom:10px; font-size:1.4em;" >Search Results</div>
   <div class="list ">
-
-    <button class="img_block" ng-repeat="item in eventTileList" (click)="goDetail(item)">
-      <img src="{{item?.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
-      <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+    <button class="img_block" *ngFor="let item of eventTileList" (click)="goDetail(item)">
+      <img src="{{item.imageThumbURL}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
     </button>
 
     <div>{{item?.age}}</div>
